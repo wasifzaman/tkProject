@@ -45,7 +45,7 @@ tpa = MoneyTextbox(text=language["Tuition Pay Amount"], repr='tpa')
 
 
 #attendance table
-attinfo = Table(repr='attinfo')
+attinfo = Table(repr='attinfo', edit=True)
 attinfo.build(headers=[language['Date'], language['Check-In Time'], language['Class Time']], data=[[]])
 
 

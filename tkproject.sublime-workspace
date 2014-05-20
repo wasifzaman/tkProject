@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"Photo",
+				"PhotoImage"
+			],
+			[
+				"att",
+				"attinfo"
+			],
+			[
+				"data",
+				"datapoints"
+			],
+			[
+				"find",
+				"findTimeSlot"
+			],
+			[
+				"get",
+				"getData"
+			],
+			[
+				"text",
+				"textvariable"
+			],
+			[
+				"set",
+				"set"
+			],
+			[
 				"d",
 				"d"
 			],
@@ -56,10 +84,6 @@
 				"privAttTable"
 			],
 			[
-				"att",
-				"attribute"
-			],
-			[
 				"class",
 				"classRem"
 			],
@@ -74,10 +98,6 @@
 			[
 				"servi",
 				"serviceType"
-			],
-			[
-				"set",
-				"setData"
 			],
 			[
 				"classes",
@@ -127,7 +147,7 @@
 			"file": "preBuilts.py",
 			"settings":
 			{
-				"buffer_size": 1972,
+				"buffer_size": 1983,
 				"line_ending": "Windows"
 			}
 		},
@@ -157,18 +177,34 @@
 			}
 		},
 		{
-			"file": "dataHandler.py",
+			"file": "/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/photoWidget.py",
 			"settings":
 			{
-				"buffer_size": 5246,
+				"buffer_size": 1723,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "languages.py",
+			"file": "photoWidget2.py",
 			"settings":
 			{
-				"buffer_size": 1113,
+				"buffer_size": 417,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dataHandler.py",
+			"settings":
+			{
+				"buffer_size": 5079,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "settingsHandler.py",
+			"settings":
+			{
+				"buffer_size": 1067,
 				"line_ending": "Windows"
 			}
 		},
@@ -176,7 +212,15 @@
 			"file": "tableWidget2.py",
 			"settings":
 			{
-				"buffer_size": 10388,
+				"buffer_size": 11194,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "languages.py",
+			"settings":
+			{
+				"buffer_size": 1135,
 				"line_ending": "Windows"
 			}
 		},
@@ -224,7 +268,12 @@
 	},
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/C/Users/Wasif/Downloads/winserver2012 key.txt",
+=======
+		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/tableWidget.py",
+		"/C/Users/Wasif/Documents/GitHub/tkProject/tableWidget2.py",
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/mainWindow.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/languages.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/dataHandler.py",
@@ -236,7 +285,6 @@
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/addStudent.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/addClass.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/uiHandler.py",
-		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/tableWidget.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/labelWidgets.py",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/Running Notes.txt",
 		"/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/widget.py",
@@ -260,6 +308,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"print",
+			"grid",
+			"edit",
+			"config(",
 			"SaveDb",
 			"Class",
 			"heade",
@@ -339,7 +391,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -348,15 +400,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1972,
+						"buffer_size": 1983,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								999,
-								999
+								224,
+								224
 							]
 						],
 						"settings":
@@ -367,7 +419,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -383,8 +435,8 @@
 						"selection":
 						[
 							[
-								657,
-								657
+								899,
+								899
 							]
 						],
 						"settings":
@@ -396,7 +448,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 4,
+=======
+					"stack_index": 8,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
 					"type": "text"
 				},
 				{
@@ -412,8 +468,8 @@
 						"selection":
 						[
 							[
-								400,
-								400
+								372,
+								372
 							]
 						],
 						"settings":
@@ -425,7 +481,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -441,8 +497,206 @@
 						"selection":
 						[
 							[
-								401,
-								401
+								255,
+								255
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		},
+		{
+<<<<<<< HEAD
+			"selected": 0,
+=======
+			"selected": 1,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "/C/Users/Wasif/Documents/GitHub/RYBAttendenceRepository/photoWidget.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								800,
+								800
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+<<<<<<< HEAD
+					"stack_index": 0,
+=======
+					"stack_index": 2,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "photoWidget2.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								417,
+								417
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+<<<<<<< HEAD
+					"stack_index": 2,
+=======
+					"stack_index": 0,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "dataHandler.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4797,
+								4797
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 1890.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "settingsHandler.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1067,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								426,
+								426
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "tableWidget2.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11194,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								829,
+								829
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+<<<<<<< HEAD
+					"stack_index": 1,
+=======
+					"stack_index": 4,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "languages.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1033,
+								1033
 							]
 						],
 						"settings":
@@ -456,103 +710,9 @@
 					},
 					"stack_index": 5,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 4,
-					"file": "dataHandler.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5246,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2254,
-								2254
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 765.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "languages.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1113,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								489,
-								489
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "tableWidget2.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10388,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								623,
-								623
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 133.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
+					"buffer": 10,
 					"file": "README.txt",
 					"semi_transient": false,
 					"settings":
@@ -576,11 +736,15 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 3,
+=======
+					"stack_index": 11,
+>>>>>>> 61f9666667459a033c81d488f13f862a24647769
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 11,
 					"file": "widget.py",
 					"semi_transient": false,
 					"settings":
@@ -604,7 +768,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -638,7 +802,7 @@
 		"cols":
 		[
 			0.0,
-			0.390104166666,
+			0.397916666666,
 			1.0
 		],
 		"rows":
@@ -650,7 +814,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 137.0
+		"height": 225.0
 	},
 	"output.find_results":
 	{

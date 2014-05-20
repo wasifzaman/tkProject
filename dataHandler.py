@@ -9,28 +9,28 @@ import pickle
 
 
 
-colorCode = {5: {time(10, 59): "#ff00ff",
-                 time(12, 29): "#9900ff",
-                 time(14, 29): "#073763",
-                 time(15, 59): "#0000ff",
-                 time(17, 29): "#4a86e8",
-                 time(23, 59): "#000000"},
-             
-             6: {time(10, 59): "#ff0000",
-                 time(12, 29): "#980000",
-                 time(14, 29): "#783f04",
-                 time(15, 59): "#274e13",
-                 time(17, 29): "#6aa84f",
-                 time(23, 59): "#000000"},
-
-             0: {time(23, 59): "#000000"},
-             1: {time(23, 59): "#000000"},
-             2: {time(23, 59): "#000000"},
-             3: {time(23, 59): "#000000"},
-             4: {time(23, 59): "#000000"}}
-
-sortedColorCode = {key: [t for t in value] for (key, value) in colorCode.items()}
-for v in sortedColorCode.values(): v.sort()
+#colorCode = {5: {time(10, 59): "#ff00ff",
+#                 time(12, 29): "#9900ff",
+#                 time(14, 29): "#073763",
+#                 time(15, 59): "#0000ff",
+#                 time(17, 29): "#4a86e8",
+#                 time(23, 59): "#000000"},
+#             
+#             6: {time(10, 59): "#ff0000",
+#                 time(12, 29): "#980000",
+#                 time(14, 29): "#783f04",
+#                 time(15, 59): "#274e13",
+#                 time(17, 29): "#6aa84f",
+#                 time(23, 59): "#000000"},
+#
+#             0: {time(23, 59): "#000000"},
+#             1: {time(23, 59): "#000000"},
+#             2: {time(23, 59): "#000000"},
+#             3: {time(23, 59): "#000000"},
+#             4: {time(23, 59): "#000000"}}
+#
+#sortedColorCode = {key: [t for t in value] for (key, value) in colorCode.items()}
+#for v in sortedColorCode.values(): v.sort()
 
 
 
@@ -55,12 +55,6 @@ class StudentInfo(object):
     '''
 
     def __init__(self):
-        self.studentAttr = {}
-        self.attendance = []
-        self.classAwarded = 0
-        self.serviceType = ''
-        self.photo = ''
-
         self.datapoints = {
             "lastName": '',
             "firstName": '',
@@ -68,7 +62,7 @@ class StudentInfo(object):
             "schoolLoc": '',
             "bCode": '',
             "sid": 0,
-            "dob": '1/1/1900/',
+            "dob": '1/1/1900',
             "age": 0,
             "gender": '',
             "parentName": '',
@@ -89,34 +83,8 @@ class StudentInfo(object):
             "cRemaining": 0,
             "findSchool": '',
             "notes": '',
-            "attinfo": [[]]
+            "attinfo": []
             }
-
-    def __str__(self):
-        #this function is for testing
-        return
-
-    def addAttendance(self):
-        dt = datetime.now()
-        date = '{:%m/%d/%Y}'.format(dt)
-        time = '{:%I:%M %p}'.format(dt)
-
-        hourSection = int('{:%I}'.format(dt))
-        minuteSection = int('{:%M}'.format(dt))
-
-        if minuteSection < 10: minuteSection = '00'
-        elif minuteSection < 40: minuteSection = '30'
-        else:
-            hourSection += 1
-            minuteSection = '00'
-
-        hourSection = str(hourSection) if hourSection > 9 else '0' + str(hourSection)
-        
-        section = hourSection + ':' + minuteSection + ' ' + str('{:%p}'.format(dt))
-
-        self.attendance.append([date, time, section])
-
-
 
 
 class StudentDB(object):
@@ -160,27 +128,43 @@ class StudentDB(object):
         self.studentList = studentList
 
 
-    def __str__(self):
-        #this function is for testing
-        return
-
-
     def checkDate(self, barcode):
         checkedInToday = 0
-        today = '{:%m/%d/%Y}'.format(datetime.now().date())
-        att = self.studentList[barcode].attendance
 
-        for entry in att:
-            if entry[0] == today: checkedInToday += 1
+        today = '{:%m/%d/%Y}'.format(datetime.now())
+        attinfo = self.studentList[barcode].datapoints['attinfo']
+
+        for att in attinfo:
+            print(att[0])
+            if att[0] == today: checkedInToday += 1
 
         if checkedInToday > 0: return checkedInToday
-        return False
+        return True
 
+
+    def findTimeSlot(self, time):
+        h, m = '{:%H}'.format(time), '{:%M}'.format(time)
+        m = int(m)
+
+        if m > 40:
+            m = '00'
+        elif m > 10:
+            m = '30'
+        else:
+            m = '00'
+
+        return h + ':' + m
 
 
     def scanStudent(self, barcode):
         #try:
-        self.studentList[barcode].addAttendance()
+        cdt = datetime.now()
+
+        timeslot = self.findTimeSlot(cdt)
+        time = '{:%H:%M}'.format(cdt)
+        date = '{:%m/%d/%Y}'.format(cdt)
+
+        self.studentList[barcode].datapoints['attinfo'].append([date, time, timeslot])
         #except:
             #return print("Student doesn't exist")
 
@@ -204,6 +188,7 @@ class StudentDB(object):
         #to excel file
         return
 
+
     def saveData(self, filename, func=lambda:False):
         self.unpickleData(filename)
         func()
@@ -214,10 +199,22 @@ class StudentDB(object):
 
 
 #Pull settings.
-settings = Settings()
+#settings = Settings()
 
 #file is unused
-file = settings.config["dbFile"]
+#file = settings.config["dbFile"]
 
-rybDB = StudentDB()
-    
+#rybDB = StudentDB()
+
+
+#s = StudentInfo()
+#s.datapoints['barcode'] = '1234'
+
+#d = StudentDB()
+#d.addStudent(s.datapoints['barcode'], s)
+#d.scanStudent('1234')
+#d.scanStudent('1234')
+
+#print(d.checkDate('1234'))
+#print(d.studentList['1234'].datapoints['attinfo'])
+#print(['05/20/2014', '02:21', '02:30'][0])

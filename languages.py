@@ -33,6 +33,7 @@ languages = \
 		},
 
 	"chinese": {
+		"First Name": "名: "
 
 	}
 		
