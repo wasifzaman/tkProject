@@ -25,19 +25,23 @@ class Cell(Widget):
 		try:
 			self.label.config(width=kwargs['width'])
 		except:
-			print("the widget could not be config")
+			pass
+			#print("the widget could not be config")
 
 		try:
 			self.label.config(text=kwargs['text'])
 		except:
-			print("the widget could not be configured")
+			pass
+			#print("the widget could not be configured")
 
-		'''try:
-			btn = kwags['bind'][0]
-			cmd = kwags['bind'][1]
+		try:
+			btn = kwargs['bind'][0]
+			cmd = kwargs['bind'][1]
+			#print(btn, cmd)
 			self.label.bind(btn, cmd)
 		except:
-			print("the widget could not be configured")'''
+			pass
+			#print("the widget could not be configured")
 
 
 	def getData(self):
@@ -76,6 +80,7 @@ class Table(Widget):
 
 		try:
 			self.repr = kwargs['repr']
+			self.editwidget = kwargs['edit']
 		except:
 			print("widget could not be loaded")
 
@@ -95,8 +100,27 @@ class Table(Widget):
 		self.attribute = attribute
 		self.current = 0'''
 
-	def edit(self, event):
-		print('called')
+	def edit(self, pos):
+
+		if not self.editwidget: return
+
+		#skip if headers or numbers
+		if pos[0] == 0 or pos[1] == 0: return
+
+		def kill(event):
+			self.data[pos[0]-1][pos[1]-1] = self.temp.get()
+			self.update(data=self.data, headers=self.headers)
+			self.temp.destroy()
+
+		t = StringVar()
+		t.set(self.cells[pos].getData())
+
+		self.temp = Entry(self.innerframe, textvariable=t, width=self.cwids[pos[1]])
+		self.temp.grid(row=pos[0], column=pos[1])
+		self.temp.focus_set()
+		self.temp.grab_set()
+		self.temp.bind("<Return>", kill)
+		#print(pos)
 
 
 	def trytoplace(self, **kwargs):
@@ -202,6 +226,13 @@ class Table(Widget):
 		except:
 			print("cells could not be placed")
 
+		try:
+			for pos, cell in self.cells.items():
+				cell.config(bind=('<Double-Button-1>', lambda event, pos=pos: self.edit(pos)))
+			#print("bound")
+		except:
+			print("cells cannot be edited")
+
 		self.resize()
 
 
@@ -218,9 +249,9 @@ class Table(Widget):
 			print("cells could not be resized")
 
 		for key, value in self.cells.items():
-			self.cwids[key[1]] = max(self.cwids[key[1]], len(value.text))
+			self.cwids[key[1]] = max(self.cwids[key[1]], len(value.getData()))
 		
-
+		#print(self.cwids)
 		for key, value in self.cells.items():
 			value.config(width=self.cwids[key[1]])
 
@@ -250,12 +281,12 @@ class Table(Widget):
 		self.parent.bind("<Configure>", makeScroll)
 		self.resize()
 
-		'''try:
-			for cell in self.cells.values():
-				cell.config(bind=('<Double-Button-1', self.edit))
-			print("bound")
-		except:
-			print("cells cannot be edited")'''
+		#try:
+		#	for cell in self.cells.values():
+		#		cell.config(bind=('<Double-Button-1>', self.edit))
+		#	print("bound")
+		#except:
+		#	print("cells cannot be edited")
 
 
 
