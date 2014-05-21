@@ -1,6 +1,7 @@
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 from settingsHandler import *
 import pickle
+import xlrd
 
 #log all changes
 
@@ -83,8 +84,39 @@ class StudentInfo(object):
             "cRemaining": 0,
             "findSchool": '',
             "notes": '',
-            "attinfo": []
+            "attinfo": [],
+            "portr": ''
             }
+
+        self.dpalias = {
+            "Last Name": "lastName",
+            "First Name": "firstName",
+            "Chinese Name": "chineseName",
+            "School Location": "schoolLoc",
+            "Barcode": "bCode",
+            "Old Student ID": "sid",
+            "Date of Birth": "dob",
+            "Age": "age",
+            "Gender": "gender",
+            "Parent Name": "parentName",
+            "Home Phone": "hPhone",
+            "Cell Phone": "cPhone",
+            "Cell Phone 2": "cPhone2",
+            "Pick up Person": "pup",
+            "Address": "addr",
+            "State": "state",
+            "City": "city",
+            "Zipcode": "zip",
+            "Weekday/Weekend": "wkdwknd",
+            "Tuition Paid Day": "tpd",
+            "Payment Method": "Payment Method: ",
+            "Tuition Pay Amount": "tpa",
+            "E-mail": "email",
+            "Service Type": "sType",
+            "Classes Awarded": "cAwarded",
+            "Classes Remaining": "cRemaining",
+            "How did you hear about the school?": "findSchool"
+        }
 
 
 class StudentDB(object):
@@ -184,8 +216,33 @@ class StudentDB(object):
         self.studentList = pickle.load(open(filename, "rb"))
 
 
-    def export(self, filename):
+    def exportxlsx(self, filename):
         #to excel file
+        return
+
+
+    def importxlsx(self, filename):
+
+        workbook = xlrd.open_workbook(filename)
+        worksheet = workbook.sheet_by_index(0)
+
+        repr, headers = {}, [cell.value for cell in worksheet.row(0)]
+        for h in headers:
+            repr[headers.index(h)] = StudentInfo().dpalias[h]
+
+
+        sraw = [worksheet.row(rx) for rx in range(1, worksheet.nrows)]
+        sinfo = [[str(cell.value) for cell in row] for row in sraw]
+
+        for info in sinfo:
+            newS = StudentInfo()
+            for dp in info:
+                newS.datapoints[repr[info.index(dp)]] = dp
+            self.addStudent(newS.datapoints['bCode'], newS)
+
+
+        #print(repr, headers, sinfo)
+
         return
 
 
@@ -210,7 +267,7 @@ class StudentDB(object):
 #s = StudentInfo()
 #s.datapoints['barcode'] = '1234'
 
-#d = StudentDB()
+d = StudentDB()
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
 #d.scanStudent('1234')
@@ -218,3 +275,12 @@ class StudentDB(object):
 #print(d.checkDate('1234'))
 #print(d.studentList['1234'].datapoints['attinfo'])
 #print(['05/20/2014', '02:21', '02:30'][0])
+
+d.importxlsx('sdt.xls')
+
+#date = datetime.strptime('1/1/1900', "%m/%d/%Y")
+#edate = date + timedelta(days=38779-2)
+
+#print(edate)
+
+print(d.studentList['FLU-000-002'].datapoints)

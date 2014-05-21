@@ -162,3 +162,35 @@ class MoneyTextbox(IntTextbox):
 
 	def config(self, **kwargs):
 		return
+
+
+class Separator(Widget):
+
+	def __init__(self, **kwargs):
+		try:
+			self.repr = kwargs['repr']
+		except:
+			print("widget could not be loaded")
+
+		#self.height = 2
+		#self.bd = 1
+		#self.relief = SUNKEN
+		#self.sticky = W+E
+
+
+	def trytoplace(self, **kwargs):
+		self.parent = kwargs['parent']
+		self.row = kwargs['row']
+		self.column = kwargs['column']
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+
+		self.fr = Frame(self.parent, height=2, bd=1, relief=SUNKEN)
+		self.fr.grid(row=self.row, column=self.column, sticky=W+E, columnspan=100, pady=10)

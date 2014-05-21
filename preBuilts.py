@@ -1,5 +1,7 @@
 from labelWidgets2 import *
 from tableWidget2 import *
+from photoWidget2 import *
+from tableWidget2 import *
 from languages import *
 
 language = languages["english"]
@@ -46,8 +48,19 @@ tpa = MoneyTextbox(text=language["Tuition Pay Amount"], repr='tpa')
 
 #attendance table
 attinfo = Table(repr='attinfo', edit=True)
-attinfo.build(headers=[language['Date'], language['Check-In Time'], language['Class Time']], data=[[]])
+attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
+attinfo.build(headers=attinfoh, data=[[]])
 
 
+#student table
+stable = Table(repr='stable', edit=False)
+stableh = [language['Barcode'], language['First Name'], language['Last Name'], language['Date of Birth']]
+stable.build(headers=stableh, data=[[]])
 
 
+#photo
+portr = Photo(repr='portr', path='monet_sm.jpg')
+
+
+#separator
+sepr = Separator(repr='sepr')
