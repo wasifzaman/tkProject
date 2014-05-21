@@ -39,9 +39,9 @@ languages = \
 		
 }
 
-try:
-	int('s')
-except ValueError:
-	print('s is not an int')
+#try:
+#	int('s')
+#except ValueError:
+#	print('s is not an int')
 
-print([n for n in range(2, 3)])
+#print([n for n in range(2, 3)])

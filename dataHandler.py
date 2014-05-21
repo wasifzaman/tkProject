@@ -216,12 +216,21 @@ class StudentDB(object):
         self.studentList = pickle.load(open(filename, "rb"))
 
 
+    def format(self, ctype, value):
+        try:
+            return self.fcell[ctype](value)
+        except:
+            print("cell could not be formatted")
+
+
     def exportxlsx(self, filename):
         #to excel file
         return
 
 
     def importxlsx(self, filename):
+
+        self.fcell = {1: lambda y: str(y), 2: lambda y: int(y), 3: lambda y: (datetime.strptime('1/1/1900', "%m/%d/%Y") + timedelta(days=y-2)).strftime("%m/%d/%y")}
 
         workbook = xlrd.open_workbook(filename)
         worksheet = workbook.sheet_by_index(0)
@@ -232,7 +241,7 @@ class StudentDB(object):
 
 
         sraw = [worksheet.row(rx) for rx in range(1, worksheet.nrows)]
-        sinfo = [[str(cell.value) for cell in row] for row in sraw]
+        sinfo = [[self.format(cell.ctype, cell.value) for cell in row] for row in sraw]
 
         for info in sinfo:
             newS = StudentInfo()
@@ -267,7 +276,7 @@ class StudentDB(object):
 #s = StudentInfo()
 #s.datapoints['barcode'] = '1234'
 
-d = StudentDB()
+#d = StudentDB()
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
 #d.scanStudent('1234')
@@ -276,11 +285,15 @@ d = StudentDB()
 #print(d.studentList['1234'].datapoints['attinfo'])
 #print(['05/20/2014', '02:21', '02:30'][0])
 
-d.importxlsx('sdt.xls')
+#d.importxlsx('sdt.xls')
 
 #date = datetime.strptime('1/1/1900', "%m/%d/%Y")
 #edate = date + timedelta(days=38779-2)
 
 #print(edate)
 
-print(d.studentList['FLU-000-002'].datapoints)
+#print(d.studentList['FLU-000-002'].datapoints)
+#x = {'1': lambda y: str(y), '2': lambda y: int(y), '3': lambda y: (datetime.strptime('1/1/1900', "%m/%d/%Y") + timedelta(days=y-2)).strftime("%m/%d/%y")}
+
+#print(x['3'](41653.0))
+#print(datetime.strftime)
