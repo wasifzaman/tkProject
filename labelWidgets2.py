@@ -194,3 +194,43 @@ class Separator(Widget):
 
 		self.fr = Frame(self.parent, height=2, bd=1, relief=SUNKEN)
 		self.fr.grid(row=self.row, column=self.column, sticky=W+E, columnspan=100, pady=10)
+
+
+class Picker(Textbox):
+
+	def __init__(self, **kwargs):
+		try:
+			self.repr = kwargs['repr']
+			self.text = kwargs['text']
+			self.rads = kwargs['rads']
+		except:
+			print("widget could not be loaded")
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+		self.selfframe = Frame(self.parent)
+		self.label = Label(self.parent, text=self.text)
+		self.entry = Entry(self.parent, relief=GROOVE)
+
+		self.b, r = StringVar(), []
+		self.b.set(self.rads[0][0])
+		for rad in self.rads:
+			r.append(Radiobutton(self.parent, text=rad[0], variable=self.b, value=rad[1], indicatoron=0))
+
+		self.rads = r
+
+		self.label.pack()
+		self.entry.pack()
+		for rad in self.rads:
+			rad.pack(side=LEFT)
+
+
+	def getData(self):
+		return self.b.get(), self.entry.get()
+

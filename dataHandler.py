@@ -156,8 +156,24 @@ class StudentDB(object):
 
     '''
 
-    def __init__(self, studentList={}):
-        self.studentList = studentList
+    def __init__(self, **kwargs):
+        
+        try:
+            self.file = kwargs['file']
+        except:
+            print("file not found")
+
+        self.studentList = {}
+
+        try:
+            self.loadData()
+            print("database loaded")
+        except:
+            self.saveData()
+            print("database could not be loaded, new database created")
+        
+        
+
 
 
     def checkDate(self, barcode):
@@ -208,12 +224,12 @@ class StudentDB(object):
         #self.studentList[barcode].student_attr = student_attr
 
 
-    def pickleData(self, filename):
-        pickle.dump(self.studentList, open(filename, "wb"))
+    def saveData(self):
+        pickle.dump(self.studentList, open(self.file, "wb"))
 
 
-    def unpickleData(self, filename):
-        self.studentList = pickle.load(open(filename, "rb"))
+    def loadData(self):
+        self.studentList = pickle.load(open(self.file, "rb"))
 
 
     def format(self, ctype, value):
@@ -252,14 +268,15 @@ class StudentDB(object):
 
         #print(repr, headers, sinfo)
 
+        self.saveData()
+
         return
 
 
-    def saveData(self, filename, func=lambda:False):
-        self.unpickleData(filename)
-        func()
-        self.pickleData(filename)
-        self.unpickleData(filename)
+    #def modData(self):
+    #    self.loadData()
+    #    self.saveData()
+    #    self.loadData()
         
 
 
@@ -276,7 +293,7 @@ class StudentDB(object):
 #s = StudentInfo()
 #s.datapoints['barcode'] = '1234'
 
-#d = StudentDB()
+#d = StudentDB(file='tdb.db')
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
 #d.scanStudent('1234')
@@ -297,3 +314,4 @@ class StudentDB(object):
 
 #print(x['3'](41653.0))
 #print(datetime.strftime)
+#print(d.studentList['FLU-000-006'].datapoints['firstName'])

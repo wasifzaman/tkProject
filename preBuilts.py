@@ -64,3 +64,41 @@ portr = Photo(repr='portr', path='monet_sm.jpg')
 
 #separator
 sepr = Separator(repr='sepr')
+
+
+#scan
+sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bcode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
+
+
+#spicker
+def spicker():
+
+	def dinfo():
+		print(b.get())
+		info.config(text=b.get())
+
+
+	def sel():
+		t.destroy()
+		return b.get()
+
+	t = Toplevel()
+	frame = Frame(t)
+	frame.pack()
+
+	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
+	b, r = StringVar(), []
+	b.set(rads[0][0])
+	for rad in rads:
+		r.append(Radiobutton(frame, text=rad[0], variable=b, value=(rad[0], rad[1]), indicatoron=0))
+
+	rads = r
+
+
+	for rad in rads:
+		rad.pack()
+
+	info = Label(frame)
+	info.pack()
+
+	Button(frame, text='sel', command=sel).pack()
