@@ -1,3 +1,4 @@
+import os.path
 from tkinter import Label
 from widget import Widget
 from PIL import Image, ImageTk
@@ -13,13 +14,15 @@ class Photo(Widget):
 		except:
 			print("widget could not be loaded")
 
+		self.script_dir = os.path.dirname(os.path.abspath(__file__))
+
 
 	def config(self, **kwargs):
 
 		try:
 			self.path = kwargs['path']
-			picture = Image.open(self.path)
-			self.image = ImageTk.PhotoImage(picture)
+			self.picture = Image.open(os.path.join(self.script_dir, self.path))
+			self.image = ImageTk.PhotoImage(self.picture)
 			self.label.config(image=self.image)
 		except:
 			print("the widget could not be configured")
@@ -38,8 +41,8 @@ class Photo(Widget):
 		except:
 			print("widget could not be placed")
 
-		picture = Image.open(self.path)
-		self.image = ImageTk.PhotoImage(picture)
+		self.picture = Image.open(os.path.join(self.script_dir, self.path))
+		self.image = ImageTk.PhotoImage(self.picture)
 
 		self.label = Label(self.parent, image=self.image)
 		self.label.grid(row=self.row, column=self.column)
@@ -50,4 +53,5 @@ class Photo(Widget):
 
 
 	def setData(self, data):
+		if data == '': return
 		self.config(path=data)

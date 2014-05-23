@@ -1,4 +1,4 @@
-class Widget(object):
+class Widget:
 
 	'''This class is the parent class for widget objects'''
 

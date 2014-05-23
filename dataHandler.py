@@ -36,7 +36,7 @@ import xlrd
 
 
 
-class StudentInfo(object):
+class StudentInfo:
 
     '''
 
@@ -115,11 +115,12 @@ class StudentInfo(object):
             "Service Type": "sType",
             "Classes Awarded": "cAwarded",
             "Classes Remaining": "cRemaining",
-            "How did you hear about the school?": "findSchool"
+            "How did you hear about the school?": "findSchool",
+            "Notes": "notes"
         }
 
 
-class StudentDB(object):
+class StudentDB:
 
     '''
 
@@ -165,12 +166,12 @@ class StudentDB(object):
 
         self.studentList = {}
 
-        try:
-            self.loadData()
-            print("database loaded")
-        except:
-            self.saveData()
-            print("database could not be loaded, new database created")
+        #try:
+        #self.loadData()
+        #    print("database loaded")
+        #except:
+        #    self.saveData()
+        #    print("database could not be loaded, new database created")
         
         
 
@@ -293,7 +294,8 @@ class StudentDB(object):
 #s = StudentInfo()
 #s.datapoints['barcode'] = '1234'
 
-#d = StudentDB(file='tdb.db')
+d = StudentDB(file='tdb2.db')
+#d.loadData()
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
 #d.scanStudent('1234')

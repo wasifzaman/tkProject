@@ -78,9 +78,9 @@ class IntTextbox(Textbox):
 		return False
 
 
-	def bind(self):
-		vcmd = (self.parent.register(self.OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
-		self.entry.config(validate="all", validatecommand=vcmd)
+	#def bind(self):
+	#	vcmd = (self.parent.register(self.OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
+	#	self.entry.config(validate="all", validatecommand=vcmd)
 
 
 class Datebox(IntTextbox):
@@ -234,3 +234,56 @@ class Picker(Textbox):
 	def getData(self):
 		return self.b.get(), self.entry.get()
 
+
+class LongTextbox(Textbox):
+
+	def config(self, **kwargs):
+
+		try:
+			self.sentry.config(height=kwargs['height'])
+		except:
+			pass
+#			print("the widget could not be configured")
+
+		try:
+			self.sentry.config(width=kwargs['width'])
+		except:
+			pass
+			#print("the widget could not be configured")
+
+		try:
+			self.sentry.delete(1.0, END)
+			self.sentry.insert(END, kwargs['text'])
+		except:
+			pass
+			#print("the widget could not be configured")		
+
+
+	def trytoplace(self, **kwargs):
+		self.parent = kwargs['parent']
+		self.row = kwargs['row']
+		self.column = kwargs['column']
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+		self.label = Label(self.parent, text=self.text)
+		self.sentry = ScrolledText(self.parent, relief=GROOVE)
+
+		self.label.grid(row=self.row, column=self.column)
+		self.sentry.grid(row=self.row, column=self.column+1, sticky=W+E, columnspan=100)
+
+
+	def getData(self):
+		return self.sentry.get(1.0, END)
+
+
+	def setData(self, data):
+		self.sentry.delete(1.0, END)
+		self.sentry.insert(END, self.text)
+#		self.config(text=data)

@@ -3,8 +3,11 @@ from dataHandler import *
 from preBuilts import *
 
 
-def main():
-	w = Window(geometry='900x600')
+def main(top=False, i=0):
+
+	d.loadData()
+
+	w = Window(top=top, geometry='900x600')
 
 
 
@@ -55,21 +58,17 @@ def main():
 
 
 
-	def collect():
-		print(w.collect(StudentInfo().datapoints))
+	w.populate(d.studentList[i].datapoints)
 
-	Button(w.frames["Third Frame"], text="Add Student to Database", command=collect).grid()
-
-
-
-
-
+	print('called')
 
 
 
 	w.start()
 
 
+
 if __name__ == '__main__':
-	main()
+	main('FLU-')
+	
 

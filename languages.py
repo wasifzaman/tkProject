@@ -29,7 +29,9 @@ languages = \
 		"Classes Remaining": "Classes Remaining: ",
 		"Date": "Date: ",
 		"Check-In Time": "Check-In Time: ",
-		"Class Time": "Class Time: "
+		"Class Time": "Class Time: ",
+		"How did you hear about the school?": "How did you hear\nabout this school?: ",
+		"Notes": "Notes: "
 		},
 
 	"chinese": {

@@ -24,6 +24,8 @@ class Window:
 		if top: self.root = Toplevel()
 		else: self.root = Tk()
 
+		self.root.protocol('WM_DELETE_WINDOW', self.dw)
+
 		#self.root.attributes('-fullscreen', True)
 
 		#root options
@@ -69,6 +71,18 @@ class Window:
 					crossed[widget.repr] = widget.getData()
 
 		return crossed
+
+	def populate(self, info):
+
+		for frame in self.frames.values():
+			for widget in frame.widgets.values():
+				if widget.repr in info:
+					widget.setData(info[widget.repr])
+
+	def dw(self):
+		self.root.destroy()
+		pass
+		
 
 	
 

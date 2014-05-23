@@ -19,8 +19,12 @@ w.frames["First Frame"].addWidget(sepr, (6, 0))
 w.frames["First Frame"].addWidget(age, (3, 0))
 w.frames["First Frame"].addWidget(dob, (4, 0))
 w.frames["First Frame"].addWidget(tpa, (5, 0))
+w.frames["First Frame"].addWidget(findSchool, (6, 0))
+w.frames["First Frame"].addWidget(notes, (7, 0))
 
 
+findSchool.config(height=3, width=40)
+notes.config(height=3, width=40)
 
 print(w.frames)
 print(w.frames["First Frame"].widgets)
@@ -46,6 +50,7 @@ portr.setData('monet_sm.jpg')
 w.frames["Fourth Frame"].addWidget(stable, (1, 0))
 
 stable.setData((stableh, [['1234', 'Johnny', 'Test', '10/07/1988']]))
+sbind(1)
 
 
 def s(): 
@@ -56,7 +61,7 @@ w.frames["Fifth Frame"].addWidget(sby, (0, 0))
 
 Button(w.frames["Fifth Frame"], text="try", command=s).pack()
 
-spicker()
+cpicker()
 
 w.start()
 

@@ -54,12 +54,26 @@ attinfo.build(headers=attinfoh, data=[[]])
 
 #student table
 stable = Table(repr='stable', edit=False)
-stableh = [language['Barcode'], language['First Name'], language['Last Name'], language['Date of Birth']]
+stableh = [language['Barcode'], language['First Name'], language['Last Name'], language['Chinese Name'], language['Date of Birth']]
 stable.build(headers=stableh, data=[[]])
+def sbind(f):
+	def fsb(p):
+		i = stable.data[p[0]-1][0]
+		try:
+			f(i)
+		except:
+			print(stable.data[p[0]-1][0])
+
+	try:
+		for pos, cell in stable.cells.items():
+			cell.config(bind=('<Double-Button-1>', lambda event, pos=pos: fsb(pos)))
+	except:
+		print("cells could not be bound")
+
 
 
 #photo
-portr = Photo(repr='portr', path='monet_sm.jpg')
+portr = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\monet_sm.jpg')
 
 
 #separator
@@ -71,12 +85,7 @@ sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bcode'), ('First N
 
 
 #spicker
-def spicker():
-
-	def dinfo():
-		print(b.get())
-		info.config(text=b.get())
-
+def cpicker():
 
 	def sel():
 		t.destroy()
@@ -89,8 +98,11 @@ def spicker():
 	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
 	b, r = StringVar(), []
 	b.set(rads[0][0])
+
 	for rad in rads:
-		r.append(Radiobutton(frame, text=rad[0], variable=b, value=(rad[0], rad[1]), indicatoron=0))
+		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0)
+		rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
+		r.append(rb)
 
 	rads = r
 
@@ -102,3 +114,8 @@ def spicker():
 	info.pack()
 
 	Button(frame, text='sel', command=sel).pack()
+
+
+#longtexts
+findSchool = LongTextbox(text=language["How did you hear about the school?"], repr='findSchool')
+notes = LongTextbox(text=language["Notes"], repr='notes')
