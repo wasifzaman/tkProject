@@ -5,6 +5,8 @@ from preBuilts import *
 
 def main():
 
+	d.loadData()
+
 	w = Window(geometry='900x600')
 
 
@@ -55,6 +57,7 @@ def main():
 
 
 	def s():
+		#w.populate(d.studentList[sby.getData()[1]].datapoints)
 		print(sby.getData())
 
 	Button(w.frames["First Frame"], text="try", command=s).pack()

@@ -4,6 +4,9 @@ from preBuilts import *
 
 
 def main():
+
+	d.loadData()
+
 	w = Window(geometry='900x600')
 
 
@@ -56,6 +59,12 @@ def main():
 
 
 	def collect():
+		ns = StudentInfo()
+		ns.datapoints = w.collect(ns.datapoints)
+
+		d.addStudent(ns.datapoints['bCode'], ns)
+		d.saveData()
+
 		print(w.collect(StudentInfo().datapoints))
 
 	Button(w.frames["Third Frame"], text="Add Student to Database", command=collect).grid()

@@ -219,7 +219,7 @@ class Picker(Textbox):
 		self.entry = Entry(self.parent, relief=GROOVE)
 
 		self.b, r = StringVar(), []
-		self.b.set(self.rads[0][0])
+		self.b.set(self.rads[0][1])
 		for rad in self.rads:
 			r.append(Radiobutton(self.parent, text=rad[0], variable=self.b, value=rad[1], indicatoron=0))
 
