@@ -7,7 +7,7 @@ def main():
 
 	d.loadData()
 
-	w = Window(geometry='900x600')
+	w = Window(geometry='900x700')
 
 
 
@@ -37,6 +37,20 @@ def main():
 
 	w.frames["First Frame"].addWidget(findSchool, (13, 0))
 	w.frames["First Frame"].addWidget(notes, (14, 0))
+
+	w.frames["First Frame"].addWidget(sepr, (15, 0))
+
+
+	w.frames["First Frame"].addWidget(sType, (16, 0))
+	w.frames["First Frame"].addWidget(cAwarded, (17, 0))
+	w.frames["First Frame"].addWidget(cRemaining, (17, 0))
+	w.frames["First Frame"].widgets['cRemaining'].hide()
+	w.frames["First Frame"].addWidget(tpd, (16, 2))
+	w.frames["First Frame"].addWidget(tpa, (17, 2))
+	Button(w.frames["First Frame"], text="Award Classes", command=cpicker).grid()
+	Button(w.frames["First Frame"], text="Award One Classe", command=caddone).grid()
+	Button(w.frames["First Frame"], text="Award Additional Classes", command=cadd).grid()
+	
 
 	findSchool.config(height=3, width=10)
 	notes.config(height=3, width=10)
@@ -81,4 +95,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

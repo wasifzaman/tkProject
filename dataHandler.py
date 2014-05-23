@@ -213,7 +213,9 @@ class StudentDB:
         time = '{:%H:%M}'.format(cdt)
         date = '{:%m/%d/%Y}'.format(cdt)
 
-        self.studentList[barcode].datapoints['attinfo'].append([date, time, timeslot])
+        s = self.studentList[barcode].datapoints
+        s['attinfo'].append([date, time, timeslot])
+        s['cRemaining'] -= 1
         #except:
             #return print("Student doesn't exist")
 

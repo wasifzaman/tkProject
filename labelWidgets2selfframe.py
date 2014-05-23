@@ -44,11 +44,13 @@ class Textbox(Widget):
 		except:
 			print("widget could not be placed")
 
-		self.label = Label(self.parent, text=self.text)
-		self.entry = Entry(self.parent, relief=GROOVE)
+		self.selfframe = Frame(self.parent)
+		self.label = Label(self.selfframe, text=self.text)
+		self.entry = Entry(self.selfframe, relief=GROOVE)
 
-		self.label.grid(row=self.row, column=self.column)
-		self.entry.grid(row=self.row, column=self.column+1)
+		self.selfframe.grid(row=self.row, column=self.column)
+		self.label.grid(row=0, column=0, sticky=E)
+		self.entry.grid(row=0, column=1, sticky=E)
 
 		self.bind()
 
@@ -64,11 +66,6 @@ class Textbox(Widget):
 
 	def setData(self, data):
 		self.config(text=data)
-
-
-	def hide(self):
-		self.label.grid_forget()
-		self.entry.grid_forget()
 
 
 class IntTextbox(Textbox):

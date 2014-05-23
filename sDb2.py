@@ -37,7 +37,7 @@ def main(top=False):
 
 	def s():
 		print(sby.getData())
-		editS2.main(top=True)
+		editS2.main(top=True, i=sby.getData()[1])
 
 	Button(w.frames["First Frame"], text="try", command=s).pack()
 

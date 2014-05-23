@@ -61,7 +61,8 @@ w.frames["Fifth Frame"].addWidget(sby, (0, 0))
 
 Button(w.frames["Fifth Frame"], text="try", command=s).pack()
 
-cpicker()
+#cpicker()
+
+shoose([['1234', 'Johnny', 'Test', '10/07/1988']])
 
 w.start()
-

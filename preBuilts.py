@@ -24,8 +24,6 @@ city = Textbox(text=language["City"], repr='city')
 wkdwknd = Textbox(text=language["Weekday/Weekend"], repr='wkdwknd')
 email = Textbox(text=language["E-mail"], repr='email')
 sType = Textbox(text=language["Service Type"], repr='sType')
-cAwarded = Textbox(text=language["Classes Awarded"], repr='cAwarded')
-cRemaining = Textbox(text=language["Classes Remaining"], repr='cRemaining')
 
 
 #integers
@@ -35,6 +33,8 @@ hPhone = IntTextbox(text=language["Home Phone"], repr='hPhone')
 cPhone = IntTextbox(text=language["Cell Phone"], repr='cPhone')
 cPhone2 = IntTextbox(text=language["Cell Phone 2"], repr='cPhone2')
 zip = IntTextbox(text=language["Zipcode"], repr='zip')
+cAwarded = IntTextbox(text=language["Classes Awarded"], repr='cAwarded')
+cRemaining = IntTextbox(text=language["Classes Remaining"], repr='cRemaining')
 
 
 #date
@@ -85,11 +85,40 @@ sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bcode'), ('First N
 
 
 #spicker
-def cpicker():
+def shoose(d):
+
+	t = Toplevel()
+	frame = Frame(t)
+	frame.pack()
+
+	stable.setData((stableh, d))
+	stable.place(parent=frame, row=0, column=0)
+
+	s = sbind(1)
+
+	t.wait_window()
+
+	#return s
+	print(s)
+
+
+
+def spicker():
+
+	s = shoose(d)
+	w.populate(d.studentList['bCode'].datapoints)
+
+
+
+
+
+#spicker
+def cward():
 
 	def sel():
 		t.destroy()
-		return b.get()
+		#cAwarded.setData(b.get())
+		#return b.get()
 
 	t = Toplevel()
 	frame = Frame(t)
@@ -97,7 +126,11 @@ def cpicker():
 
 	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
 	b, r = StringVar(), []
-	b.set(rads[0][0])
+	b.set(rads[0][1])
+
+	info = Label(frame, text=rads[0][2])
+	info.pack()
+
 
 	for rad in rads:
 		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0)
@@ -110,10 +143,32 @@ def cpicker():
 	for rad in rads:
 		rad.pack()
 
-	info = Label(frame)
-	info.pack()
-
 	Button(frame, text='sel', command=sel).pack()
+
+	t.wait_window()
+
+	return int(b.get())
+
+def sstype():
+	if cAwarded.getData() >= 60:
+		sType.setData('Gold')
+	else:
+		sType.setData('Basic')
+
+def cpicker():
+	cAwarded.setData(cward())
+	cRemaining.setData(cAwarded.getData())
+	sstype()
+
+def cadd():
+	cAwarded.setData(cAwarded.getData() + cward())
+	cRemaining.setData(cAwarded.getData())
+	sstype()
+
+def caddone():
+	cAwarded.setData(cAwarded.getData() + 1)
+	cRemaining.setData(cAwarded.getData())
+	sstype()
 
 
 #longtexts

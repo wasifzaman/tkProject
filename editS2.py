@@ -69,6 +69,6 @@ def main(top=False, i=0):
 
 
 if __name__ == '__main__':
-	main('FLU-')
+	main(i='')
 	
 
