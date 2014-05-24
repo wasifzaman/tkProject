@@ -85,7 +85,11 @@ sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bcode'), ('First N
 
 
 #spicker
-def shoose(d):
+def spicker(d):
+
+	def sets(i):
+		stable.s = i
+		t.destroy()
 
 	t = Toplevel()
 	frame = Frame(t)
@@ -94,22 +98,12 @@ def shoose(d):
 	stable.setData((stableh, d))
 	stable.place(parent=frame, row=0, column=0)
 
-	s = sbind(1)
+	sbind(lambda i: sets(i=i))
 
 	t.wait_window()
 
 	#return s
-	print(s)
-
-
-
-def spicker():
-
-	s = shoose(d)
-	w.populate(d.studentList['bCode'].datapoints)
-
-
-
+	return stable.s
 
 
 #spicker

@@ -63,6 +63,7 @@ Button(w.frames["Fifth Frame"], text="try", command=s).pack()
 
 #cpicker()
 
-shoose([['1234', 'Johnny', 'Test', '10/07/1988']])
+s = spicker([['1234', 'Johnny', 'Test', '10/07/1988']])
+print(s)
 
 w.start()
