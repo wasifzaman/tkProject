@@ -35,6 +35,11 @@ class Cell(Widget):
 			#print("the widget could not be configured")
 
 		try:
+			self.label.config(bg=kwargs['bgcolor'])
+		except:
+			pass
+
+		try:
 			btn = kwargs['bind'][0]
 			cmd = kwargs['bind'][1]
 			#print(btn, cmd)
@@ -83,6 +88,9 @@ class Table(Widget):
 			self.editwidget = kwargs['edit']
 		except:
 			print("error-88: widget could not be loaded")
+
+		#
+		self.clast = False
 
 		'''self.data = data
 		self.parent = parent
@@ -232,6 +240,16 @@ class Table(Widget):
 			#print("bound")
 		except:
 			print("error-237: cells cannot be edited")
+
+		if self.clast:
+			try:
+				for cell in self.cells:
+					if cell[0] == len(self.data):
+						self.cells[cell].config(bgcolor=self.clast)
+			except:
+				print("error-246: cells could not be colored")
+		
+		#print(self.cells[(len(self.data), 1)].config(bgcolor='blue'))
 
 		self.resize()
 

@@ -46,3 +46,7 @@ class Mbox(Window):
 
 
 		#self.widgets = {}
+
+	def dw(self):
+		self.root.option_add("*Foreground", "black")
+		self.root.destroy()

@@ -88,10 +88,13 @@ def main():
 				w.s = spicker(sl)
 			
 		w.populate(d.studentList[w.s].datapoints)
+
+		if cs(d.studentList[w.s].datapoints['firstName']): ss()
 		#print(d.studentList[w.s].datapoints['attinfo'])
 		
 		#else:
 			#w.populate(d.studentList[sby.getData()[1]].datapoints)
+
 
 	def ss():
 		d.scanStudent(w.s)
@@ -100,13 +103,21 @@ def main():
 		w.frames['Fourth Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
 
 
+	def z():
+		try:
+			ss() if cs(d.studentList[w.s].datapoints['firstName']) else False
+		except:
+			print("error-105")
+
+
 		
 
 		print(sby.getData())
 
+	w.frames["First Frame"].widgets['sby'].entry.bind("<Return>", lambda x: s())
 	Button(w.frames["First Frame"], text="try", command=s).pack()
 
-	Button(w.frames["Fifth Frame"], text="s", command=ss).pack()
+	Button(w.frames["Fifth Frame"], text="Scan", command=z).pack()
 
 
 

@@ -81,7 +81,6 @@ class Window:
 
 	def dw(self):
 		self.root.destroy()
-		pass
 		
 
 	

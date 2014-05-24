@@ -52,6 +52,7 @@ tpa = MoneyTextbox(text=language["Tuition Pay Amount"], repr='tpa')
 attinfo = Table(repr='attinfo', edit=True)
 attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
 attinfo.build(headers=attinfoh, data=[[]])
+attinfo.clast = '#FF99FF'
 
 
 #student table
@@ -267,3 +268,30 @@ def sa(s):
 	Button(t.frames["Second Frame"], text='        OK       ', command=t.dw).pack()
 
 	t.root.wait_window()
+
+
+def cs(s):
+
+	def d(z):
+		t.z = z
+		t.dw()
+
+	t = Mbox(geometry='230x310')
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	Label(t.frames["First Frame"], text='\n').grid()
+
+	t.frames["First Frame"].addWidget(hs, (1, 0))
+
+	Label(t.frames["First Frame"], text='Check in the student?\n\nStudent Name: ' + s).grid()
+
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+
+	t.root.wait_window()
+
+	#t.root.wait_window()
+
+	return t.z
