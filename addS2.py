@@ -38,6 +38,9 @@ def main():
 	w.frames["First Frame"].addWidget(findSchool, (13, 0))
 	w.frames["First Frame"].addWidget(notes, (14, 0))
 
+	findSchool.config(height=3, width=10)
+	notes.config(height=3, width=10)
+
 	w.frames["First Frame"].addWidget(sepr, (15, 0))
 
 
@@ -50,10 +53,7 @@ def main():
 	Button(w.frames["First Frame"], text="Award Classes", command=cpicker).grid()
 	Button(w.frames["First Frame"], text="Award One Classe", command=caddone).grid()
 	Button(w.frames["First Frame"], text="Award Additional Classes", command=cadd).grid()
-	
 
-	findSchool.config(height=3, width=10)
-	notes.config(height=3, width=10)
 
 	#
 	w.frames["First Frame"].addWidget(addr, (0, 2))
@@ -74,14 +74,28 @@ def main():
 
 	def collect():
 		ns = StudentInfo()
-		ns.datapoints = w.collect(ns.datapoints)
+		ns.datapoints = dict(list(ns.datapoints.items()) + list(w.collect(ns.datapoints).items()))
+		print(ns.datapoints)
+
+		nsbcode = ns.datapoints['bCode']
+
+		if d.checkCode(nsbcode):
+			if not ase(d.studentList[nsbcode].datapoints['firstName']):
+				return
+		else:
+			if not con(ns.datapoints['firstName']):
+				return
 
 		d.addStudent(ns.datapoints['bCode'], ns)
 		d.saveData()
 
+		sa(ns.datapoints['firstName'])
+
 		print(w.collect(StudentInfo().datapoints))
 
 	Button(w.frames["Third Frame"], text="Add Student to Database", command=collect).grid()
+
+	Button(w.frames["Second Frame"], text="Browse Photo", command=ppicker).grid()
 
 
 

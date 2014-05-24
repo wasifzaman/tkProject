@@ -7,14 +7,15 @@ def main():
 
 	d.loadData()
 
-	w = Window(geometry='900x600')
+	w = Window(geometry='1300x600')
 
 
 
 	w.newFrame("First Frame", (0, 0))
 	w.newFrame("Second Frame", (1, 0))
 	w.newFrame("Third Frame", (1, 1))
-	w.newFrame("Fourth Frame", (2, 1))
+	w.newFrame("Fourth Frame", (1, 2))
+	w.newFrame("Fifth Frame", (2, 1))
 
 
 	w.frames["First Frame"].addWidget(sby, (0, 0))
@@ -54,13 +55,58 @@ def main():
 
 	w.frames["Third Frame"].addWidget(portr, (0, 0))
 
+	w.frames["Fourth Frame"].addWidget(attinfo, (0, 0))
+
+	attinfo.editwidget=False
+
 
 
 	def s():
-		w.populate(d.studentList[sby.getData()[1]].datapoints)
+		w.s = sby.getData()[1]
+
+		print(sby.getData())
+
+
+		if sby.getData()[0] != 'bCode':
+			sty = sby.getData()[0]
+			sdp = sby.getData()[1]
+
+			sl = []
+
+			for s in d.studentList:
+				if d.studentList[s].datapoints[sty] == sdp:
+					dp = d.studentList[s].datapoints
+					sl.append([dp['bCode'], dp['firstName'], dp['lastName'], dp['dob']])
+
+
+			if len(sl) == 0: return
+
+			w.s = sl[0][0]
+			#print(sl)
+			if len(sl) > 1:
+				sl.sort()
+				w.s = spicker(sl)
+			
+		w.populate(d.studentList[w.s].datapoints)
+		#print(d.studentList[w.s].datapoints['attinfo'])
+		
+		#else:
+			#w.populate(d.studentList[sby.getData()[1]].datapoints)
+
+	def ss():
+		d.scanStudent(w.s)
+		d.saveData()
+		#print(d.studentList[w.s].datapoints['attinfo'])
+		w.frames['Fourth Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
+
+
+		
+
 		print(sby.getData())
 
 	Button(w.frames["First Frame"], text="try", command=s).pack()
+
+	Button(w.frames["Fifth Frame"], text="s", command=ss).pack()
 
 
 

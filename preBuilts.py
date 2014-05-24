@@ -3,6 +3,8 @@ from tableWidget2 import *
 from photoWidget2 import *
 from tableWidget2 import *
 from languages import *
+from mbox import *
+from tkinter import filedialog
 
 language = languages["english"]
 
@@ -81,7 +83,7 @@ sepr = Separator(repr='sepr')
 
 
 #scan
-sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bcode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
+sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
 
 
 #spicker
@@ -95,7 +97,7 @@ def spicker(d):
 	frame = Frame(t)
 	frame.pack()
 
-	stable.setData((stableh, d))
+	stable.build(headers=stableh, data=d)
 	stable.place(parent=frame, row=0, column=0)
 
 	sbind(lambda i: sets(i=i))
@@ -168,3 +170,100 @@ def caddone():
 #longtexts
 findSchool = LongTextbox(text=language["How did you hear about the school?"], repr='findSchool')
 notes = LongTextbox(text=language["Notes"], repr='notes')
+
+
+#ppicker
+def ppicker():
+	p = filedialog.askopenfile().name
+	portr.config(path=p)
+
+
+#signs
+ws = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\ws_sm.png')
+hs = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\hand_cursor_sm.png')
+cm = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\check_mark_sm.png')
+
+
+#ebox
+def nos():
+
+	t = Mbox(geometry='230x200')
+	
+	t.newFrame("First Frame", (0, 0))
+
+	t.frames["First Frame"].addWidget(ws, (0, 0))
+
+	Label(t.frames["First Frame"], text='Student was not found!\nType in the correct name or \n contact your system administrator.').grid()
+
+	Button(t.frames["First Frame"], text='        OK       ', command=t.dw).grid(pady=10)
+
+	t.root.wait_window()
+
+def con(s):
+
+	def d(z):
+		t.z = z
+		t.dw()
+
+	t = Mbox(geometry='230x310')
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	Label(t.frames["First Frame"], text='\n').grid()
+
+	t.frames["First Frame"].addWidget(hs, (1, 0))
+
+	Label(t.frames["First Frame"], text='Are you sure you would like to add \n\n' + s + '\n\n to the Database?').grid()
+
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+
+	t.root.wait_window()
+
+	#t.root.wait_window()
+
+	return t.z
+
+def ase(s):
+
+	def d(z):
+		t.z = z
+		t.dw()
+
+	t = Mbox(geometry='330x290')
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	Label(t.frames["First Frame"], text='\n').grid()
+
+	t.frames["First Frame"].addWidget(ws, (0, 0))
+
+	Label(t.frames["First Frame"], text='\nStudent with this barcode exists in the database\nAdding this student will overwrite the existing student\n\nExisting Student: ' + s + '\n\n Overwrite current student?').grid()
+
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+
+	t.root.wait_window()
+
+	return t.z
+
+
+def sa(s):
+
+
+	t = Mbox(geometry='280x180')
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	Label(t.frames["First Frame"], text='\n').grid()
+
+	t.frames["First Frame"].addWidget(cm, (0, 0))
+
+	Label(t.frames["First Frame"], text=s + '\n\nhas been to the Database').grid(row=0, column=1)
+
+	Button(t.frames["Second Frame"], text='        OK       ', command=t.dw).pack()
+
+	t.root.wait_window()

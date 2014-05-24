@@ -46,7 +46,7 @@ class Window:
 		self.framePadding = (20, 10)
 
 
-		self.widgets = {}
+		#self.widgets = {}
 
 	def newFrame(self, frameName, gridpos=(0,0)):
 		gridRow = gridpos[0]

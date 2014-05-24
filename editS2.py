@@ -41,6 +41,19 @@ def main(top=False, i=0):
 	findSchool.config(height=3, width=10)
 	notes.config(height=3, width=10)
 
+	w.frames["First Frame"].addWidget(sepr, (15, 0))
+
+
+	w.frames["First Frame"].addWidget(sType, (16, 0))
+	w.frames["First Frame"].addWidget(cAwarded, (17, 0))
+	w.frames["First Frame"].addWidget(cRemaining, (17, 0))
+	w.frames["First Frame"].widgets['cRemaining'].hide()
+	w.frames["First Frame"].addWidget(tpd, (16, 2))
+	w.frames["First Frame"].addWidget(tpa, (17, 2))
+	Button(w.frames["First Frame"], text="Award Classes", command=cpicker).grid()
+	Button(w.frames["First Frame"], text="Award One Classe", command=caddone).grid()
+	Button(w.frames["First Frame"], text="Award Additional Classes", command=cadd).grid()
+
 	#
 	w.frames["First Frame"].addWidget(addr, (0, 2))
 	w.frames["First Frame"].addWidget(city, (1, 2))
@@ -57,10 +70,20 @@ def main(top=False, i=0):
 	w.frames["Second Frame"].addWidget(portr, (0, 0))
 
 
+	s = d.studentList[i]
+	w.populate(s.datapoints)
 
-	w.populate(d.studentList[i].datapoints)
+	def collect():
+		s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
+		d.saveData()
 
-	print('called')
+		w.dw()
+
+	Button(w.frames["Third Frame"], text="Save Student to Database", command=collect).grid()
+
+	Button(w.frames["Second Frame"], text="Browse Photo", command=ppicker).grid()
+
+	#print('called')
 
 
 

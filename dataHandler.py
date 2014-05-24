@@ -84,7 +84,7 @@ class StudentInfo:
             "cRemaining": 0,
             "findSchool": '',
             "notes": '',
-            "attinfo": [],
+            "attinfo": [['Date', 'Check-In Time', 'Class Time'], []],
             "portr": ''
             }
 
@@ -181,7 +181,7 @@ class StudentDB:
         checkedInToday = 0
 
         today = '{:%m/%d/%Y}'.format(datetime.now())
-        attinfo = self.studentList[barcode].datapoints['attinfo']
+        attinfo = self.studentList[barcode].datapoints['attinfo'][1]
 
         for att in attinfo:
             print(att[0])
@@ -197,6 +197,7 @@ class StudentDB:
 
         if m > 40:
             m = '00'
+            h = str(int(h) + 1)
         elif m > 10:
             m = '30'
         else:
@@ -214,11 +215,14 @@ class StudentDB:
         date = '{:%m/%d/%Y}'.format(cdt)
 
         s = self.studentList[barcode].datapoints
-        s['attinfo'].append([date, time, timeslot])
+        s['attinfo'][1].append([date, time, timeslot])
         s['cRemaining'] -= 1
         #except:
             #return print("Student doesn't exist")
 
+
+    def checkCode(self, barcode):
+        return barcode in self.studentList
 
     def addStudent(self, barcode, student):
         self.studentList[barcode] = student

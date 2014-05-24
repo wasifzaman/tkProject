@@ -13,7 +13,7 @@ class Cell(Widget):
 			self.text = kwargs['text']
 			self.pos = kwargs['pos']
 		except:
-			print("widget could not be loaded")
+			print("error-16: widget could not be loaded")
 		
 		self.bgcolor = 'white'
 		self.bd = 1
@@ -46,7 +46,7 @@ class Cell(Widget):
 
 	def getData(self):
 		return self.label.cget('text')
-
+		
 
 	def trytoplace(self, **kwargs):
 
@@ -58,7 +58,7 @@ class Cell(Widget):
 		try:
 			self.trytoplace(**kwargs)
 		except:
-			print("widget could not be placed")
+			print("error-64: widget could not be placed")
 		
 		self.label = Label(self.parent, text=self.text, relief=self.relief, bd=self.bd, bg=self.bgcolor)
 
@@ -70,7 +70,7 @@ class Cell(Widget):
 		try:
 			self.label.destroy()
 		except:
-			print("widget could not be deleted")
+			print("error-76: widget could not be deleted")
 
 
 class Table(Widget):
@@ -82,7 +82,7 @@ class Table(Widget):
 			self.repr = kwargs['repr']
 			self.editwidget = kwargs['edit']
 		except:
-			print("widget could not be loaded")
+			print("error-88: widget could not be loaded")
 
 		'''self.data = data
 		self.parent = parent
@@ -178,8 +178,8 @@ class Table(Widget):
 			c = 0
 			for data in row:
 				try:
-					newdata[r][c] != data
-					cross[(r+1, c+1)] = data
+					if newdata[r][c] != data:
+						cross[(r+1, c+1)] = data
 				except:
 					deprecated[(r+1, c+1)] = data
 				c += 1
@@ -206,7 +206,7 @@ class Table(Widget):
 			self.previouscells[cell].delete()
 
 		for key, value in cross.items():
-			self.previouscells[key].config(text=self.data[key[0]-1][key[1]-1])
+			self.previouscells[key].config(text=self.previous[key[0]-1][key[1]-1])
 
 		for key, value in hcross.items():
 			self.previouscells[(0, key[0])].config(text=self.headers[key[0]-1])
@@ -224,16 +224,18 @@ class Table(Widget):
 				if pos not in cross:
 					cell.place(parent=self.innerframe, pos=cell.pos)
 		except:
-			print("cells could not be placed")
+			print("error-230: cells could not be placed")
 
 		try:
 			for pos, cell in self.cells.items():
 				cell.config(bind=('<Double-Button-1>', lambda event, pos=pos: self.edit(pos)))
 			#print("bound")
 		except:
-			print("cells cannot be edited")
+			print("error-237: cells cannot be edited")
 
 		self.resize()
+
+		self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
 
 	def resize(self):
@@ -246,7 +248,7 @@ class Table(Widget):
 			#0 corresponds to the numbers column
 			self.cwids[0] = 4
 		except:
-			print("cells could not be resized")
+			print("error-252: cells could not be resized")
 
 		for key, value in self.cells.items():
 			self.cwids[key[1]] = max(self.cwids[key[1]], len(value.getData()))
@@ -261,7 +263,7 @@ class Table(Widget):
 		try:
 			self.trytoplace(**kwargs)
 		except:
-			print("widget could not be placed")
+			print("error-267: widget could not be placed")
 
 		def makeScroll(event):
 			self.canvas.config(scrollregion=self.canvas.bbox("all"))
@@ -273,7 +275,7 @@ class Table(Widget):
 			for cell in self.cells.values():
 				cell.place(parent=self.innerframe, pos=cell.pos)
 		except:
-			print("cells could not be placed")
+			print("error-279: cells could not be placed")
 
 		self.container.grid()
 		self.innerframe.grid(row=0, column=0)
