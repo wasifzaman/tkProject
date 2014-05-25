@@ -1,6 +1,7 @@
 languages = \
 {
 	"english": {
+		"": "",
 		"Last Name": "Last Name: ",
 		"First Name": "First Name",
 		"Chinese Name": "Chinese Name: ",
@@ -50,7 +51,8 @@ languages = \
 		"back": "Back",
 		"next": "Next",
 		"saveto": "Save To",
-		"save": "Save"
+		"save": "Save",
+		"choosedb": "Choose Database"
 		},
 
 	"chinese": {

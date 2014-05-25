@@ -37,13 +37,19 @@ class Window:
 		self.root.geometry(geometry)
 		self.root.config(bg="#9FB6CD")
 
-		self.mainFrame = Frame(self.root)
-		self.mainFrame.pack(fill=Y, expand=1, anchor=S)
+		self.oframe = Frame(self.root)
+		self.mainFrame = Frame(self.oframe)
+		self.oframe.pack(fill="both", expand=True, padx=20, pady=20)
+		self.mainFrame.place(in_=self.oframe, anchor="c", relx=.5, rely=.5)
 
 
 		#frames
 		self.frames = {}
 		self.framePadding = (20, 10)
+
+		#
+		self.root.update_idletasks()
+		self.root.after_idle(lambda: self.root.minsize(self.root.winfo_width(), self.root.winfo_height()))	
 
 
 		#self.widgets = {}

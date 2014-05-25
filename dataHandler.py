@@ -166,6 +166,9 @@ class StudentDB:
 
         self.studentList = {}
 
+        #
+        self.fcell = {1: lambda y: str(y), 2: lambda y: int(y), 3: lambda y: (datetime.strptime('1/1/1900', "%m/%d/%Y") + timedelta(days=y-2)).strftime("%m/%d/%y")}
+
         #try:
         #self.loadData()
         #    print("database loaded")
@@ -251,9 +254,7 @@ class StudentDB:
         return
 
 
-    def importxlsx(self, filename):
-
-        self.fcell = {1: lambda y: str(y), 2: lambda y: int(y), 3: lambda y: (datetime.strptime('1/1/1900', "%m/%d/%Y") + timedelta(days=y-2)).strftime("%m/%d/%y")}
+    def importxlsx(self, filename):        
 
         workbook = xlrd.open_workbook(filename)
         worksheet = workbook.sheet_by_index(0)
@@ -280,6 +281,50 @@ class StudentDB:
         return
 
 
+    def importtimexlsx(self, filename):
+
+        workbook = xlrd.open_workbook(filename)
+        worksheet = workbook.sheet_by_index(0)
+
+        repr, headers = {}, [cell.value for cell in worksheet.row(0)][:4]
+        for h in headers:
+            repr[headers.index(h)] = StudentInfo().dpalias[h]
+
+
+        sraw = [worksheet.row(rx) for rx in range(1, worksheet.nrows)]
+        sinfo = [[self.format(cell.ctype, cell.value) for cell in row] for row in sraw]
+
+
+        for info in sinfo:
+    
+            bCode = info[0]
+            tdata = info[4:info.index(None)]
+
+            if bCode not in self.studentList: continue
+
+            ftdata = []
+            for td in tdata:
+                dt = td.split(' ')
+                date = dt[0]
+                time = dt[1]
+
+                ftdata.append([date, '', time])
+
+#            print(bCode, ftdata)
+            for data in ftdata:
+                self.studentList[bCode].datapoints['attinfo'][1].append(data)
+
+
+            #for dp in info:
+             #   newS.datapoints[repr[info.index(dp)]] = dp
+           #self.addStudent(newS.datapoints['bCode'], newS)
+
+
+        #print(repr, headers, sinfo)
+
+        self.saveData()
+
+
     #def modData(self):
     #    self.loadData()
     #    self.saveData()
@@ -300,7 +345,9 @@ class StudentDB:
 #s = StudentInfo()
 #s.datapoints['barcode'] = '1234'
 
-d = StudentDB(file='tdb2.db')
+#print(s.config['dbFile'])
+
+d = StudentDB(file=s.config['dbFile'])
 #d.loadData()
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
@@ -311,6 +358,7 @@ d = StudentDB(file='tdb2.db')
 #print(['05/20/2014', '02:21', '02:30'][0])
 
 #d.importxlsx('sdt.xls')
+#d.importtimexlsx('at.xls')
 
 #date = datetime.strptime('1/1/1900', "%m/%d/%Y")
 #edate = date + timedelta(days=38779-2)

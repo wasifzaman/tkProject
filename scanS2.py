@@ -87,7 +87,7 @@ def main(top=False):
 			if len(sl) > 1:
 				sl.sort()
 				w.s = spicker(sl)
-			
+
 		w.populate(d.studentList[w.s].datapoints)
 
 		if cs(d.studentList[w.s].datapoints['firstName']): ss()

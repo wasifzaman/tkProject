@@ -8,21 +8,21 @@ class Settings(object):
         self.file = "rybCONFIG.db"
         self.config = {}
         self.defaults = {"requiredFields": ["Age", "First Name"],
-                         "dbFile": "db\\rybDB.db",
-                         "defPhoto": "resc\\default.jpg"}
+                         "dbFile": "tdb2.db",
+                         "defPhoto": "monet_sm.jpg"}
 
-        self.unpickleData()
+        self.loadSettings()
 
     def pickleData(self):
         pickle.dump(self.config, open(self.file, "wb"))
 
-    def unpickleData(self):
+    def loadSettings(self):
         #if the config file does not exist, create a new config file.
         try:
             self.config = pickle.load(open(self.file, "rb"))
         except:
             self.pickleData()
-            self.unpickleData()
+            self.loadSettings()
 
         #if the config file does not contain required configurations,
         #fill them with defaults
@@ -31,7 +31,11 @@ class Settings(object):
                 self.config[setting] = value
 
     def saveSettings(self, func=lambda:False):
-        self.unpickleData()
+        self.loadSettings()
         func()
         self.pickleData()
-        self.unpickleData()
+        self.loadSettings()
+
+
+s = Settings()
+s.loadSettings()

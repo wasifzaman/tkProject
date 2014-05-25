@@ -342,10 +342,20 @@ class Labelbox(Textbox):
 	def config(self, **kwargs):
 
 		try:
+			self.text=kwargs['text']
+			self.label.config(text=self.text)
+		except:
+			pass
+
+		try:
 			self.lang = kwargs['lang']
 			self.label.config(text=self.lang[self.text])
 		except:
 			pass
+
+
+	def getData(self):
+		return self.text
 
 
 	def place(self, **kwargs):
@@ -383,6 +393,10 @@ class Buttonbox(Textbox):
 			self.button.config(command=self.cmd)
 		except:
 			pass
+
+
+	def setData(self, data):
+		self.config(text=data)
 
 
 	def place(self, **kwargs):

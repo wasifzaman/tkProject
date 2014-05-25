@@ -199,11 +199,13 @@ bno = Buttonbox(text='no', lang=language, repr='bno')
 imp = Labelbox(text='impdb', lang=language, repr='imp')
 exp = Labelbox(text='expdb', lang=language, repr='exp')
 curfile = Labelbox(text='curfile', lang=language, repr='curfile')
+curdb = Labelbox(text='', lang=language, repr='curdb')
 saveto = Labelbox(text='saveto', lang=language, repr='saveto')
 
 bimp = Buttonbox(text='impxls', lang=language, repr='bimp')
 bexp = Buttonbox(text='expxls', lang=language, repr='bexp')
 bsav = Buttonbox(text='save', lang=language, repr='bsav')
+bcdb = Buttonbox(text='choosedb', lang=language, repr='bcdb')
 
 bk = Buttonbox(text='back', lang=language, repr='bk')
 nxt = Buttonbox(text='next', lang=language, repr='bimp')

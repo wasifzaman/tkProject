@@ -312,6 +312,12 @@ class Table(Widget):
 		#	print("cells cannot be edited")
 
 
+	def deleteAll(self):
+		for cell in self.cells.values():
+			cell.delete()
+
+		self.cells = {}
+
 
 	def getData(self):
 		return self.headers, self.data
