@@ -108,6 +108,9 @@ class Table(Widget):
 		self.attribute = attribute
 		self.current = 0'''
 
+	def config(self, **kwargs):
+		pass
+
 	def edit(self, pos):
 
 		if not self.editwidget: return

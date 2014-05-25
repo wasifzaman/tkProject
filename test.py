@@ -2,6 +2,7 @@
 from uiHandler2 import *
 from dataHandler import *
 from preBuilts import *
+from languages import *
 
 
 
@@ -11,6 +12,7 @@ w.newFrame("Second Frame", (1,0))
 w.newFrame("Third Frame", (0,1))
 w.newFrame("Fourth Frame", (1,1))
 w.newFrame("Fifth Frame", (2,1))
+w.newFrame("Sixth Frame", (3,0))
 
 
 w.frames["First Frame"].addWidget(firstName, (0, 0))
@@ -58,6 +60,7 @@ def s():
 	s = con('Steve Hall')
 	ase('Henry Hall')
 	sa('Steve Hall')
+	cs('Howard Hall')
 	print(sby.getData())
 
 #p = Picker(repr='sby', text='Search By', rads=[('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
@@ -82,6 +85,24 @@ d.scanStudent('1234')
 attinfo.setData(s.datapoints['attinfo'])
 
 #nos()
+
+def z():
+	#w.frames["First Frame"].widgets['firstName'].config(lang=languages['chinese'])
+	language = languages['chinese']
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=language)
+
+
+def zz():
+	#w.frames["First Frame"].widgets['firstName'].config(lang=languages['chinese'])
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=languages['english'])
+
+
+Button(w.frames["Sixth Frame"], text='Try', command=z).grid()
+Button(w.frames["Sixth Frame"], text='Try', command=zz).grid()
 
 
 

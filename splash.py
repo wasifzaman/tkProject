@@ -15,6 +15,7 @@ def main():
 	Button(w.frames["First Frame"], text='Add Students', command=lambda: addS2.main(top=True)).grid()
 	Button(w.frames["First Frame"], text='Scan Students', command=lambda: scanS2.main(top=True)).grid()
 	Button(w.frames["First Frame"], text='Student Database', command=lambda: sDb2.main(top=True)).grid()
+	Button(w.frames["First Frame"], text='Tools', command=lambda: tools.main(top=True)).grid()
 
 	w.start()
 

@@ -12,40 +12,40 @@ language = languages["english"]
 
 
 #strings
-firstName = Textbox(text=language["First Name"], repr='firstName')
-lastName = Textbox(text=language["Last Name"], repr='lastName')
-chineseName = Textbox(text=language["Chinese Name"], repr='chineseName')
-schoolLoc = Textbox(text=language["School Location"], repr='schoolLoc')
-bCode = Textbox(text=language["Barcode"], repr='bCode')
-gender = Textbox(text=language["Gender"], repr='gender')
-parentName = Textbox(text=language["Parent Name"], repr='parentName')
-pup = Textbox(text=language["Pick up Person"], repr='pup')
-addr = Textbox(text=language["Address"], repr='addr')
-state = Textbox(text=language["State"], repr='state')
-city = Textbox(text=language["City"], repr='city')
-wkdwknd = Textbox(text=language["Weekday/Weekend"], repr='wkdwknd')
-email = Textbox(text=language["E-mail"], repr='email')
-sType = Textbox(text=language["Service Type"], repr='sType')
+firstName = Textbox(text="First Name", lang=language, repr='firstName')
+lastName = Textbox(text="Last Name", lang=language, repr='lastName')
+chineseName = Textbox(text="Chinese Name", lang=language, repr='chineseName')
+schoolLoc = Textbox(text="School Location", lang=language, repr='schoolLoc')
+bCode = Textbox(text="Barcode", lang=language, repr='bCode')
+gender = Textbox(text="Gender", lang=language, repr='gender')
+parentName = Textbox(text="Parent Name", lang=language, repr='parentName')
+pup = Textbox(text="Pick up Person", lang=language, repr='pup')
+addr = Textbox(text="Address", lang=language, repr='addr')
+state = Textbox(text="State", lang=language, repr='state')
+city = Textbox(text="City", lang=language, repr='city')
+wkdwknd = Textbox(text="Weekday/Weekend", lang=language, repr='wkdwknd')
+email = Textbox(text="E-mail", lang=language, repr='email')
+sType = Textbox(text="Service Type", lang=language, repr='sType')
 
 
 #integers
-age = IntTextbox(text=language["Age"], repr='age')
-sid = IntTextbox(text=language["Old Student ID"], repr='sid')
-hPhone = IntTextbox(text=language["Home Phone"], repr='hPhone')
-cPhone = IntTextbox(text=language["Cell Phone"], repr='cPhone')
-cPhone2 = IntTextbox(text=language["Cell Phone 2"], repr='cPhone2')
-zip = IntTextbox(text=language["Zipcode"], repr='zip')
-cAwarded = IntTextbox(text=language["Classes Awarded"], repr='cAwarded')
-cRemaining = IntTextbox(text=language["Classes Remaining"], repr='cRemaining')
+age = IntTextbox(text="Age", lang=language, repr='age')
+sid = IntTextbox(text="Old Student ID", lang=language, repr='sid')
+hPhone = IntTextbox(text="Home Phone", lang=language, repr='hPhone')
+cPhone = IntTextbox(text="Cell Phone", lang=language, repr='cPhone')
+cPhone2 = IntTextbox(text="Cell Phone 2", lang=language, repr='cPhone2')
+zip = IntTextbox(text="Zipcode", lang=language, repr='zip')
+cAwarded = IntTextbox(text="Classes Awarded", lang=language, repr='cAwarded')
+cRemaining = IntTextbox(text="Classes Remaining", lang=language, repr='cRemaining')
 
 
 #date
-dob = Datebox(text=language["Date of Birth"], repr='dob')
-tpd = Datebox(text=language["Tuition Paid Day"], repr='tpd')
+dob = Datebox(text="Date of Birth", lang=language, repr='dob')
+tpd = Datebox(text="Tuition Paid Day", lang=language, repr='tpd')
 
 
 #money
-tpa = MoneyTextbox(text=language["Tuition Pay Amount"], repr='tpa')
+tpa = MoneyTextbox(text="Tuition Pay Amount", lang=language, repr='tpa')
 
 
 #attendance table
@@ -169,8 +169,8 @@ def caddone():
 
 
 #longtexts
-findSchool = LongTextbox(text=language["How did you hear about the school?"], repr='findSchool')
-notes = LongTextbox(text=language["Notes"], repr='notes')
+findSchool = LongTextbox(text="How did you hear about the school?", lang=language, repr='findSchool')
+notes = LongTextbox(text="Notes", lang=language, repr='notes')
 
 
 #ppicker
@@ -184,6 +184,37 @@ ws = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\w
 hs = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\hand_cursor_sm.png')
 cm = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\check_mark_sm.png')
 
+nostext = Labelbox(text='No student', lang=language, repr='nostext')
+context = Labelbox(text='Con student', lang=language, repr='context')
+asetext = Labelbox(text='Ase student', lang=language, repr='asetext')
+satext = Labelbox(text='Sa student', lang=language, repr='satext')
+cstext = Labelbox(text='Cs student', lang=language, repr='cstext')
+
+bok = Buttonbox(text='ok', lang=language, repr='bok')
+byes = Buttonbox(text='yes', lang=language, repr='byes')
+bno = Buttonbox(text='no', lang=language, repr='bno')
+
+
+#importexp
+imp = Labelbox(text='impdb', lang=language, repr='imp')
+exp = Labelbox(text='expdb', lang=language, repr='exp')
+curfile = Labelbox(text='curfile', lang=language, repr='curfile')
+saveto = Labelbox(text='saveto', lang=language, repr='saveto')
+
+bimp = Buttonbox(text='impxls', lang=language, repr='bimp')
+bexp = Buttonbox(text='expxls', lang=language, repr='bexp')
+bsav = Buttonbox(text='save', lang=language, repr='bsav')
+
+bk = Buttonbox(text='back', lang=language, repr='bk')
+nxt = Buttonbox(text='next', lang=language, repr='bimp')
+
+
+#browsebtn
+brw = Buttonbox(text='browse', lang=language, repr='brw')
+fpath = Textbox(text='filepath', lang=language, repr='fpath')
+brw2 = Buttonbox(text='browse', lang=language, repr='brw2')
+fpath2 = Textbox(text='filepath', lang=language, repr='fpath2')
+
 
 #ebox
 def nos():
@@ -193,11 +224,13 @@ def nos():
 	t.newFrame("First Frame", (0, 0))
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
+	t.frames["First Frame"].addWidget(nostext, (1, 0))
+	t.frames["First Frame"].addWidget(bok, (2, 0))
 
-	Label(t.frames["First Frame"], text='Student was not found!\nType in the correct name or \n contact your system administrator.', bg='grey', fg='white').grid()
 
-	Button(t.frames["First Frame"], text='        OK       ', command=t.dw, bg='grey', fg='white').grid(pady=10)
-
+	nostext.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw)
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -213,21 +246,23 @@ def con(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n', bg='grey').grid()
-
 	t.frames["First Frame"].addWidget(hs, (1, 0))
-	#t.frames["First Frame"].widgets['portr'].label.config(bg='grey')
+	t.frames["First Frame"].addWidget(context, (2, 0))
+	t.frames["Second Frame"].addWidget(byes, (0, 0))
+	t.frames["Second Frame"].addWidget(bno, (0, 1))
 
-	Label(t.frames["First Frame"], text='Are you sure you would like to add \n\n' + s + '\n\n to the Database?', bg='grey', fg='white').grid()
+	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
-
+	context.label.config(bg='grey', fg='white')
+	byes.button.config(bg='grey', fg='white')
+	bno.button.config(bg='grey', fg='white')
+	byes.button.grid(sticky=E+W, padx=5)
+	bno.button.grid(sticky=E+W, padx=5)
+	byes.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(True))
 	t.config(bg='grey')
 
 	t.root.wait_window()
-
-	#t.root.wait_window()
 
 	return t.z
 
@@ -241,16 +276,21 @@ def ase(s):
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
-
-	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
+	t.frames["Second Frame"].addWidget(byes, (0, 0))
+	t.frames["Second Frame"].addWidget(bno, (0, 1))
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
+	t.frames["First Frame"].addWidget(asetext, (2, 0))
 
-	Label(t.frames["First Frame"], text='\nStudent with this barcode exists in the database\nAdding this student will overwrite the existing student\n\nExisting Student: ' + s + '\n\n Overwrite current student?', bg='grey', fg='white').grid()
+	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
-
+	asetext.label.config(bg='grey', fg='white')
+	byes.button.config(bg='grey', fg='white')
+	bno.button.config(bg='grey', fg='white')
+	byes.button.grid(sticky=E+W, padx=5)
+	bno.button.grid(sticky=E+W, padx=5)
+	byes.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(True))
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -261,19 +301,21 @@ def ase(s):
 def sa(s):
 
 
-	t = Mbox(geometry='280x180')
+	t = Mbox(geometry='280x230')
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
-
 	t.frames["First Frame"].addWidget(cm, (0, 0))
+	t.frames["First Frame"].addWidget(bok, (4, 0))
 
-	Label(t.frames["First Frame"], text=s + '\n\nhas been to the Database', bg='grey', fg='white').grid(row=0, column=1)
+	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid(row=3)
+	
+	t.frames["First Frame"].addWidget(satext, (2, 0))
 
-	Button(t.frames["Second Frame"], text='        OK       ', command=t.dw, bg='grey', fg='white').pack()
-
+	satext.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw)
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -290,19 +332,22 @@ def cs(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
-
 	t.frames["First Frame"].addWidget(hs, (1, 0))
+	t.frames["First Frame"].addWidget(cstext, (2, 0))
+	t.frames["Second Frame"].addWidget(byes, (0, 0))
+	t.frames["Second Frame"].addWidget(bno, (0, 1))
 
-	Label(t.frames["First Frame"], text='Check in the student?\n\nStudent Name: ' + s, bg='grey', fg='white').grid()
+	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
-
+	cstext.label.config(bg='grey', fg='white')
+	byes.button.config(bg='grey', fg='white')
+	bno.button.config(bg='grey', fg='white')
+	byes.button.grid(sticky=E+W, padx=5)
+	bno.button.grid(sticky=E+W, padx=5)
+	byes.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(True))
 	t.config(bg='grey')
 
 	t.root.wait_window()
-
-	#t.root.wait_window()
 
 	return t.z

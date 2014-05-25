@@ -7,14 +7,16 @@ from datetime import time, date, datetime
 class Textbox(Widget):
 
 	def __init__(self, **kwargs):
-		try:
+		try:			
 			self.text = kwargs['text']
 			self.repr = kwargs['repr']
+			self.lang = kwargs['lang']
 		except:
 			print("widget could not be loaded")
 
 		self.height = 1
 		self.width = 2
+
 
 	def config(self, **kwargs):
 
@@ -23,7 +25,14 @@ class Textbox(Widget):
 			s.set(kwargs['text'])
 			self.entry.config(textvariable=s)
 		except:
-			print("the widget could not be configured")		
+			pass
+			#print("the widget could not be configured")
+
+		try:
+			self.lang = kwargs['lang']
+			self.label.config(text=self.lang[self.text])
+		except:
+			pass
 
 
 	#helpers
@@ -44,7 +53,9 @@ class Textbox(Widget):
 		except:
 			print("widget could not be placed")
 
-		self.label = Label(self.parent, text=self.text)
+		#self.textvar = StringVar()
+		#self.textvar.set(self.text)
+		self.label = Label(self.parent, text=self.lang[self.text])
 		self.entry = Entry(self.parent, relief=GROOVE)
 
 		self.label.grid(row=self.row, column=self.column)
@@ -107,6 +118,12 @@ class Datebox(IntTextbox):
 			self.yEntry.config(textvariable=y)
 		except:
 			print("the widget could not be configured")
+
+		try:
+			self.lang = kwargs['lang']
+			self.label.config(text=self.lang[self.text])
+		except:
+			pass
 
 
 	def place(self, **kwargs):
@@ -172,8 +189,8 @@ class MoneyTextbox(IntTextbox):
 		return False
 
 
-	def config(self, **kwargs):
-		return
+	#def config(self, **kwargs):
+		#return
 
 
 	def getData(self):
@@ -197,6 +214,10 @@ class Separator(Widget):
 		#self.bd = 1
 		#self.relief = SUNKEN
 		#self.sticky = W+E
+
+
+	def config(self, **kwargs):
+		pass
 
 
 	def trytoplace(self, **kwargs):
@@ -277,7 +298,13 @@ class LongTextbox(Textbox):
 			self.sentry.insert(END, kwargs['text'])
 		except:
 			pass
-			#print("the widget could not be configured")		
+			#print("the widget could not be configured")
+
+		try:
+			self.lang = kwargs['lang']
+			self.label.config(text=self.lang[self.text])
+		except:
+			pass
 
 
 	def trytoplace(self, **kwargs):
@@ -293,7 +320,7 @@ class LongTextbox(Textbox):
 		except:
 			print("widget could not be placed")
 
-		self.label = Label(self.parent, text=self.text)
+		self.label = Label(self.parent, text=self.lang[self.text])
 		self.sentry = ScrolledText(self.parent, relief=GROOVE)
 
 		self.label.grid(row=self.row, column=self.column)
@@ -308,3 +335,62 @@ class LongTextbox(Textbox):
 		self.sentry.delete(1.0, END)
 		self.sentry.insert(END, self.text)
 #		self.config(text=data)
+
+
+class Labelbox(Textbox):
+
+	def config(self, **kwargs):
+
+		try:
+			self.lang = kwargs['lang']
+			self.label.config(text=self.lang[self.text])
+		except:
+			pass
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+		self.label = Label(self.parent, text=self.lang[self.text])
+		self.label.grid(row=self.row, column=self.column)
+
+
+class Buttonbox(Textbox):
+
+	def __init__(self, **kwargs):
+		try:			
+			self.text = kwargs['text']
+			self.repr = kwargs['repr']
+			self.lang = kwargs['lang']
+		except:
+			print("widget could not be loaded")
+
+
+	def config(self, **kwargs):
+
+		try:
+			self.lang = kwargs['lang']
+			self.button.config(text=self.lang[self.text])
+		except:
+			pass
+
+		try:
+			self.cmd = kwargs['cmd']
+			self.button.config(command=self.cmd)
+		except:
+			pass
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+		self.button = Button(self.parent, text=self.lang[self.text])
+		self.button.grid(row=self.row, column=self.column)
