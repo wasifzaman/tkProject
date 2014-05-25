@@ -25,7 +25,15 @@ class Photo(Widget):
 			self.image = ImageTk.PhotoImage(self.picture)
 			self.label.config(image=self.image)
 		except:
-			print("the widget could not be configured")
+			pass
+			#print("the widget could not be configured")
+
+		try:
+			self.bgc = kwargs['bg']
+			self.label.config(bg=self.bgc)
+		except:
+			pass
+			#print("the widget background color could not be changed")
 
 
 	def trytoplace(self, **kwargs):

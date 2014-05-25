@@ -23,6 +23,8 @@ def main(top=False):
 
 	w.frames["Second Frame"].addWidget(stable, (0, 0))
 
+	sby.rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')]
+
 	sL = []
 	for s in d.studentList.values():
 		dp = s.datapoints

@@ -3,11 +3,11 @@ from dataHandler import *
 from preBuilts import *
 
 
-def main():
+def main(top=False):
 
 	d.loadData()
 
-	w = Window(geometry='1300x600')
+	w = Window(top=top, geometry='1300x600')
 
 
 
@@ -59,6 +59,7 @@ def main():
 
 	attinfo.editwidget=False
 
+	sby.rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')]
 
 
 	def s():

@@ -16,8 +16,8 @@ class Mbox(Window):
 
 		#root options
 		#self.root.option_add("*Font", "")
-		self.root.option_add("*Background", "grey")
-		self.root.option_add("*Foreground", "white")
+		#self.root.option_add("*Background", "grey")
+		#self.root.option_add("*Foreground", "white")
 
 		w = self.root.winfo_screenwidth()
 		h = self.root.winfo_screenheight()
@@ -36,7 +36,7 @@ class Mbox(Window):
 		self.root.geometry(geometry + '+' + str(w) + '+' + str(h))
 		self.root.config(bg="#9FB6CD")
 
-		self.mainFrame = Frame(self.root)
+		self.mainFrame = Frame(self.root, bg='grey')
 		self.mainFrame.pack(fill=Y, expand=1, anchor=S)
 
 
@@ -47,6 +47,19 @@ class Mbox(Window):
 
 		#self.widgets = {}
 
+	def config(self, **kwargs):
+		try:
+			self.bgc = kwargs['bg']
+			for frame in self.frames.values():
+				frame.config(bg=self.bgc)
+
+				for widget in frame.widgets.values():
+					widget.config(bg=kwargs['bg'])
+		except:
+			print('the frames background color could not be changed')
+
 	def dw(self):
-		self.root.option_add("*Foreground", "black")
+		#self.root.option_add("*Foreground", "black")
+		#self.root.option_add("*Background", "lightgrey")
+		
 		self.root.destroy()

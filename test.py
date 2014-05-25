@@ -54,9 +54,9 @@ portr.setData('monet_sm.jpg')
 
 
 def s():
-	#nos()
-	#s = con('Steve Hall')
-	#ase('Henry Hall')
+	nos()
+	s = con('Steve Hall')
+	ase('Henry Hall')
 	sa('Steve Hall')
 	print(sby.getData())
 

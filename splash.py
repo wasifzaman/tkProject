@@ -12,7 +12,9 @@ def main():
 
 	w.newFrame("First Frame", (0, 0))
 
-	Button(w.frames["First Frame"], text='Add Students', command=addS2.main).grid()
+	Button(w.frames["First Frame"], text='Add Students', command=lambda: addS2.main(top=True)).grid()
+	Button(w.frames["First Frame"], text='Scan Students', command=lambda: scanS2.main(top=True)).grid()
+	Button(w.frames["First Frame"], text='Student Database', command=lambda: sDb2.main(top=True)).grid()
 
 	w.start()
 

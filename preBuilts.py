@@ -194,9 +194,11 @@ def nos():
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
 
-	Label(t.frames["First Frame"], text='Student was not found!\nType in the correct name or \n contact your system administrator.').grid()
+	Label(t.frames["First Frame"], text='Student was not found!\nType in the correct name or \n contact your system administrator.', bg='grey', fg='white').grid()
 
-	Button(t.frames["First Frame"], text='        OK       ', command=t.dw).grid(pady=10)
+	Button(t.frames["First Frame"], text='        OK       ', command=t.dw, bg='grey', fg='white').grid(pady=10)
+
+	t.config(bg='grey')
 
 	t.root.wait_window()
 
@@ -211,14 +213,17 @@ def con(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n').grid()
+	Label(t.frames["First Frame"], text='\n', bg='grey').grid()
 
 	t.frames["First Frame"].addWidget(hs, (1, 0))
+	#t.frames["First Frame"].widgets['portr'].label.config(bg='grey')
 
-	Label(t.frames["First Frame"], text='Are you sure you would like to add \n\n' + s + '\n\n to the Database?').grid()
+	Label(t.frames["First Frame"], text='Are you sure you would like to add \n\n' + s + '\n\n to the Database?', bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
+
+	t.config(bg='grey')
 
 	t.root.wait_window()
 
@@ -237,14 +242,16 @@ def ase(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n').grid()
+	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
 
-	Label(t.frames["First Frame"], text='\nStudent with this barcode exists in the database\nAdding this student will overwrite the existing student\n\nExisting Student: ' + s + '\n\n Overwrite current student?').grid()
+	Label(t.frames["First Frame"], text='\nStudent with this barcode exists in the database\nAdding this student will overwrite the existing student\n\nExisting Student: ' + s + '\n\n Overwrite current student?', bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
+
+	t.config(bg='grey')
 
 	t.root.wait_window()
 
@@ -259,13 +266,15 @@ def sa(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n').grid()
+	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
 
 	t.frames["First Frame"].addWidget(cm, (0, 0))
 
-	Label(t.frames["First Frame"], text=s + '\n\nhas been to the Database').grid(row=0, column=1)
+	Label(t.frames["First Frame"], text=s + '\n\nhas been to the Database', bg='grey', fg='white').grid(row=0, column=1)
 
-	Button(t.frames["Second Frame"], text='        OK       ', command=t.dw).pack()
+	Button(t.frames["Second Frame"], text='        OK       ', command=t.dw, bg='grey', fg='white').pack()
+
+	t.config(bg='grey')
 
 	t.root.wait_window()
 
@@ -281,14 +290,16 @@ def cs(s):
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 
-	Label(t.frames["First Frame"], text='\n').grid()
+	Label(t.frames["First Frame"], text='\n', bg='grey', fg='white').grid()
 
 	t.frames["First Frame"].addWidget(hs, (1, 0))
 
-	Label(t.frames["First Frame"], text='Check in the student?\n\nStudent Name: ' + s).grid()
+	Label(t.frames["First Frame"], text='Check in the student?\n\nStudent Name: ' + s, bg='grey', fg='white').grid()
 
-	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True)).pack(padx=10, side=LEFT)
-	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False)).pack(side=LEFT)
+	Button(t.frames["Second Frame"], text='        YES       ', command=lambda: d(True), bg='grey', fg='white').pack(padx=10, side=LEFT)
+	Button(t.frames["Second Frame"], text='        NO       ', command=lambda: d(False), bg='grey', fg='white').pack(side=LEFT)
+
+	t.config(bg='grey')
 
 	t.root.wait_window()
 

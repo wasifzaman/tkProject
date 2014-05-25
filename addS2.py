@@ -3,11 +3,11 @@ from dataHandler import *
 from preBuilts import *
 
 
-def main():
+def main(top=False):
 
 	d.loadData()
 
-	w = Window(geometry='900x700')
+	w = Window(top=top, geometry='900x700')
 
 
 
