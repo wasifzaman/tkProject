@@ -21,6 +21,7 @@ def main(top=False):
 		def z():
 			s.config['dbFile'] = curdb.getData()
 		s.saveSettings(lambda: z())
+		w.dw()
 
 
 	def it():
@@ -29,17 +30,22 @@ def main(top=False):
 
 	d.loadData()
 
-	w = Window(top=top, geometry='500x300')
+	w = Window(top=top, geometry='500x400')
 
 	w.newFrame("First Frame", (0, 0))
-	w.newFrame("Second Frame", (1, 0))
+	w.newFrame("Fifth Frame", (1, 0))
+	w.newFrame("Second Frame", (2, 0))
 	w.newFrame("Third Frame", (0, 1))
-	w.newFrame("Fourth Frame", (2, 1))
+	w.newFrame("Fourth Frame", (3, 1))
 
 
 	w.frames["First Frame"].addWidget(imp, (0, 0))
 	w.frames["First Frame"].addWidget(sepr, (1, 0))
 	w.frames["First Frame"].addWidget(bimp, (2, 0))
+
+	w.frames["Fifth Frame"].addWidget(impt, (0, 0))
+	w.frames["Fifth Frame"].addWidget(sepr, (1, 0))
+	w.frames["Fifth Frame"].addWidget(bimpt, (2, 0))
 
 	w.frames["Second Frame"].addWidget(exp, (0, 0))
 	w.frames["Second Frame"].addWidget(sepr, (1, 0))
@@ -52,7 +58,7 @@ def main(top=False):
 	#w.frames["Third Frame"].addWidget(bexp, (2, 0))
 
 	Button(w.frames["Fourth Frame"], text="     Save     ", command=ss).grid()
-	Button(w.frames["Fourth Frame"], text="   Cancel   ", command=ss).grid()
+	Button(w.frames["Fourth Frame"], text="   Cancel   ", command=w.dw).grid()
 
 	bimp.config(cmd=importwiz.main)
 	bcdb.config(cmd=cdb)

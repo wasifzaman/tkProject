@@ -197,12 +197,14 @@ bno = Buttonbox(text='no', lang=language, repr='bno')
 
 #importexp
 imp = Labelbox(text='impdb', lang=language, repr='imp')
+impt = Labelbox(text='impt', lang=language, repr='impt')
 exp = Labelbox(text='expdb', lang=language, repr='exp')
 curfile = Labelbox(text='curfile', lang=language, repr='curfile')
 curdb = Labelbox(text='', lang=language, repr='curdb')
 saveto = Labelbox(text='saveto', lang=language, repr='saveto')
 
 bimp = Buttonbox(text='impxls', lang=language, repr='bimp')
+bimpt = Buttonbox(text='imptxls', lang=language, repr='bimpt')
 bexp = Buttonbox(text='expxls', lang=language, repr='bexp')
 bsav = Buttonbox(text='save', lang=language, repr='bsav')
 bcdb = Buttonbox(text='choosedb', lang=language, repr='bcdb')
@@ -353,3 +355,14 @@ def cs(s):
 	t.root.wait_window()
 
 	return t.z
+
+
+#clang
+def clang():
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=language)
+
+
+#bclang
+bclang = Buttonbox(text='changelanguage', lang=language, repr='bclang')

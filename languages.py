@@ -1,6 +1,7 @@
 languages = \
 {
 	"english": {
+		"self": "english",
 		"": "",
 		"Last Name": "Last Name: ",
 		"First Name": "First Name",
@@ -44,6 +45,8 @@ languages = \
 		"impdb": "Import Database",
 		"expdb": "Export Database",
 		"impxls": "Import from Excel",
+		"impt": "Import Time Data",
+		"imptxls": "Import from Excel",
 		"expxls": "Export to Excel",
 		"curfile": "Current Database File",
 		"browse": "Browse",
@@ -52,10 +55,12 @@ languages = \
 		"next": "Next",
 		"saveto": "Save To",
 		"save": "Save",
-		"choosedb": "Choose Database"
+		"choosedb": "Choose Database",
+		"changelanguage": "更改语言"
 		},
 
 	"chinese": {
+		"self": "chinese",
 		"First Name": "名: ",
 		"Last Name": "姓: ",
 		"Chinese Name": "中国名字: ",
@@ -94,7 +99,8 @@ languages = \
 		"Cs student": "\n你想要记录这个学生？\n",
 		"ok": "    OK    ",
 		"yes": "    确认    ",
-		"no": "    不记录    "
+		"no": "    不记录    ",
+		"changelanguage": "Change Language"
 	}
 		
 }

@@ -5,17 +5,29 @@ from preBuilts import *
 
 def main(top=False):
 
+	def clang():
+		if w.lang['self'] == 'english':
+			w.lang = languages['chinese']
+		else:
+			w.lang = languages['english']
+		for frame in w.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
+
 	d.loadData()
 
 	w = Window(top=top, geometry='900x700')
 
+	w.lang = language
 
 
-	w.newFrame("First Frame", (0, 0))
-	w.newFrame("Second Frame", (0, 1))
-	w.newFrame("Third Frame", (1, 1))
+	w.newFrame("L Frame", (0, 0))
+	w.newFrame("First Frame", (1, 0))
+	w.newFrame("Second Frame", (1, 1))
+	w.newFrame("Third Frame", (2, 1))
 
-
+	w.frames["L Frame"].addWidget(bclang, (0, 0))
+	bclang.config(cmd=clang)
 
 	w.frames["First Frame"].addWidget(firstName, (0, 0))
 	w.frames["First Frame"].addWidget(lastName, (1, 0))
