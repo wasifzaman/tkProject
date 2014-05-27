@@ -61,7 +61,13 @@ languages = \
 		"awardclass": "Award Classes",
 		"awardoneclass": "Award One Class",
 		"awardaddclass": "Award Additional Classes",
-		"addstudent": "Add Student to Database"
+		"addstudent": "Add Student to Database",
+		"Add Students": "Add Students", #students* for buttons
+		"Scan Students": "Scan Students",
+		"Student Database": "Student Database",
+		"Tools": "Tools",
+		"Back to Main Menu": "Back to Main Menu",
+		"Exit": "Exit"
 		},
 
 	"chinese": {
@@ -110,7 +116,14 @@ languages = \
 		"awardoneclass": "奖一类",
 		"awardaddclass": "奖其他类",
 		"browsephoto": "浏览照片",
-		"addstudent": "向数据库中添加学生"
+		"addstudent": "向数据库中添加学生",
+		"addstudent": "Add Student to Database",
+		"Add Students": "添加学生", #students* for buttons
+		"Scan Students": "扫描的学生",
+		"Student Database": "学生数据库",
+		"Tools": "工具",
+		"Back to Main Menu": "返回到主菜单",
+		"Exit": "退出"
 	}
 		
 }

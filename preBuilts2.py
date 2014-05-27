@@ -56,7 +56,8 @@ attinfo.clast = '#FF99FF'
 
 #student table
 stable = Table(repr='stable', edit=False)
-stableh = [language['Barcode'], language['First Name'], language['Last Name'], language['Chinese Name'], language['Date of Birth']]
+stableh = [language['Barcode'], language['First Name'], \
+	language['Last Name'], language['Chinese Name'], language['Date of Birth']]
 stable.build(headers=stableh, data=[[]])
 def sbind(f):
 	def fsb(p):
@@ -82,7 +83,8 @@ sepr = Separator(repr='sepr')
 
 
 #scan
-sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
+sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), \
+	('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
 
 
 #spicker
@@ -185,9 +187,9 @@ def ppicker():
 
 
 #signs
-ws = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\ws_sm.png')
-hs = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\hand_cursor_sm.png')
-cm = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\check_mark_sm.png')
+ws = Photo(repr='portr', path='ws_sm.png')
+hs = Photo(repr='portr', path='hand_cursor_sm.png')
+cm = Photo(repr='portr', path='check_mark_sm.png')
 
 nostext = Labelbox(text='No student', lang=language, repr='nostext')
 context = Labelbox(text='Con student', lang=language, repr='context')
@@ -365,9 +367,13 @@ def cs(s):
 
 #clang
 def clang():
-	for frame in w.frames.values():
-		for widget in frame.widgets.values():
-			widget.config(lang=language)
+		if w.lang['self'] == 'english':
+			w.lang = languages['chinese']
+		else:
+			w.lang = languages['english']
+		for frame in w.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
 
 
 #bclang
