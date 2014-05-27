@@ -21,30 +21,20 @@ class AppFrame(Frame):
 class AppWindow(Frame):
 
 	def __init__(self, parent, *args, **kwargs):
-		#if top: self = Toplevel()
-		#else: self = Tk()
-
+		
 		Frame.__init__(self, parent, *args, **kwargs)
 		self.parent = parent
-
-		#self.protocol('WM_DELETE_WINDOW', self.dw)
-
-		#self.attributes('-fullscreen', True)
-
-		#root options
-		#self.option_add("*Font", "")
-		#self.option_add("*Background", "")
-
-
-		#self.title(title)
-		#self.geometry(geometry)
-		#self.config(bg="#9FB6CD")
 
 		self.oframe = Frame(self)
 		self.mainFrame = Frame(self.oframe)
 		self.oframe.pack(fill="both", expand=True, padx=20, pady=20)
 		self.mainFrame.place(in_=self.oframe, anchor="c", relx=.5, rely=.5)
 
+		#troubleshooter
+		self.option_add("*Background", "lightgrey")
+
+		#font-size
+		self.option_add("*Font", "Verdana 11")
 
 		#frames
 		self.frames = {}
@@ -59,8 +49,6 @@ class AppWindow(Frame):
 		self.mainFrame.grid()
 
 
-		#self.widgets = {}
-
 	def newFrame(self, frameName, gridpos=(0,0)):
 		gridRow = gridpos[0]
 		gridColumn = gridpos[1]
@@ -71,8 +59,6 @@ class AppWindow(Frame):
 			row=gridRow, column=gridColumn,
 			padx=self.framePadding[0], pady=self.framePadding[1])
 
-	#def start(self):
-		#self.mainloop()
 
 	def collect(self, relevant):
 
@@ -99,20 +85,17 @@ class AppWindow(Frame):
 class Window(Tk):
 
 	def __init__(self, top=False, *args, **kwargs):
-		#if top: self = Toplevel()
-		#else: self = Tk()
-
+		#if top, Toplevel
+		#else: Tk
 		if top: Toplevel.__init__(self, *args, **kwargs)
 		else: Tk.__init__(self, *args, **kwargs)
 
 		#self.protocol('WM_DELETE_WINDOW', self.dw)
 
 		#self.attributes('-fullscreen', True)
-
 		#root options
-		#self.option_add("*Font", "")
+		#self.option_add("*Font", "size=11")
 		#self.option_add("*Background", "")
-
 
 		#self.title(title)
 		#self.geometry(geometry)
@@ -126,7 +109,6 @@ class Window(Tk):
 
 		self.oframe.config(bg="grey")
 
-
 		#
 		self.update_idletasks()
 		self.after_idle(lambda: self.minsize(self.winfo_width(), self.winfo_height()))	
@@ -139,11 +121,8 @@ class Window(Tk):
 if __name__ == "__main__":
 
 	w = Window()
-	#w.newFrame("First Frame")
 
-	#f = w.frames["First Frame"]
-
-	w.start()
+	w.mainloop()
 
 
 

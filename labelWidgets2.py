@@ -134,7 +134,7 @@ class Datebox(IntTextbox):
 			print("widget could not be placed")
 
 		self.selfframe = Frame(self.parent)
-		self.label = Label(self.parent, text=self.text, anchor=E)
+		self.label = Label(self.parent, text=self.text, width=20, anchor=E)
 		self.mLabel = Label(self.selfframe, text='MM')
 		self.dLabel = Label(self.selfframe, text='DD')
 		self.yLable = Label(self.selfframe, text='YY')

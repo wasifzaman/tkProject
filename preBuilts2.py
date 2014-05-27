@@ -112,37 +112,44 @@ def cward():
 
 	def sel():
 		t.destroy()
-		#cAwarded.setData(b.get())
-		#return b.get()
+		t.cancel = False
 
 	t = Toplevel()
+	t.grab_set()
+	t.focus_set()
+	t.cancel = True
+
 	frame = Frame(t)
-	frame.pack()
+	frame.grid()
 
 	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
 	b, r = StringVar(), []
 	b.set(rads[0][1])
 
 	info = Label(frame, text=rads[0][2])
-	info.pack()
+	info.grid()
 
 
 	for rad in rads:
-		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0)
+		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0, width=20)
 		rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
 		r.append(rb)
 
 	rads = r
 
+	#self.protocol('WM_DELETE_WINDOW', t.destroy())
+
 
 	for rad in rads:
-		rad.pack()
+		rad.grid()
 
-	Button(frame, text='sel', command=sel).pack()
+	bac = Buttonbox(text='awardclass', lang=language, repr='bac')
+	bac.place(parent=frame, row=4, column=0)
+	bac.config(cmd=sel)
 
 	t.wait_window()
 
-	return int(b.get())
+	return 0 if t.cancel else int(b.get())
 
 def sstype():
 	if cAwarded.getData() >= 60:
