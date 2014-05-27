@@ -1,6 +1,6 @@
-from uiHandler2 import *
+from uiHandler22 import *
 
-class Mbox(Window):
+class Mbox(AppWindow):
 
 	def __init__(self, title='', geometry='300x200'):
 		self.root = Toplevel()

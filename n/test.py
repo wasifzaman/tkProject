@@ -106,4 +106,4 @@ Button(w.frames["Sixth Frame"], text='Try', command=zz).grid()
 
 
 
-#w.start()
+w.start()

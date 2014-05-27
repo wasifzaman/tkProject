@@ -2,7 +2,7 @@ from labelWidgets2 import *
 from tableWidget2 import *
 from photoWidget2 import *
 from languages import *
-from mbox import *
+from mbox2 import *
 from tkinter import filedialog
 
 language = languages["english"]

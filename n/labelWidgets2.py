@@ -55,7 +55,7 @@ class Textbox(Widget):
 
 		#self.textvar = StringVar()
 		#self.textvar.set(self.text)
-		self.label = Label(self.parent, text=self.lang[self.text], width=20, anchor=E)
+		self.label = Label(self.parent, text=self.lang[self.text])
 		self.entry = Entry(self.parent, relief=GROOVE)
 
 		self.label.grid(row=self.row, column=self.column)
@@ -134,7 +134,7 @@ class Datebox(IntTextbox):
 			print("widget could not be placed")
 
 		self.selfframe = Frame(self.parent)
-		self.label = Label(self.parent, text=self.text, anchor=E)
+		self.label = Label(self.parent, text=self.text)
 		self.mLabel = Label(self.selfframe, text='MM')
 		self.dLabel = Label(self.selfframe, text='DD')
 		self.yLable = Label(self.selfframe, text='YY')
@@ -285,7 +285,7 @@ class LongTextbox(Textbox):
 			self.sentry.config(height=kwargs['height'])
 		except:
 			pass
-			#print("the widget could not be configured")
+#			print("the widget could not be configured")
 
 		try:
 			self.sentry.config(width=kwargs['width'])
@@ -299,7 +299,7 @@ class LongTextbox(Textbox):
 		except:
 			pass
 			#print("the widget could not be configured")
-			
+
 		try:
 			self.lang = kwargs['lang']
 			self.label.config(text=self.lang[self.text])
@@ -334,7 +334,7 @@ class LongTextbox(Textbox):
 	def setData(self, data):
 		self.sentry.delete(1.0, END)
 		self.sentry.insert(END, self.text)
-		#self.config(text=data)
+#		self.config(text=data)
 
 
 class Labelbox(Textbox):
@@ -406,5 +406,5 @@ class Buttonbox(Textbox):
 		except:
 			print("widget could not be placed")
 
-		self.button = Button(self.parent, text=self.lang[self.text], width=30)
+		self.button = Button(self.parent, text=self.lang[self.text])
 		self.button.grid(row=self.row, column=self.column)

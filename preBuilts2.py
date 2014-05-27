@@ -2,7 +2,7 @@ from labelWidgets2 import *
 from tableWidget2 import *
 from photoWidget2 import *
 from languages import *
-from mbox import *
+from mbox2 import *
 from tkinter import filedialog
 
 language = languages["english"]
@@ -75,8 +75,7 @@ def sbind(f):
 
 
 #photo
-portr = Photo(repr='portr', path='C:\\Users\\Wasif\\Documents\\GitHub\\tkProject\\monet_sm.jpg')
-
+portr = Photo(repr='portr', path='monet_sm.jpg')
 
 #separator
 sepr = Separator(repr='sepr')
@@ -199,7 +198,7 @@ imp = Labelbox(text='impdb', lang=language, repr='imp')
 impt = Labelbox(text='impt', lang=language, repr='impt')
 exp = Labelbox(text='expdb', lang=language, repr='exp')
 curfile = Labelbox(text='curfile', lang=language, repr='curfile')
-curdb = Labelbox(text='', lang=language, repr='curdb')
+curdbs = Labelbox(text='', lang=language, repr='curdb')
 saveto = Labelbox(text='saveto', lang=language, repr='saveto')
 
 bimp = Buttonbox(text='impxls', lang=language, repr='bimp')
@@ -217,6 +216,7 @@ brw = Buttonbox(text='browse', lang=language, repr='brw')
 fpath = Textbox(text='filepath', lang=language, repr='fpath')
 brw2 = Buttonbox(text='browse', lang=language, repr='brw2')
 fpath2 = Textbox(text='filepath', lang=language, repr='fpath2')
+brwp = Buttonbox(text='browsephoto', lang=language, repr='brwp')
 
 
 #ebox
@@ -262,7 +262,7 @@ def con(s):
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(False))
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -293,7 +293,7 @@ def ase(s):
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(False))
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -348,7 +348,7 @@ def cs(s):
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(True))
+	bno.config(cmd=lambda: d(False))
 	t.config(bg='grey')
 
 	t.root.wait_window()

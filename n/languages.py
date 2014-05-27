@@ -50,18 +50,13 @@ languages = \
 		"expxls": "Export to Excel",
 		"curfile": "Current Database File",
 		"browse": "Browse",
-		"browsephoto": "Browse Photo",
 		"filepath": "File Path",
 		"back": "Back",
 		"next": "Next",
 		"saveto": "Save To",
 		"save": "Save",
 		"choosedb": "Choose Database",
-		"changelanguage": "更改语言",
-		"awardclass": "Award Classes",
-		"awardoneclass": "Award One Class",
-		"awardaddclass": "Award Additional Classes",
-		"addstudent": "Add Student to Database"
+		"changelanguage": "更改语言"
 		},
 
 	"chinese": {
@@ -87,7 +82,7 @@ languages = \
 		"Weekday/Weekend": "平日/周末: ",
 		"Tuition Paid Day": "支付学费日期: ",
 		"Payment Method": "付款方式: ",
-		"Tuition Pay Amount": "付款金额: ",
+		"Tuition Pay Amount": "Payment Amount: ",
 		"E-mail": "电子邮件: ",
 		"Service Type": "课程级别: ",
 		"Classes Awarded": "加入学生课程: ",
@@ -105,12 +100,7 @@ languages = \
 		"ok": "    OK    ",
 		"yes": "    确认    ",
 		"no": "    不记录    ",
-		"changelanguage": "Change Language",
-		"awardclass": "奖类",
-		"awardoneclass": "奖一类",
-		"awardaddclass": "奖其他类",
-		"browsephoto": "浏览照片",
-		"addstudent": "向数据库中添加学生"
+		"changelanguage": "Change Language"
 	}
 		
 }

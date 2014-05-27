@@ -1,4 +1,4 @@
-from uiHandler2 import *
+from uiHandler22 import *
 
 class Mbox(Window):
 

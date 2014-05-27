@@ -23,4 +23,4 @@ setup(  name = "rybDB",
         version = "0.1",
         description = "RYB DB",
         options = {"build_exe": build_exe_options},
-        executables = [Executable("splash.py", base=base)])
+        executables = [Executable("splashy2.py", base=base)])

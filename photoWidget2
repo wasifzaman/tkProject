@@ -1,3 +1,0 @@
-from tkinter import Label
-from widget import Widget
-from PIL import Image, ImageTk

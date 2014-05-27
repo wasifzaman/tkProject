@@ -1,13 +1,13 @@
-from uiHandler22 import *
+from uiHandler2 import *
 from dataHandler import *
-from preBuilts2 import *
+from preBuilts import *
 from tkinter import filedialog
 
-def main():
+def main(top=False):
 
 	def odb():
 		try:
-			w.fpath.setData(filedialog.askopenfile(mode='r').name)
+			fpath.setData(filedialog.askopenfile().name)
 		except:
 			pass
 
@@ -49,13 +49,7 @@ def main():
 
 	d.loadData()
 
-	t = Window(top=True)
-	t.geometry('500x700')
-	t.attributes('-fullscreen', False)
-	t.focus_set()
-	t.grab_set()
-
-	w = AppWindow(t.mainFrame)
+	w = Window(top=top, geometry='500x700')
 
 	w.newFrame("First Frame", (0, 0))
 	w.newFrame("Second Frame", (1, 0))
@@ -70,9 +64,8 @@ def main():
 
 	Label(w.frames["First Frame"], text="Welcome to the Import wizard.\n\n\nPlease select the xls or xlsx file below.\nThen click Next.", justify=LEFT).grid()
 
-	w.fpath = fpath
 
-	w.frames["Second Frame"].addWidget(w.fpath, (0, 0))
+	w.frames["Second Frame"].addWidget(fpath, (0, 0))
 	w.frames["Second Frame"].addWidget(brw, (0, 3))
 	#w.frames["Third Frame"].addWidget(bk, (0, 0))
 	w.frames["Third Frame"].addWidget(nxt, (0, 1))
@@ -91,7 +84,7 @@ def main():
 
 
 	
-	t.mainloop()
+	w.start()
 
 if __name__ == '__main__':
 	main()
