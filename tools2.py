@@ -99,7 +99,7 @@ def main(t, lang):
 	w.frames['Fourth Frame'].addWidget(bsav, (0, 0))
 
 	bsav.config(cmd=ss)
-	bimp.config(cmd=importwiz.main)
+	bimp.config(cmd=lambda: importwiz.main(w.lang))
 	bcdb.config(cmd=cdb)
 	bimpt.config(cmd=ctdb)
 	#curdb.config(text=s.config['dbFile'])

@@ -115,6 +115,8 @@ def main(lang):
 	w.fpath = fpath
 
 #intialize widgets
+	w.bsav = bsav
+
 	w.frames["Second Frame"].addWidget(w.fpath, (0, 0))
 	w.frames["Second Frame"].addWidget(brw, (0, 3))
 	w.frames["Third Frame"].addWidget(nxt, (0, 1))
@@ -123,7 +125,7 @@ def main(lang):
 	w.frames["Fifth Frame"].addWidget(brw2, (0, 3))
 	w.frames["Fifth Frame"].addWidget(sepr, (1, 0))
 	w.frames["Sixth Frame"].addWidget(bk, (2, 0))
-	w.frames["Sixth Frame"].addWidget(bsav, (2, 1))
+	w.frames["Sixth Frame"].addWidget(w.bsav, (2, 1))
 
 	bcancel1 = Buttonbox(text='Cancel', lang=w.lang, repr='cancel')
 	bcancel2 = Buttonbox(text='Cancel', lang=w.lang, repr='cancel')
@@ -135,7 +137,7 @@ def main(lang):
 	brw2.config(cmd=pdb)
 	bk.config(cmd=sp)
 	nxt.config(cmd=pvdb)
-	bsav.config(cmd=sav)
+	w.bsav.config(cmd=sav)
 	bcancel1.config(cmd=t.destroy)
 	bcancel2.config(cmd=t.destroy)
 
@@ -145,8 +147,8 @@ def main(lang):
 	bk.button.grid(padx=10)
 	nxt.button.config(width=10)
 	nxt.button.grid(padx=10)
-	bsav.button.config(width=10)
-	bsav.button.grid(padx=10)
+	w.bsav.button.config(width=10)
+	w.bsav.button.grid(padx=10)
 	bcancel1.button.config(width=10)
 	bcancel1.button.grid(padx=10)
 	bcancel2.button.config(width=10)
