@@ -33,7 +33,7 @@ def main():
 	w.frames["First Frame"].addWidget(w.attinfo, (0, 0))
 	
 	w.attinfo.setData((w.attinfoh, sL))
-	w.attinfo.setData((w.attinfoh, [['def', '345', '565']]))
+	w.attinfo.setData((w.attinfoh, [['def', '345', '565'], ['xyz']]))
 	
 
 	

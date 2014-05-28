@@ -179,7 +179,7 @@ class Table(Widget):
 		for row in newdata:
 			c = 0
 			for data in row:
-				new[(r, c)] = data
+				new[(r + 1, c + 1)] = data
 				c += 1
 			r += 1
 
@@ -187,7 +187,7 @@ class Table(Widget):
 		for row in olddata:
 			c = 0
 			for data in row:
-				old[(r, c)] = data
+				old[(r + 1, c + 1)] = data
 				c += 1
 			r += 1
 
@@ -195,9 +195,9 @@ class Table(Widget):
 
 		for key, val in old.items():
 			if key in new and new[key] != val:
-				cross[(key[0] + 1, key[1] + 1)] = new[key]
+				cross[key] = new[key]
 			else:
-				deprecated[(key[0] + 1, key[1] + 1)] = val
+				deprecated[key] = val
 
 		print(cross, deprecated)
 
