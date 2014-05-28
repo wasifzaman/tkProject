@@ -77,6 +77,16 @@ def main(t, lang):
 	w.frames["Second Frame"].addWidget(cPhone, (7, 2))
 	w.frames["Second Frame"].addWidget(cPhone2, (8, 2))
 
+#award class widgets
+	w.frames["Second Frame"].addWidget(sType, (16, 0))
+	w.frames["Second Frame"].addWidget(cAwarded, (17, 0))
+	w.frames["Second Frame"].addWidget(cRemaining, (16, 2))
+
+	w.frames["Second Frame"].addWidget(sepr, (18, 0))
+
+#special
+	spec = Labelbox(text='spec', lang=w.lang, repr='spec')
+	w.frames["Second Frame"].addWidget(spec, (19, 0))
 
 	w.frames["Third Frame"].addWidget(portr, (0, 0))
 
@@ -120,8 +130,37 @@ def main(t, lang):
 
 			#reset portrait
 			portr.setData('monet_sm.jpg')
-			
+			portr2.setData('monet_sm.jpg')
+
+			#reset classes rem
+			spec.setData("")
+
+			#temp workaround while table is fixed
+			for child in w.frames["Fourth Frame"].winfo_children():
+				child.destroy()
+
+			w.attinfo.build(headers=w.attinfoh, data=[[]])
+			w.frames["Fourth Frame"].addWidget(w.attinfo, (0, 0))
+			w.frames["Fourth Frame"].grid(rowspan=100, sticky=W)
+
+			w.attinfo.editwidget=False
+			w.attinfo.canvas.config(width=500, height=500)
+			#
+
+			#temp workaround while table is fixed
+			for child in w2.frames["Third Frame"].winfo_children():
+				child.destroy()
+
+			w2.attinfo.build(headers=w2.attinfoh, data=[[]])
+			w2.frames["Third Frame"].addWidget(w2.attinfo, (0, 0))
+			w2.frames["Third Frame"].grid(rowspan=100, sticky=W)
+
+			w2.attinfo.editwidget=False
+			w2.attinfo.canvas.config(width=500, height=500)
+			#
+
 			w.populate(d.studentList[w.s].datapoints)
+			w2.populate(d.studentList[w.s].datapoints)
 
 			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
@@ -132,7 +171,18 @@ def main(t, lang):
 	def ss():
 		d.scanStudent(w.s)
 		d.saveData()
+		
+		#show alert if classes remaining is less than 2
+		cRem = d.studentList[w.s].datapoints['cRemaining']
+		if cRem <= 2:
+			spec.setData(w.lang['Classes remaining for this student'] + ': ' + str(cRem))
+			spec.label.config(bg='yellow')
+
+		#update cRemaining
+		cRemaining.setData(str(cRem))
+
 		w.frames['Fourth Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
+		w2.frames['Third Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
 
 
 	def z():
@@ -162,6 +212,58 @@ def main(t, lang):
 			widget.config(lang=w.lang)
 
 
+#t2 window
+	t2 = Window(top=True)
+	t2.attributes('-fullscreen', False)
+	t2.geometry('900x800')
+
+	w2 = AppWindow(t2.mainFrame)
+
+	w2.lang = lang
+
+	#attendance table
+	w2.attinfo = Table(repr='attinfo', edit=True)
+	w2.attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
+	w2.attinfo.build(headers=w2.attinfoh, data=[[]])
+	w2.attinfo.clast = '#FF99FF'
+
+#frame initialization
+	w2.newFrame("First Frame", (0, 0))
+	w2.newFrame("Second Frame", (1, 0))
+	w2.newFrame("Third Frame", (0, 1))
+
+	firstName2 = Textbox(text="First Name", lang=language, repr='firstName')
+	lastName2 = Textbox(text="Last Name", lang=language, repr='lastName')
+	chineseName2 = Textbox(text="Chinese Name", lang=language, repr='chineseName')
+	bCode2 = Textbox(text="Barcode", lang=language, repr='bCode')
+	sid2 = IntTextbox(text="Old Student ID", lang=language, repr='sid')
+	dob2 = Datebox(text="Date of Birth", lang=language, repr='dob')
+	portr2 = Photo(repr='portr', path='monet_sm.jpg')
+
+	w2.frames["First Frame"].addWidget(portr2, (0, 0))
+
+#basic info widgets
+	w2.frames["Second Frame"].addWidget(firstName2, (0, 0))
+	w2.frames["Second Frame"].addWidget(lastName2, (1, 0))
+	w2.frames["Second Frame"].addWidget(chineseName2, (2, 0))
+
+	w2.frames["Second Frame"].addWidget(sepr, (5, 0))
+
+	w2.frames["Second Frame"].addWidget(bCode2, (6, 0))
+	w2.frames["Second Frame"].addWidget(sid2, (7, 0))
+
+	w2.frames["Second Frame"].addWidget(sepr, (8, 0))
+
+	w2.frames["Second Frame"].addWidget(dob2, (10, 0))
+
+#att table widget
+	w2.frames["Third Frame"].addWidget(w.attinfo, (0, 0))
+	w2.frames["Third Frame"].grid(rowspan=100, sticky=W)
+
+	w2.attinfo.editwidget=False
+	w.attinfo.canvas.config(width=500, height=500)
+
+	
 
 
 
@@ -172,8 +274,10 @@ def main(t, lang):
 
 if __name__ == '__main__':
 	t = Window()
+	t.attributes('-fullscreen', False)
+	t.geometry('1000x700')
 
-	main(t, language)
+	main(t.mainFrame, language)
 
 	t.mainloop()
 

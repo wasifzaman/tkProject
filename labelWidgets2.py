@@ -97,7 +97,10 @@ class IntTextbox(Textbox):
 	def getData(self):
 		e = self.entry.get()
 		if e == '': return 0
-		return int(e)
+		try:
+			return int(e)
+		except:
+			return 0
 
 	#def bind(self):
 	#	vcmd = (self.parent.register(self.OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')

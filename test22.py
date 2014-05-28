@@ -22,7 +22,10 @@ def main():
 	
 
 
-	sL = [['abc', 'bcd', '123'], ['abc', 'def', '123'], ['x', 'y', 'zpreviouscells']]
+	sL = [['abc', 'bcd', '123'],\
+		['abc', 'def', '123'],\
+		['x', 'y', 'zprevis']]
+
 	sL2 = list(sL)
 
 	w.attinfo = Table(repr='attinfo', edit=True)
@@ -34,7 +37,11 @@ def main():
 	
 	w.attinfo.setData((w.attinfoh, sL))
 	w.attinfo.setData((w.attinfoh, [['def', '345', '565'], ['xyz']]))
+	w.attinfo.setData((w.attinfoh, [['def', '345', '565'], ['xyz'], ['123']]))
+	w.attinfo.setData((w.attinfoh, [['def', '345', '565'], ['xyz'], ['123'], ['456']]))
+	w.attinfo.setData((w.attinfoh, [['def', '345', '565'], ['xyz'], ['123'], ['456'], ['678']]))
 	
+	w.attinfo.setData((w.attinfoh, [[]]))
 
 	
 

@@ -75,7 +75,9 @@ languages = \
 		"Database succesfully updated!": "Database succesfully updated!\n",
 		"File could not be imported": "File could not be imported\n",
 		"Cancel": "Cancel",
-		"Please choose a file": "Please choose a file\n"
+		"Please choose a file": "Please choose a file\n",
+		"spec": "",
+		"Classes remaining for this student": "Classes remaining for this student"
 		},
 
 	"chinese": {
@@ -151,6 +153,8 @@ languages = \
 		"expxls": "导出到 excel 中",
 		"curfile": "当前数据库文件",
 		"choosedb": "选择数据库",
+		"": "",
+		"Classes remaining for this student": "剩余的这名学生的班"
 	}
 		
 }

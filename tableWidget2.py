@@ -72,12 +72,11 @@ class Cell(Widget):
 
 
 	def delete(self, **kwargs):
-
-		try:
-			self.label.grid_forget()
-			self.label.destroy()
-		except:
-			print("error-76: widget could not be deleted")
+		print('called')
+		#try:
+		self.label.grid_remove()
+		#except:
+		#print("error-76: widget could not be deleted")
 
 
 class Table(Widget):
@@ -196,25 +195,10 @@ class Table(Widget):
 		for key, val in old.items():
 			if key in new and new[key] != val:
 				cross[key] = new[key]
-			else:
+			elif key not in new:
 				deprecated[key] = val
 
-		print(cross, deprecated)
-
-		#cross = {}
-		#deprecated = {}
-		
-		#r = 0
-		#for row in olddata:
-		#	c = 0
-		#	for data in row:
-		#		try:
-		#			if newdata[r][c] != data:
-		#				cross[(r+1, c+1)] = data
-		#		except:
-		#			deprecated[(r+1, c+1)] = data
-		#		c += 1
-		#	r += 1
+		#print('cross', cross, '\n', 'dep', deprecated)
 
 		return cross, deprecated
 
@@ -234,6 +218,8 @@ class Table(Widget):
 
 		#print(self.previous, self.data)
 
+		#print('data', self.data)
+
 		cross, deprecated = self.intersect(self.data, self.previous)
 		#hcross, hdeprecated = self.intersect(self.headers, self.previousheaders)
 
@@ -243,7 +229,9 @@ class Table(Widget):
 		#	self.previouscells[(0, cell[0])].delete()
 
 		for cell in deprecated:
+			#print(self.previouscells[cell].text)
 			self.previouscells[cell].delete()
+			del self.previouscells[cell]
 
 		for key, value in cross.items():
 			self.previouscells[key].config(text=self.data[key[0]-1][key[1]-1])
