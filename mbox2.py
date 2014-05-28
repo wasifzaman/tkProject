@@ -2,8 +2,8 @@ from uiHandler22 import *
 
 class Mbox(AppWindow):
 
-	def __init__(self, title='', geometry='300x200'):
-		self.root = Toplevel()
+	def __init__(self, title=''):
+		self.root = Toplevel(bd=2)
 		self.root.resizable(0, 0)
 		self.root.grab_set()
 		self.root.focus_set()
@@ -12,31 +12,21 @@ class Mbox(AppWindow):
 
 		self.root.overrideredirect(1)
 
-		#self.root.attributes('-fullscreen', True)
-
-		#root options
-		#self.root.option_add("*Font", "")
-		#self.root.option_add("*Background", "grey")
-		#self.root.option_add("*Foreground", "white")
-
 		w = self.root.winfo_screenwidth()
 		h = self.root.winfo_screenheight()
 
 		
-		print(w, h)
+		#print(w, h)
 
-		g = geometry.split('x')
-
-		w, h = w//2 - int(g[0]), h//2 - int(g[1])
-		print(g)
+		w, h = w//2, h//2
 
 
 
 		self.root.title(title)
-		self.root.geometry(geometry + '+' + str(w) + '+' + str(h))
+		self.root.geometry('+' + str(w) + '+' + str(h))
 		self.root.config(bg="#9FB6CD")
 
-		self.mainFrame = Frame(self.root, bg='grey')
+		self.mainFrame = Frame(self.root, bg='grey', bd=10)
 		self.mainFrame.pack(fill=Y, expand=1, anchor=S)
 
 

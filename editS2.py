@@ -1,22 +1,49 @@
-from uiHandler2 import *
+from uiHandler22 import *
 from dataHandler import *
-from preBuilts import *
+from preBuilts2 import *
 
 
-def main(top=False, i=0):
+def main(lang, top=False, i=0):
+
+#language changer
+	def clang():
+		if w.lang['self'] == 'english':
+			w.lang = languages['chinese']
+		else:
+			w.lang = languages['english']
+		for frame in w.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
 
 	d.loadData()
 
-	w = Window(top=top, geometry='900x600')
+	t = Window(top=top)
+	t.attributes('-fullscreen', False)
+	t.geometry('1900x900')
+	t.resizable(0, 0)
+	t.grab_set()
+	t.focus_set()
 
+	w = AppWindow(t.mainFrame)
 
+	w.lang = lang
 
-	w.newFrame("First Frame", (0, 0))
-	w.newFrame("Second Frame", (0, 1))
-	w.newFrame("Third Frame", (1, 1))
+#frame initialization
+	w.newFrame("L Frame", (0, 0))
+	w.newFrame("First Frame", (1, 0))
+	w.newFrame("Second Frame", (1, 1))
+	w.newFrame("Third Frame", (3, 1))
+	w.newFrame("Fourth Frame", (2, 0))
+	w.newFrame("Fifth Frame", (0, 2))
 
+	w.frames["Fourth Frame"].grid(sticky=W)
 
+#language changer button
+	w.frames["L Frame"].addWidget(bclang, (0, 0))
+	w.frames["L Frame"].grid(sticky=E)
+	bclang.config(cmd=clang)
 
+#basic info widgets
 	w.frames["First Frame"].addWidget(firstName, (0, 0))
 	w.frames["First Frame"].addWidget(lastName, (1, 0))
 	w.frames["First Frame"].addWidget(chineseName, (2, 0))
@@ -43,16 +70,22 @@ def main(top=False, i=0):
 
 	w.frames["First Frame"].addWidget(sepr, (15, 0))
 
-
+#award class widgets
 	w.frames["First Frame"].addWidget(sType, (16, 0))
 	w.frames["First Frame"].addWidget(cAwarded, (17, 0))
-	w.frames["First Frame"].addWidget(cRemaining, (17, 0))
-	w.frames["First Frame"].widgets['cRemaining'].hide()
+	w.frames["First Frame"].addWidget(cRemaining, (18, 0))
 	w.frames["First Frame"].addWidget(tpd, (16, 2))
 	w.frames["First Frame"].addWidget(tpa, (17, 2))
-	Button(w.frames["First Frame"], text="Award Classes", command=cpicker).grid()
-	Button(w.frames["First Frame"], text="Award One Classe", command=caddone).grid()
-	Button(w.frames["First Frame"], text="Award Additional Classes", command=cadd).grid()
+
+
+	baoclass = Buttonbox(text='awardoneclass', lang=w.lang, repr='aoclass')
+	baac = Buttonbox(text='awardaddclass', lang=w.lang, repr='baaclasses')
+
+	w.frames["Fourth Frame"].addWidget(baoclass, (1, 0))
+	w.frames["Fourth Frame"].addWidget(baac, (2, 0))
+
+	baoclass.config(cmd=caddone)
+	baac.config(cmd=cadd)
 
 	#
 	w.frames["First Frame"].addWidget(addr, (0, 2))
@@ -69,6 +102,16 @@ def main(top=False, i=0):
 
 	w.frames["Second Frame"].addWidget(portr, (0, 0))
 
+	w.attinfo = attinfo
+	#w.attinfo.deleteAll()
+	w.frames["Fifth Frame"].addWidget(w.attinfo, (0, 0))
+	w.frames["Fifth Frame"].grid(rowspan=100, sticky=W)
+
+	w.attinfo.editwidget=True
+	w.attinfo.canvas.config(width=500, height=500)
+
+	#reset portrait
+	portr.setData('monet_sm.jpg')
 
 	s = d.studentList[i]
 	w.populate(s.datapoints)
@@ -77,21 +120,26 @@ def main(top=False, i=0):
 		s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
 		d.saveData()
 
-		w.dw()
-
-	Button(w.frames["Third Frame"], text="Save Student to Database", command=collect).grid()
-
-	Button(w.frames["Second Frame"], text="Browse Photo", command=ppicker).grid()
-
-	#print('called')
+		t.destroy()
 
 
+	sstudent = Buttonbox(text='savestudent', lang=w.lang, repr='sstudent')
+	w.frames["Third Frame"].addWidget(sstudent, (0, 0))
+	sstudent.config(cmd=collect)
 
-	w.start()
+	w.frames["Second Frame"].addWidget(brwp, (1, 0))
+	brwp.config(cmd=ppicker)
+
+	
+	t.mainloop()
+
+
+
+	
 
 
 
 if __name__ == '__main__':
-	main(i='')
+	main(language, i='')
 	
 

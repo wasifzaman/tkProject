@@ -3,7 +3,7 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(t):
+def main(t, lang):
 
 #language changer
 	def clang():
@@ -19,7 +19,7 @@ def main(t):
 
 	w = AppWindow(t)
 
-	w.lang = language
+	w.lang = lang
 
 #frame initialization
 	w.newFrame("L Frame", (0, 0))
@@ -30,6 +30,7 @@ def main(t):
 
 	w.frames["Fourth Frame"].grid(sticky=W)
 
+#language changer button
 	w.frames["L Frame"].addWidget(bclang, (0, 0))
 	w.frames["L Frame"].grid(sticky=E)
 	bclang.config(cmd=clang)
@@ -103,21 +104,21 @@ def main(t):
 		
 		ns = StudentInfo()
 		ns.datapoints = dict(list(ns.datapoints.items()) + list(w.collect(ns.datapoints).items()))
-		print(ns.datapoints)
+		#print(ns.datapoints)
 
 		nsbcode = ns.datapoints['bCode']
 
 		if d.checkCode(nsbcode):
-			if not ase(d.studentList[nsbcode].datapoints['firstName']):
+			if not ase(d.studentList[nsbcode].datapoints['firstName'], w.lang):
 				return
 		else:
-			if not con(ns.datapoints['firstName']):
+			if not con(ns.datapoints['firstName'], w.lang):
 				return
 
 		d.addStudent(ns.datapoints['bCode'], ns)
 		d.saveData()
 
-		sa(ns.datapoints['firstName'])
+		sa(ns.datapoints['firstName'], w.lang)
 
 		#print(w.collect(StudentInfo().datapoints))
 
@@ -131,6 +132,11 @@ def main(t):
 
 	w.frames["Second Frame"].addWidget(brwp, (1, 0))
 	brwp.config(cmd=ppicker)
+
+#set starting lang
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
 
 if __name__ == '__main__':
 	t = Tk()

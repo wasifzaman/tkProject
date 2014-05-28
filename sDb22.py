@@ -4,12 +4,13 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(t):
+def main(t, lang):
 
 	d.loadData()
 
 	w = AppWindow(t)
 
+	w.lang = lang
 
 
 	w.newFrame("First Frame", (0, 0))
@@ -32,8 +33,9 @@ def main(t):
 
 	sL.sort()
 	stable.setData((stableh, sL))
+	stable.canvas.config(width=700, height=700)
 
-	sbind(lambda i: editS2.main(top=True, i=i))
+	sbind(lambda i: editS2.main(w.lang, top=True, i=i))
 
 
 
@@ -41,12 +43,15 @@ def main(t):
 		print(sby.getData())
 		editS2.main(top=True, i=sby.getData()[1])
 
-	Button(w.frames["First Frame"], text="try", command=s).pack()
+	Button(w.frames["First Frame"], text="try", command=s).grid()
 
 
 
 
 if __name__ == '__main__':
-	main()
+	t = Window()
+	main(t, language)
+
+	t.mainloop()
 
 

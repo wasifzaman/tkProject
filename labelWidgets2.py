@@ -117,7 +117,8 @@ class Datebox(IntTextbox):
 			self.dEntry.config(textvariable=d)
 			self.yEntry.config(textvariable=y)
 		except:
-			print("the widget could not be configured")
+			pass
+			#print("the widget could not be configured")
 
 		try:
 			self.lang = kwargs['lang']
@@ -249,6 +250,19 @@ class Picker(Textbox):
 			print("widget could not be loaded")
 
 
+	def config(self, **kwargs):
+
+		try:
+			self.lang = kwargs['lang']
+			self.label.config(text=self.lang[self.text])
+			i = 0
+			for rad in self.brads:
+				rad.config(text=self.lang[self.rads[i][0]])
+				i += 1
+		except:
+			pass
+
+
 	def place(self, **kwargs):
 
 		try:
@@ -257,20 +271,22 @@ class Picker(Textbox):
 			print("widget could not be placed")
 
 		self.selfframe = Frame(self.parent)
-		self.label = Label(self.parent, text=self.text)
-		self.entry = Entry(self.parent, relief=GROOVE)
+		self.label = Label(self.selfframe, text=self.text)
+		self.entry = Entry(self.selfframe, relief=GROOVE)
 
 		self.b, r = StringVar(), []
 		self.b.set(self.rads[0][1])
 		for rad in self.rads:
-			r.append(Radiobutton(self.parent, text=rad[0], variable=self.b, value=rad[1], indicatoron=0))
+			r.append(Radiobutton(self.selfframe, text=rad[0], variable=self.b, \
+				value=rad[1], indicatoron=0, width=15))
 
-		self.rads = r
+		self.brads = r
 
+		self.selfframe.grid()
 		self.label.pack()
 		self.entry.pack()
-		for rad in self.rads:
-			rad.pack(side=LEFT)
+		for rad in self.brads:
+			rad.pack(side=LEFT, padx=2)
 
 
 	def getData(self):
@@ -379,6 +395,8 @@ class Buttonbox(Textbox):
 		except:
 			print("widget could not be loaded")
 
+		self.width = 30
+
 
 	def config(self, **kwargs):
 
@@ -406,5 +424,6 @@ class Buttonbox(Textbox):
 		except:
 			print("widget could not be placed")
 
-		self.button = Button(self.parent, text=self.lang[self.text], width=30)
+		self.button = Button(self.parent, text=self.lang[self.text], width=self.width)
+		self.button.bind('<Enter>', self.config(bg='blue'))
 		self.button.grid(row=self.row, column=self.column)

@@ -26,8 +26,8 @@ class AppWindow(Frame):
 		self.parent = parent
 
 		self.oframe = Frame(self)
-		self.mainFrame = Frame(self.oframe)
-		self.oframe.pack(fill="both", expand=True, padx=20, pady=20)
+		self.mainFrame = Frame(self.oframe, bd=20)
+		self.oframe.pack(fill="both", expand=True)
 		self.mainFrame.place(in_=self.oframe, anchor="c", relx=.5, rely=.5)
 
 		#troubleshooter
@@ -99,7 +99,7 @@ class Window(Tk):
 
 		#self.title(title)
 		#self.geometry(geometry)
-		self.config(bg="#9FB6CD")
+		self.config(bg="#575765", bd=2)
 		self.attributes('-fullscreen', True)
 
 		self.oframe = Frame(self)
@@ -107,7 +107,7 @@ class Window(Tk):
 		self.oframe.pack(fill="both", expand=True, padx=20, pady=20)
 		self.mainFrame.place(in_=self.oframe, anchor="c", relx=.5, rely=.5)
 
-		self.oframe.config(bg="grey")
+		self.oframe.config(bg="#404056")
 
 		#
 		self.update_idletasks()

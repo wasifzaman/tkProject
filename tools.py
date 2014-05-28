@@ -4,7 +4,7 @@ from preBuilts import *
 import importwiz
 
 
-def main(top=False):
+def main(top=False, lang):
 
 	def cdb():
 		try:
@@ -31,6 +31,8 @@ def main(top=False):
 	d.loadData()
 
 	w = Window(top=top, geometry='500x400')
+
+	w.lang = lang
 
 	w.newFrame("First Frame", (0, 0))
 	w.newFrame("Fifth Frame", (1, 0))

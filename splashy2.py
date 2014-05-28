@@ -26,7 +26,7 @@ def main():
 
 	def showWindow(f):
 		w.frames["First Frame"].grid_forget()
-		f(w.frames["Second Frame"])
+		f(w.frames["Second Frame"], w.lang)
 		w.frames["Second Frame"].grid()
 		w.frames["Third Frame"].grid()
 

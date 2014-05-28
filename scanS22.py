@@ -3,24 +3,43 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(t):
+def main(t, lang):
+
+#language changer
+	def clang():
+		if w.lang['self'] == 'english':
+			w.lang = languages['chinese']
+		else:
+			w.lang = languages['english']
+		for frame in w.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
 
 	d.loadData()
 
 	w = AppWindow(t)
 
+	w.lang = lang
+
+#frame initialization
+	w.newFrame("L Frame", (0, 0))
+	w.newFrame("First Frame", (1, 0))
+	w.newFrame("Second Frame", (2, 0))
+	w.newFrame("Third Frame", (2, 1))
+	w.newFrame("Fourth Frame", (0, 2))
+	w.newFrame("Fifth Frame", (3, 0))
 
 
-	w.newFrame("First Frame", (0, 0))
-	w.newFrame("Second Frame", (1, 0))
-	w.newFrame("Third Frame", (1, 1))
-	w.newFrame("Fourth Frame", (1, 2))
-	w.newFrame("Fifth Frame", (2, 1))
+#language changer button
+	w.frames["L Frame"].addWidget(bclang, (0, 0))
+	w.frames["L Frame"].grid(sticky=E)
+	bclang.config(cmd=clang)
 
 
+#add widget to search for students
 	w.frames["First Frame"].addWidget(sby, (0, 0))
 
-
+#basic info widgets
 	w.frames["Second Frame"].addWidget(firstName, (0, 0))
 	w.frames["Second Frame"].addWidget(lastName, (1, 0))
 	w.frames["Second Frame"].addWidget(chineseName, (2, 0))
@@ -56,8 +75,10 @@ def main(t):
 	w.frames["Third Frame"].addWidget(portr, (0, 0))
 
 	w.frames["Fourth Frame"].addWidget(attinfo, (0, 0))
+	w.frames["Fourth Frame"].grid(rowspan=100, sticky=W)
 
 	attinfo.editwidget=False
+	attinfo.canvas.config(width=500, height=500)
 
 	sby.rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')]
 
@@ -81,35 +102,36 @@ def main(t):
 						sl.append([dp['bCode'], dp['firstName'], dp['lastName'], dp['dob']])
 
 
-				if len(sl) == 0: return
+				if len(sl) == 0:
+					nos(w.lang)
+					return
 
 				w.s = sl[0][0]
-				#print(sl)
 				if len(sl) > 1:
 					sl.sort()
 					w.s = spicker(sl)
+					if not w.s: return
 
+			#reset portrait
+			portr.setData('monet_sm.jpg')
+			
 			w.populate(d.studentList[w.s].datapoints)
 
-			if cs(d.studentList[w.s].datapoints['firstName']): ss()
+			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
+			nos(w.lang)
 			pass
-		#print(d.studentList[w.s].datapoints['attinfo'])
-		
-		#else:
-			#w.populate(d.studentList[sby.getData()[1]].datapoints)
 
 
 	def ss():
 		d.scanStudent(w.s)
 		d.saveData()
-		#print(d.studentList[w.s].datapoints['attinfo'])
 		w.frames['Fourth Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
 
 
 	def z():
 		try:
-			ss() if cs(d.studentList[w.s].datapoints['firstName']) else False
+			ss() if cs(d.studentList[w.s].datapoints['firstName'], w.lang) else False
 		except:
 			print("error-105")
 
@@ -119,10 +141,19 @@ def main(t):
 		print(sby.getData())
 
 	w.frames["First Frame"].widgets['sby'].entry.bind("<Return>", lambda x: s())
-	Button(w.frames["First Frame"], text="try", command=s).pack()
 
-	Button(w.frames["Fifth Frame"], text="Scan", command=z).pack()
+	w.frames["First Frame"].addWidget(bsearch, (1, 0))
+	bsearch.button.config(width=20)
+	bsearch.config(cmd=s)
 
+	bcheck = Buttonbox(text='cinstudent', lang=language, repr='bcheck')
+	w.frames["Fifth Frame"].addWidget(bcheck, (1, 0))
+	bcheck.config(cmd=z)
+
+#set starting lang
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
 
 
 
@@ -134,5 +165,9 @@ def main(t):
 
 
 if __name__ == '__main__':
-	main()
+	t = Window()
+
+	main(t, language)
+
+	t.mainloop()
 

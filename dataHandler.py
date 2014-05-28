@@ -195,7 +195,7 @@ class StudentDB:
 
 
     def findTimeSlot(self, time):
-        h, m = '{:%H}'.format(time), '{:%M}'.format(time)
+        h, m, p = '{:%I}'.format(time), '{:%M}'.format(time), '{:%p}'.format(time)
         m = int(m)
 
         if m > 40:
@@ -206,7 +206,7 @@ class StudentDB:
         else:
             m = '00'
 
-        return h + ':' + m
+        return h + ':' + m + ' ' + p
 
 
     def scanStudent(self, barcode):
@@ -214,12 +214,13 @@ class StudentDB:
         cdt = datetime.now()
 
         timeslot = self.findTimeSlot(cdt)
-        time = '{:%H:%M}'.format(cdt)
+        time = '{:%I:%M %p}'.format(cdt)
         date = '{:%m/%d/%Y}'.format(cdt)
 
         s = self.studentList[barcode].datapoints
         s['attinfo'][1].append([date, time, timeslot])
         s['cRemaining'] -= 1
+        if s['cRemaining'] < 0: s['cRemaining'] = 0
         #except:
             #return print("Student doesn't exist")
 
@@ -246,7 +247,8 @@ class StudentDB:
         try:
             return self.fcell[ctype](value)
         except:
-            print("cell could not be formatted")
+            if ctype == 0: print("cell is empty, not added to database")
+            else: print("cell could not be formatted")
 
 
     def exportxlsx(self, filename):

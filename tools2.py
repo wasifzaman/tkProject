@@ -4,12 +4,22 @@ from preBuilts2 import *
 import importwiz
 
 
-def main(t):
+def main(t, lang):
+
+#language changer
+	def clang():
+		if w.lang['self'] == 'english':
+			w.lang = languages['chinese']
+		else:
+			w.lang = languages['english']
+		for frame in w.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
 
 	def cdb():
 		try:
 			p = filedialog.askopenfile().name.split('/')[-1]
-			if p[-3:] != '.db':
+			if p[p.rfind('.'):]!= '.db':
 				print("invalid file")
 				return
 			else:
@@ -17,11 +27,30 @@ def main(t):
 		except:
 			print("error opening file.")
 
+
+	def ctdb():
+		try:
+			p = filedialog.askopenfile().name.split('/')[-1]
+			ext = p[p.rfind('.'):]
+			if ext != '.xls' and ext != '.xlsx':
+				print("invalid file")
+				return
+			else:
+				d.loadData()
+				d.importtimexlsx(p)
+				d.saveData()
+		except:
+			print("error opening file.")
+
+
 	def ss():
 		def z():
-			s.config['dbFile'] = curdb.cget(text)
+			s.config['dbFile'] = curdb.cget('text')
 		s.saveSettings(lambda: z())
-		w.dw()
+		dbs(w.lang)
+
+
+		
 
 
 	def it():
@@ -32,13 +61,22 @@ def main(t):
 
 	w = AppWindow(t)
 
-	w.newFrame("First Frame", (0, 0))
-	w.newFrame("Fifth Frame", (1, 0))
-	w.newFrame("Second Frame", (2, 0))
-	w.newFrame("Third Frame", (0, 1))
-	w.newFrame("Fourth Frame", (3, 1))
+	w.lang = lang
 
+#frame initialization
+	w.newFrame("L Frame", (0, 0))
+	w.newFrame("First Frame", (1, 0))
+	w.newFrame("Fifth Frame", (2, 0))
+	w.newFrame("Second Frame", (3, 0))
+	w.newFrame("Third Frame", (1, 1))
+	w.newFrame("Fourth Frame", (4, 1))
 
+#language changer button
+	w.frames["L Frame"].addWidget(bclang, (0, 0))
+	w.frames["L Frame"].grid(sticky=E)
+	bclang.config(cmd=clang)
+
+#import export widgets
 	w.frames["First Frame"].addWidget(imp, (0, 0))
 	w.frames["First Frame"].addWidget(sepr, (1, 0))
 	w.frames["First Frame"].addWidget(bimp, (2, 0))
@@ -54,22 +92,27 @@ def main(t):
 	curdb = Label(w.frames['Third Frame'], text=s.config['dbFile'])
 	w.frames["Third Frame"].addWidget(curfile, (0, 0))
 	curdb.grid(row=1, column=0)
-	#w.frames["Third Frame"].addWidget(curdb, (1, 0))
+
 	w.frames["Third Frame"].addWidget(bcdb, (2, 0))
-	#w.frames["Third Frame"].addWidget(sepr, (1, 0))
-	#w.frames["Third Frame"].addWidget(bexp, (2, 0))
 
-	Button(w.frames["Fourth Frame"], text="     Save     ", command=ss).grid()
-	Button(w.frames["Fourth Frame"], text="   Cancel   ", command=w.dw).grid()
 
+	w.frames['Fourth Frame'].addWidget(bsav, (0, 0))
+
+	bsav.config(cmd=ss)
 	bimp.config(cmd=importwiz.main)
 	bcdb.config(cmd=cdb)
+	bimpt.config(cmd=ctdb)
 	#curdb.config(text=s.config['dbFile'])
 	#exp.config(cmd=importwiz.main)
 
-
+#set starting lang
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
 
 
 if __name__ == '__main__':
-	main()
-	print('abcd.db'[-3:])
+	t = Window()
+	main(t, language)
+	
+	t.mainloop()

@@ -25,14 +25,14 @@ city = Textbox(text="City", lang=language, repr='city')
 wkdwknd = Textbox(text="Weekday/Weekend", lang=language, repr='wkdwknd')
 email = Textbox(text="E-mail", lang=language, repr='email')
 sType = Textbox(text="Service Type", lang=language, repr='sType')
+hPhone = Textbox(text="Home Phone", lang=language, repr='hPhone')
+cPhone = Textbox(text="Cell Phone", lang=language, repr='cPhone')
+cPhone2 = Textbox(text="Cell Phone 2", lang=language, repr='cPhone2')
 
 
 #integers
 age = IntTextbox(text="Age", lang=language, repr='age')
 sid = IntTextbox(text="Old Student ID", lang=language, repr='sid')
-hPhone = IntTextbox(text="Home Phone", lang=language, repr='hPhone')
-cPhone = IntTextbox(text="Cell Phone", lang=language, repr='cPhone')
-cPhone2 = IntTextbox(text="Cell Phone 2", lang=language, repr='cPhone2')
 zip = IntTextbox(text="Zipcode", lang=language, repr='zip')
 cAwarded = IntTextbox(text="Classes Awarded", lang=language, repr='cAwarded')
 cRemaining = IntTextbox(text="Classes Remaining", lang=language, repr='cRemaining')
@@ -83,8 +83,10 @@ sepr = Separator(repr='sepr')
 
 
 #scan
-sby = Picker(repr='sby', text='Search By', rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), \
-	('Last Name', 'lastName'), ('Chinese Name', 'chineseName')])
+sby = Picker(repr='sby', text=language['Search By'], rads=[(language['Barcode'], 'bCode'), \
+	(language['First Name'], 'firstName'), \
+	(language['Last Name'], 'lastName'), \
+	(language['Chinese Name'], 'chineseName')])
 
 
 #spicker
@@ -97,11 +99,17 @@ def spicker(d):
 	t = Toplevel()
 	frame = Frame(t)
 	frame.pack()
+	t.grab_set()
+	t.focus_set()
+
 
 	stable.build(headers=stableh, data=d)
 	stable.place(parent=frame, row=0, column=0)
+	stable.canvas.config(widt=500, height=600)
 
 	sbind(lambda i: sets(i=i))
+
+	#t.resizable(0, 0)
 
 	t.wait_window()
 
@@ -121,10 +129,13 @@ def cward():
 	t.focus_set()
 	t.cancel = True
 
+	t.protocol('WM_DELETE_WINDOW', t.destroy)
+
 	frame = Frame(t)
 	frame.grid()
 
-	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
+	rads = [('Gold', 60, 'This awards the student 60 classes.'),\
+	('Basic', 15, 'This awrards the student 15 classes.')]
 	b, r = StringVar(), []
 	b.set(rads[0][1])
 
@@ -139,7 +150,7 @@ def cward():
 
 	rads = r
 
-	#self.protocol('WM_DELETE_WINDOW', t.destroy())
+	
 
 
 	for rad in rads:
@@ -165,13 +176,14 @@ def cpicker():
 	sstype()
 
 def cadd():
-	cAwarded.setData(cAwarded.getData() + cward())
-	cRemaining.setData(cAwarded.getData())
+	new = cward()
+	cAwarded.setData(cAwarded.getData() + new)
+	cRemaining.setData(cRemaining.getData() + new)
 	sstype()
 
 def caddone():
 	cAwarded.setData(cAwarded.getData() + 1)
-	cRemaining.setData(cAwarded.getData())
+	cRemaining.setData(cRemaining.getData() + 1)
 	sstype()
 
 
@@ -191,15 +203,18 @@ ws = Photo(repr='portr', path='ws_sm.png')
 hs = Photo(repr='portr', path='hand_cursor_sm.png')
 cm = Photo(repr='portr', path='check_mark_sm.png')
 
-nostext = Labelbox(text='No student', lang=language, repr='nostext')
-context = Labelbox(text='Con student', lang=language, repr='context')
-asetext = Labelbox(text='Ase student', lang=language, repr='asetext')
-satext = Labelbox(text='Sa student', lang=language, repr='satext')
-cstext = Labelbox(text='Cs student', lang=language, repr='cstext')
+
+
+
+
 
 bok = Buttonbox(text='ok', lang=language, repr='bok')
 byes = Buttonbox(text='yes', lang=language, repr='byes')
 bno = Buttonbox(text='no', lang=language, repr='bno')
+
+bok.width = 10
+byes.width = 10
+bno.width = 10
 
 
 #importexp
@@ -213,11 +228,11 @@ saveto = Labelbox(text='saveto', lang=language, repr='saveto')
 bimp = Buttonbox(text='impxls', lang=language, repr='bimp')
 bimpt = Buttonbox(text='imptxls', lang=language, repr='bimpt')
 bexp = Buttonbox(text='expxls', lang=language, repr='bexp')
-bsav = Buttonbox(text='save', lang=language, repr='bsav')
+bsav = Buttonbox(text='Save', lang=language, repr='bsav')
 bcdb = Buttonbox(text='choosedb', lang=language, repr='bcdb')
 
-bk = Buttonbox(text='back', lang=language, repr='bk')
-nxt = Buttonbox(text='next', lang=language, repr='bimp')
+bk = Buttonbox(text='Back', lang=language, repr='bk')
+nxt = Buttonbox(text='Next', lang=language, repr='bimp')
 
 
 #browsebtn
@@ -229,34 +244,37 @@ brwp = Buttonbox(text='browsephoto', lang=language, repr='brwp')
 
 
 #ebox
-def nos():
+def nos(lang):
 
-	t = Mbox(geometry='230x200')
+	t = Mbox()
 	
 	t.newFrame("First Frame", (0, 0))
+
+	nostext = Labelbox(text='No student', lang=lang, repr='nostext')
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
 	t.frames["First Frame"].addWidget(nostext, (1, 0))
 	t.frames["First Frame"].addWidget(bok, (2, 0))
-
-
+	
 	nostext.label.config(bg='grey', fg='white')
 	bok.button.config(bg='grey', fg='white')
-	bok.config(cmd=t.dw)
+	bok.config(cmd=t.dw, lang=lang)
 	t.config(bg='grey')
 
 	t.root.wait_window()
 
-def con(s):
+def con(s, lang):
 
 	def d(z):
 		t.z = z
 		t.dw()
 
-	t = Mbox(geometry='230x310')
+	t = Mbox()
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
+
+	context = Labelbox(text='Con student', lang=lang, repr='context')
 
 	t.frames["First Frame"].addWidget(hs, (1, 0))
 	t.frames["First Frame"].addWidget(context, (2, 0))
@@ -270,26 +288,28 @@ def con(s):
 	bno.button.config(bg='grey', fg='white')
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
-	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(False))
+	byes.config(cmd=lambda: d(True), lang=lang)
+	bno.config(cmd=lambda: d(False), lang=lang)
 	t.config(bg='grey')
 
 	t.root.wait_window()
 
 	return t.z
 
-def ase(s):
+def ase(s, lang):
 
 	def d(z):
 		t.z = z
 		t.dw()
 
-	t = Mbox(geometry='330x290')
+	t = Mbox()
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
 	t.frames["Second Frame"].addWidget(byes, (0, 0))
 	t.frames["Second Frame"].addWidget(bno, (0, 1))
+
+	asetext = Labelbox(text='Ase student', lang=lang, repr='asetext')
 
 	t.frames["First Frame"].addWidget(ws, (0, 0))
 	t.frames["First Frame"].addWidget(asetext, (2, 0))
@@ -301,19 +321,18 @@ def ase(s):
 	bno.button.config(bg='grey', fg='white')
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
-	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(False))
+	byes.config(cmd=lambda: d(True), lang=lang)
+	bno.config(cmd=lambda: d(False), lang=lang)
 	t.config(bg='grey')
 
 	t.root.wait_window()
 
 	return t.z
 
+def sa(s, lang):
 
-def sa(s):
 
-
-	t = Mbox(geometry='280x230')
+	t = Mbox()
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
@@ -322,27 +341,30 @@ def sa(s):
 	t.frames["First Frame"].addWidget(bok, (4, 0))
 
 	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid(row=3)
+
+	satext = Labelbox(text='Sa student', lang=lang, repr='satext')
 	
 	t.frames["First Frame"].addWidget(satext, (2, 0))
 
 	satext.label.config(bg='grey', fg='white')
 	bok.button.config(bg='grey', fg='white')
-	bok.config(cmd=t.dw)
+	bok.config(cmd=t.dw, lang=lang)
 	t.config(bg='grey')
 
 	t.root.wait_window()
 
-
-def cs(s):
+def cs(s, lang):
 
 	def d(z):
 		t.z = z
 		t.dw()
 
-	t = Mbox(geometry='230x310')
+	t = Mbox()
 
 	t.newFrame("First Frame", (0, 0))
 	t.newFrame("Second Frame", (1, 0))
+
+	cstext = Labelbox(text='Cs student', lang=lang, repr='cstext')
 
 	t.frames["First Frame"].addWidget(hs, (1, 0))
 	t.frames["First Frame"].addWidget(cstext, (2, 0))
@@ -356,14 +378,70 @@ def cs(s):
 	bno.button.config(bg='grey', fg='white')
 	byes.button.grid(sticky=E+W, padx=5)
 	bno.button.grid(sticky=E+W, padx=5)
-	byes.config(cmd=lambda: d(True))
-	bno.config(cmd=lambda: d(False))
+	byes.config(cmd=lambda: d(True), lang=lang)
+	bno.config(cmd=lambda: d(False), lang=lang)
 	t.config(bg='grey')
 
 	t.root.wait_window()
 
 	return t.z
 
+def dbs(lang):
+
+	t = Mbox()
+	
+	t.newFrame("First Frame", (0, 0))
+
+	dbupdate = Labelbox(text='Database succesfully updated!', lang=lang, repr='dbupdate')
+
+	t.frames["First Frame"].addWidget(ws, (0, 0))
+	t.frames["First Frame"].addWidget(dbupdate, (1, 0))
+	t.frames["First Frame"].addWidget(bok, (2, 0))
+	
+	dbupdate.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw, lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
+
+def noimp(lang):
+
+	t = Mbox()
+	
+	t.newFrame("First Frame", (0, 0))
+
+	fimport = Labelbox(text='File could not be imported', lang=lang, repr='fimport')
+
+	t.frames["First Frame"].addWidget(ws, (0, 0))
+	t.frames["First Frame"].addWidget(fimport, (1, 0))
+	t.frames["First Frame"].addWidget(bok, (2, 0))
+	
+	fimport.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw, lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
+
+def pchoosefile(lang):
+
+	t = Mbox()
+	
+	t.newFrame("First Frame", (0, 0))
+
+	pchoosefiletext = Labelbox(text='Please choose a file', lang=lang, repr='pchoosefiletext')
+
+	t.frames["First Frame"].addWidget(ws, (0, 0))
+	t.frames["First Frame"].addWidget(pchoosefiletext, (1, 0))
+	t.frames["First Frame"].addWidget(bok, (2, 0))
+	
+	pchoosefiletext.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw, lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
 
 #clang
 def clang():
@@ -378,3 +456,7 @@ def clang():
 
 #bclang
 bclang = Buttonbox(text='changelanguage', lang=language, repr='bclang')
+
+
+#Search
+bsearch = Buttonbox(text='Search', lang=language, repr='bsearch')

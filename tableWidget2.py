@@ -64,7 +64,8 @@ class Cell(Widget):
 		except:
 			print("error-64: widget could not be placed")
 		
-		self.label = Label(self.parent, text=self.text, relief=self.relief, bd=self.bd, bg=self.bgcolor)
+		self.label = Label(self.parent, text=self.text, relief=self.relief,\
+			bd=self.bd, bg=self.bgcolor, height=0)
 
 		self.label.grid(row=self.pos[0], column=self.pos[1])
 
@@ -88,24 +89,9 @@ class Table(Widget):
 		except:
 			print("error-88: widget could not be loaded")
 
-		#
+		#color last
 		self.clast = False
 
-		'''self.data = data
-		self.parent = parent
-		self.headers = headers
-		self.rowNumbers = rowNumbers
-		self.cellpadding = 2
-		self.cells = []
-
-		self.setData(self.data)
-		
-
-		#temp variables
-		self.canvasWidth = w
-		self.canvasHeight = h
-		self.attribute = attribute
-		self.current = 0'''
 
 	def config(self, **kwargs):
 		pass
@@ -275,7 +261,7 @@ class Table(Widget):
 		
 		#print(self.cwids)
 		for key, value in self.cells.items():
-			value.config(width=self.cwids[key[1]])
+			value.config(width=self.cwids[key[1]] + 2)
 
 
 	def place(self, **kwargs):
@@ -327,179 +313,3 @@ class Table(Widget):
 		information = data[1]
 
 		self.update(headers=headers, data=information)
-
-
-
-
-	'''def setwidth(self):
-
-
-	''''''
-	def place(self):
-
-		try:
-			self.trytoplace(self, **kwargs)
-		except:
-			print("widget could not be placed")
-
-		self.make()
-		self.outerframe.grid(row=0, column=0)
-		self.innerframe.grid(row=1, column=1)
-
-		self.canvas.create_window((0,0), window=self.masterFrame, anchor=NW)
-
-
-		
-		
-
-		for i in range(self.maxrows):
-			r = []
-			for j in range(self.maxcols):
-				try:
-					cell = Cell(self.inner, self.data[i][j], (i, j), self.colwidth[j])
-					r.append(cell)
-					cell.label.bind("<Double-Button-1>", lambda event, row=i: self.editRow(row))
-					cell.label.bind("<Button-1>", lambda event, row=i: self.select(row))
-				except:
-					cell = Cell(self.inner, '', (i, j), self.colwidth[j])
-					r.append(cell)
-					cell.label.bind("<Double-Button-1>", lambda event, row=i: self.editRow(row))
-					cell.label.bind("<Button-1>", lambda event, row=i: self.select(row))
-
-			self.cells.append(r)
-
-
-
-
-		if self.headers:
-			while len(self.headers) < self.maxcols:
-				self.headers.append("Col " + str(len(self.headers)))
-
-			for i in range(len(self.headers)):
-				if i not in self.colwidth: continue
-				Label(self.headerFrame, text=self.headers[i], bd=1, relief=SUNKEN, width=self.colwidth[i], bg="#5983D6", fg="white").grid(row=0, column=i)
-
-		if self.rowNumbers:
-			for i in range(self.maxrows):
-				Label(self.numberFrame, text=i+1, bd=1, relief=SUNKEN, bg="#5983D6", fg="white", width=3).grid(row=i, column=0)
-
-
-		self.parent.bind("<Configure>", self.makeScroll)
-
-		
-				
-
-	def makeScroll(self, event):
-		#width, height defined by func, determine by max width
-		self.canvas.config(scrollregion=self.canvas.bbox("all"), width=self.canvasWidth, height=self.canvasHeight)
-		self.xscrollbar.pack(side=BOTTOM, fill=X)
-		self.canvas.pack(side=LEFT)
-		self.yscrollbar.pack(side=RIGHT, fill=Y)
-
-	def getData(self):
-		table = []
-		empty = ['' for x in range(len(self.cells[0]))]
-        
-		for row in self.cells:
-			r = []
-			for cell in row:
-				r.append(cell.label.cget('text').strip())
-
-			if r != empty:
-				table.append(r)
-
-		return table
-
-	def setData(self, data):
-		self.data = data
-		self.cells = []
-		self.setTable()
-		self.displayTable()
-
-	def clearData(self):
-		for row in self.cells:
-			for cell in row:
-				cell.label.destroy()
-		self.cells = []
-
-	def setTable(self):
-
-		#set the table, cell widths, heights
-		self.maxrows = len(self.data)
-		self.maxcols = 0
-		self.colwidth = {}
-		
-		for row in range(len(self.data)):
-			self.maxcols = max(len(self.data[row]), self.maxcols)
-			for col in range(len(self.data[row])):
-				if col not in self.colwidth: self.colwidth[col] = 0
-				
-				if self.headers:
-					#if header, compare header len
-					self.colwidth[col] = max(len(self.data[row][col]),len(self.headers[col]), self.colwidth[col]-self.cellpadding)+self.cellpadding 
-				self.colwidth[col] = max(len(self.data[row][col]), self.colwidth[col]-self.cellpadding)+self.cellpadding 
-
-	def setRowColor(self, i, color):
-		for cell in self.cells[i]:
-			cell.label.config(bg=color)
-
-	def editRow(self, i):
-		
-		def setCellData():
-			for i in range(len(row)):
-				row[i].label.config(text=entries[i].get())
-			self.data = self.getData()
-			#print(self.data)
-			self.clearData()
-			self.setData(self.data)
-			top.destroy()
-
-		def clearAllData():
-			result = messagebox.askyesno("Clear?", "Clear all fields?")
-			if not result: return
-
-			for entry in entries:
-				entry.delete(0, END)
-            
-            
-
-		top = Toplevel()
-		top.grab_set()
-
-		cellFrame = Frame(top)
-		buttonFrame = Frame(top)
-
-		cellFrame.grid(row=0,column=0)
-		buttonFrame.grid(row=1,column=0)
-
-		row = self.cells[i]
-		entries = []
-
-        #place headers
-		for i in range(len(self.headers)):
-			Label(cellFrame, text=self.headers[i], width=self.colwidth[i]).grid(row=0, column=i, padx=10, pady=3)
-
-		for j in range(len(row)):
-			strCellData = StringVar()
-			strCellData.set(row[j].label.cget('text'))
-			entries.append(Entry(cellFrame, textvariable=strCellData, width=10))
-			entries[-1].grid(row=1, column=j, padx=10, pady=4)
-
-		entries[0].focus_set()
-		Button(buttonFrame, text='Save', width=5, command=setCellData).grid(row=2, column=0, padx=5, pady=10)
-		Button(buttonFrame, text='Clear All', width=8, command=clearAllData).grid(row=2, column=1, padx=5, pady=10)
-		Button(buttonFrame, text='Cancel', width=8, command=top.destroy).grid(row=2, column=2, padx=5, pady=10)
-
-	def bindCells(self, button, command):
-		for row in self.cells:
-			for cell in row:
-				cell.label.bind(button, command)
-
-	def select(self, row):
-		for cell in self.cells[self.current]:
-			cell.label.config(bg="white")
-			
-		for cell in self.cells[row]:
-			cell.label.config(bg='#F0E0FF')
-
-		self.current = row'''
