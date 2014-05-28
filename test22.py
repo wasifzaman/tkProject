@@ -9,23 +9,37 @@ from languages import *
 def main():
 
 	t = Window(top=False)
+	t.attributes('-fullscreen', False)
+	t.geometry('700x700')
 	
 	w = AppWindow(t.mainFrame)
 
 	w.lang = language
 
 	w.newFrame("First Frame", (0, 0))
-
-	bsexit = Buttonbox(text='Exit', lang=w.lang, repr='bsexit')
-
-	#w.frames["First Frame"].addWidget(bsexit, (5, 0))
-
-	bsexit.config(cmd=t.destroy)
+	
 
 	
 
-	r = Radiobutton(w.frames["First Frame"], text='abcd')
-	print(r.cget('text'))
+
+	sL = [['abc', 'bcd', '123'], ['abc', 'def', '123'], ['x', 'y', 'zpreviouscells']]
+	sL2 = list(sL)
+
+	w.attinfo = Table(repr='attinfo', edit=True)
+	w.attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
+	w.attinfo.build(headers=w.attinfoh, data=[[]])
+	w.attinfo.clast = '#FF99FF'
+
+	w.frames["First Frame"].addWidget(w.attinfo, (0, 0))
+	
+	w.attinfo.setData((w.attinfoh, sL))
+	w.attinfo.setData((w.attinfoh, [['def', '345', '565']]))
+	
+
+	
+
+	
+	
 
 
 	t.mainloop()

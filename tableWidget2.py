@@ -1,5 +1,6 @@
 from tkinter import *
 from widget import Widget
+import copy
 
 
 
@@ -73,6 +74,7 @@ class Cell(Widget):
 	def delete(self, **kwargs):
 
 		try:
+			self.label.grid_forget()
 			self.label.destroy()
 		except:
 			print("error-76: widget could not be deleted")
@@ -80,7 +82,6 @@ class Cell(Widget):
 
 class Table(Widget):
 
-	#remove attribute in final version
 	def __init__(self, **kwargs):
 
 		try:
@@ -168,6 +169,40 @@ class Table(Widget):
 
 		cross = {}
 		deprecated = {}
+
+		#print(newdata, olddata)
+
+		new = {}
+		old = {}
+
+		r = 0
+		for row in newdata:
+			c = 0
+			for data in row:
+				new[(r, c)] = data
+				c += 1
+			r += 1
+
+		r = 0
+		for row in olddata:
+			c = 0
+			for data in row:
+				old[(r, c)] = data
+				c += 1
+			r += 1
+
+		print(new, old)
+
+		for key, val in new.items():
+			if key in old and old[key] != val:
+				cross[key] = val
+			else:
+				deprecated[key] = val
+
+		print(cross, deprecated)
+
+		cross = {}
+		deprecated = {}
 		
 		r = 0
 		for row in olddata:
@@ -186,26 +221,35 @@ class Table(Widget):
 
 	def update(self, **kwargs):
 
-		self.previous = self.data
-		self.previouscells = self.cells
+		#print('data', list(self.data))
+		#print('cells', dict(self.cells))
+		#print('headers', dict(self.headers))
+		#print(self.headers)
+
+		self.previous = list(self.data)
+		self.previouscells = dict(self.cells)
 		self.previousheaders = self.headers
 
-		self.build(data=kwargs['data'], headers=kwargs['headers'])
+		self.build(**kwargs)
+
+		#print(self.previous, self.data)
 
 		cross, deprecated = self.intersect(self.data, self.previous)
-		hcross, hdeprecated = self.intersect(self.headers, self.previousheaders)
+		#hcross, hdeprecated = self.intersect(self.headers, self.previousheaders)
 
-		for cell in hdeprecated:
-			self.previouscells[(0, cell[0])].delete()
+		#print(self.previouscells, self.cells)
+
+		#for cell in hdeprecated:
+		#	self.previouscells[(0, cell[0])].delete()
 
 		for cell in deprecated:
 			self.previouscells[cell].delete()
 
 		for key, value in cross.items():
-			self.previouscells[key].config(text=self.previous[key[0]-1][key[1]-1])
+			self.previouscells[key].config(text=self.data[key[0]-1][key[1]-1])
 
-		for key, value in hcross.items():
-			self.previouscells[(0, key[0])].config(text=self.headers[key[0]-1])
+		#for key, value in hcross.items():
+		#	self.previouscells[(0, key[0])].config(text=self.headers[key[0]-1])
 
 		for n in range(len(self.data), len(self.previous)):
 			self.previouscells[(n+1, 0)].delete()
@@ -312,4 +356,4 @@ class Table(Widget):
 		headers = data[0]
 		information = data[1]
 
-		self.update(headers=headers, data=information)
+		self.update(headers=data[0], data=data[1])

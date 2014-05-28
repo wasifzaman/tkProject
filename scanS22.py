@@ -21,6 +21,12 @@ def main(t, lang):
 
 	w.lang = lang
 
+#attendance table
+	w.attinfo = Table(repr='attinfo', edit=True)
+	w.attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
+	w.attinfo.build(headers=w.attinfoh, data=[[]])
+	w.attinfo.clast = '#FF99FF'
+
 #frame initialization
 	w.newFrame("L Frame", (0, 0))
 	w.newFrame("First Frame", (1, 0))
@@ -74,11 +80,11 @@ def main(t, lang):
 
 	w.frames["Third Frame"].addWidget(portr, (0, 0))
 
-	w.frames["Fourth Frame"].addWidget(attinfo, (0, 0))
+	w.frames["Fourth Frame"].addWidget(w.attinfo, (0, 0))
 	w.frames["Fourth Frame"].grid(rowspan=100, sticky=W)
 
-	attinfo.editwidget=False
-	attinfo.canvas.config(width=500, height=500)
+	w.attinfo.editwidget=False
+	w.attinfo.canvas.config(width=500, height=500)
 
 	sby.rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')]
 
