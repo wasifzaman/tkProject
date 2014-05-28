@@ -191,30 +191,30 @@ class Table(Widget):
 				c += 1
 			r += 1
 
-		print(new, old)
+		#print(new, old)
 
-		for key, val in new.items():
-			if key in old and old[key] != val:
-				cross[key] = val
+		for key, val in old.items():
+			if key in new and new[key] != val:
+				cross[(key[0] + 1, key[1] + 1)] = new[key]
 			else:
-				deprecated[key] = val
+				deprecated[(key[0] + 1, key[1] + 1)] = val
 
 		print(cross, deprecated)
 
-		cross = {}
-		deprecated = {}
+		#cross = {}
+		#deprecated = {}
 		
-		r = 0
-		for row in olddata:
-			c = 0
-			for data in row:
-				try:
-					if newdata[r][c] != data:
-						cross[(r+1, c+1)] = data
-				except:
-					deprecated[(r+1, c+1)] = data
-				c += 1
-			r += 1
+		#r = 0
+		#for row in olddata:
+		#	c = 0
+		#	for data in row:
+		#		try:
+		#			if newdata[r][c] != data:
+		#				cross[(r+1, c+1)] = data
+		#		except:
+		#			deprecated[(r+1, c+1)] = data
+		#		c += 1
+		#	r += 1
 
 		return cross, deprecated
 
