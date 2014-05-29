@@ -130,7 +130,7 @@ class Table(Widget):
 		self.outerframe = Frame(self.canvas)
 		self.innerframe = Frame(self.outerframe)		
 
-		self.xscrollbar = Scrollbar(self.container, orient="horizontal", command=self.canvas.xview)
+		self.xscrollbar = Scrollbar(self.container, orient="horizontal", command=self.canvas.xview, relief=FLAT)
 		self.yscrollbar = Scrollbar(self.container, orient="vertical", command=self.canvas.yview)
 		self.canvas.config(xscrollcommand=self.xscrollbar.set)
 		self.canvas.config(yscrollcommand=self.yscrollbar.set)

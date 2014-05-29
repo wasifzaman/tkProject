@@ -154,7 +154,8 @@ languages = \
 		"curfile": "当前数据库文件",
 		"choosedb": "选择数据库",
 		"": "",
-		"Classes remaining for this student": "剩余的这名学生的班"
+		"Classes remaining for this student": "剩余的这名学生的班",
+		"spec": ""
 	}
 		
 }

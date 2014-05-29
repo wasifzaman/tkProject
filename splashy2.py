@@ -3,6 +3,7 @@ from uiHandler22 import *
 from dataHandler import *
 from languages import *
 from labelWidgets2 import *
+from photoWidget2 import *
 import addS22
 import scanS22
 import sDb22
@@ -68,6 +69,8 @@ def main():
 	bsexit = Buttonbox(text='Exit', lang=w.lang, repr='bsexit')
 	bclang = Buttonbox(text='changelanguage', lang=w.lang, repr='bclang')
 
+	w.p = Photo(repr='splash', path='icc.jpg')
+
 	w.frames["First Frame"].addWidget(bsadd, (0, 0))
 	w.frames["First Frame"].addWidget(bsscan, (1, 0))
 	w.frames["First Frame"].addWidget(bssdb, (2, 0))
@@ -75,6 +78,7 @@ def main():
 	w.frames["Third Frame"].addWidget(bsbmm, (0, 0))
 	w.frames["First Frame"].addWidget(bsexit, (5, 0))
 	w.frames["First Frame"].addWidget(bclang, (4, 0))
+	w.frames["First Frame"].addWidget(w.p, (0, 1))
 	
 	bsadd.config(cmd=lambda: showWindow(addS22.main))
 	bsscan.config(cmd=lambda: showWindow(scanS22.main))
@@ -83,6 +87,9 @@ def main():
 	bsbmm.config(cmd=showMain)
 	bsexit.config(cmd=t.destroy)
 	bclang.config(cmd=clang)
+
+	w.p.label.grid(rowspan=100, padx=20)
+	
 	
 	t.mainloop()
 
