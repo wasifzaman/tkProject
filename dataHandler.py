@@ -94,7 +94,7 @@ class StudentInfo:
             "Chinese Name": "chineseName",
             "School Location": "schoolLoc",
             "Barcode": "bCode",
-            "Old Student ID": "sid",
+            "Student Number": "sid",
             "Date of Birth": "dob",
             "Age": "age",
             "Gender": "gender",
@@ -102,16 +102,16 @@ class StudentInfo:
             "Home Phone": "hPhone",
             "Cell Phone": "cPhone",
             "Cell Phone 2": "cPhone2",
-            "Pick up Person": "pup",
+            "Pick Up Person": "pup",
             "Address": "addr",
             "State": "state",
             "City": "city",
-            "Zipcode": "zip",
+            "Zip": "zip",
             "Weekday/Weekend": "wkdwknd",
-            "Tuition Paid Day": "tpd",
+            "Payment Date": "tpd",
             "Payment Method": "Payment Method: ",
-            "Tuition Pay Amount": "tpa",
-            "E-mail": "email",
+            "Payment Amount": "tpa",
+            "Email": "email",
             "Service Type": "sType",
             "Classes Awarded": "cAwarded",
             "Classes Remaining": "cRemaining",
@@ -273,6 +273,7 @@ class StudentDB:
             newS = StudentInfo()
             for dp in info:
                 newS.datapoints[repr[info.index(dp)]] = dp
+            if newS.datapoints['bCode'][:3] != 'FLU': continue
             self.addStudent(newS.datapoints['bCode'], newS)
 
 
@@ -359,7 +360,7 @@ d = StudentDB(file=s.config['dbFile'])
 #print(d.studentList['1234'].datapoints['attinfo'])
 #print(['05/20/2014', '02:21', '02:30'][0])
 
-#d.importxlsx('sdt.xls')
+#d.importxlsx('sdt1.xls')
 #d.importtimexlsx('at.xls')
 
 #date = datetime.strptime('1/1/1900', "%m/%d/%Y")

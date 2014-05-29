@@ -14,10 +14,15 @@ def main(t, lang):
 		for frame in w.frames.values():
 			for widget in frame.widgets.values():
 				widget.config(lang=w.lang)
+		for frame in w2.frames.values():
+			for widget in frame.widgets.values():
+				widget.config(lang=w.lang)
 
 	d.loadData()
 
 	w = AppWindow(t)
+
+	w.bind("<Destroy>", lambda event: t2.destroy)
 
 	w.lang = lang
 
@@ -88,7 +93,8 @@ def main(t, lang):
 	spec = Labelbox(text='spec', lang=w.lang, repr='spec')
 	w.frames["Second Frame"].addWidget(spec, (19, 0))
 
-	w.frames["Third Frame"].addWidget(portr, (0, 0))
+	w.portr = portr = Photo(repr='portr', path='monet_sm.jpg')
+	w.frames["Third Frame"].addWidget(w.portr, (0, 0))
 
 	w.frames["Fourth Frame"].addWidget(w.attinfo, (0, 0))
 	w.frames["Fourth Frame"].grid(rowspan=100, sticky=W)
@@ -129,7 +135,7 @@ def main(t, lang):
 					if not w.s: return
 
 			#reset portrait
-			portr.setData('monet_sm.jpg')
+			w.portr.setData('monet_sm.jpg')
 			portr2.setData('monet_sm.jpg')
 
 			#reset classes rem
@@ -206,22 +212,23 @@ def main(t, lang):
 	w.frames["Fifth Frame"].addWidget(bcheck, (1, 0))
 	bcheck.config(cmd=z)
 
-#set starting lang
-	for frame in w.frames.values():
-		for widget in frame.widgets.values():
-			widget.config(lang=w.lang)
-
-
 #t2 window
 	t2 = Window(top=True)
 	t2.attributes('-fullscreen', False)
-	t2.geometry('900x800')
+	t2.geometry('1200x800')
+
+#remove close button function
+	t2.protocol('WM_DELETE_WINDOW', lambda: False)
+
+#set minimum height
+	t2.update_idletasks()
+	t2.after_idle(lambda: t2.minsize(t2.winfo_width(), t2.winfo_height()))
 
 	w2 = AppWindow(t2.mainFrame)
 
 	w2.lang = lang
 
-	#attendance table
+#attendance table
 	w2.attinfo = Table(repr='attinfo', edit=True)
 	w2.attinfoh = [language['Date'], language['Check-In Time'], language['Class Time']]
 	w2.attinfo.build(headers=w2.attinfoh, data=[[]])
@@ -263,6 +270,17 @@ def main(t, lang):
 	w2.attinfo.editwidget=False
 	w.attinfo.canvas.config(width=500, height=500)
 
+#set starting lang
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
+	for frame in w2.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
+
+	return t2
+
+
 	
 
 
@@ -280,4 +298,6 @@ if __name__ == '__main__':
 	main(t.mainFrame, language)
 
 	t.mainloop()
+
+	print('abcd'[:3])
 

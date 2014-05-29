@@ -26,13 +26,20 @@ def main():
 
 	def showWindow(f):
 		w.frames["First Frame"].grid_forget()
-		f(w.frames["Second Frame"], w.lang)
+		w.t = f(w.frames["Second Frame"], w.lang)
 		w.frames["Second Frame"].grid()
 		w.frames["Third Frame"].grid()
 
 
 	def showMain():
 		w.frames['Second Frame'].grid_forget()
+		try:
+			w.t.destroy()
+		except:
+			pass
+		for child in w.frames["Second Frame"].winfo_children():
+			child.destroy()
+
 		w.frames['Second Frame'].destroy()
 		w.newFrame("Second Frame", (1, 0))
 		w.frames['Second Frame'].grid_forget()
@@ -76,14 +83,6 @@ def main():
 	bsbmm.config(cmd=showMain)
 	bsexit.config(cmd=t.destroy)
 	bclang.config(cmd=clang)
-
-	#Button(w.frames["First Frame"], text='Add Students', command=lambda: showWindow(addS22.main)).grid()
-	#Button(w.frames["First Frame"], text='Scan Students', command=lambda: showWindow(scanS22.main)).grid()
-	#Button(w.frames["First Frame"], text='Student Database', command=lambda: showWindow(sDb22.main)).grid()
-	#Button(w.frames["First Frame"], text='Tools', command=lambda: showWindow(tools2.main)).grid()
-	#Button(w.frames["Third Frame"], text='Back to Main Window', command=showMain).grid()
-	#Button(w.frames["First Frame"], text='Exit', command=t.destroy).grid()
-
 	
 	t.mainloop()
 

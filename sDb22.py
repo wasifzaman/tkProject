@@ -18,8 +18,8 @@ def main(t, lang):
 	w.newFrame("Third Frame", (1, 1))
 	w.newFrame("Fourth Frame", (2, 1))
 
-
-	w.frames["First Frame"].addWidget(sby, (0, 0))
+	#widget for scan
+	#w.frames["First Frame"].addWidget(sby, (0, 0))
 
 
 	w.frames["Second Frame"].addWidget(stable, (0, 0))
@@ -43,7 +43,8 @@ def main(t, lang):
 		print(sby.getData())
 		editS2.main(top=True, i=sby.getData()[1])
 
-	Button(w.frames["First Frame"], text="try", command=s).grid()
+	#button for scan
+	#Button(w.frames["First Frame"], text="try", command=s).grid()
 
 
 

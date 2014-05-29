@@ -31,7 +31,7 @@ class AppWindow(Frame):
 		self.mainFrame.place(in_=self.oframe, anchor="c", relx=.5, rely=.5)
 
 		#troubleshooter
-		self.option_add("*Background", "lightgrey")
+		#self.option_add("*Background", "lightgrey")
 
 		#font-size
 		self.option_add("*Font", "Verdana 11")

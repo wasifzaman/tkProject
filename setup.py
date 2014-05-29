@@ -17,10 +17,12 @@ base = None
 if sys.platform == "win32":
     base = "Win32GUI"
 
-build_exe_options = {}
+includefiles = ['check_mark_sm.png', 'hand_cursor_sm.png', 'monet_sm.jpg', 'rybCONFIG.db', 'ws_sm.png']
 
-setup(  name = "rybDB",
+build_exe_options = {'include_files':includefiles, 'create_shared_zip': False}
+
+setup(  name = "rybsas",
         version = "0.1",
-        description = "RYB DB",
+        description = "RYB SAS",
         options = {"build_exe": build_exe_options},
-        executables = [Executable("splash.py", base=base)])
+        executables = [Executable("splashy2.py", base=base)])

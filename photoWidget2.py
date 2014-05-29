@@ -14,14 +14,14 @@ class Photo(Widget):
 		except:
 			print("widget could not be loaded")
 
-		self.script_dir = os.path.dirname(os.path.abspath(__file__))
+		#self.script_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 	def config(self, **kwargs):
 
 		try:
 			self.path = kwargs['path']
-			self.picture = Image.open(os.path.join(self.script_dir, self.path))
+			self.picture = Image.open(self.path)
 			self.image = ImageTk.PhotoImage(self.picture)
 			self.label.config(image=self.image)
 		except:
@@ -49,7 +49,7 @@ class Photo(Widget):
 		except:
 			print("widget could not be placed")
 
-		self.picture = Image.open(os.path.join(self.script_dir, self.path))
+		self.picture = Image.open(self.path)
 		self.image = ImageTk.PhotoImage(self.picture)
 
 		self.label = Label(self.parent, image=self.image, bd=2, bg='black')

@@ -74,7 +74,7 @@ def main(lang):
 			return
 
 		nd.importxlsx(fpath.getData())
-		w.dw()
+		t.destroy()
 
 
 
@@ -143,6 +143,8 @@ def main(lang):
 
 	brw.button.config(width=12)
 	brw.button.grid(padx=10)
+	brw2.button.config(width=12)
+	brw2.button.grid(padx=10)
 	bk.button.config(width=10)
 	bk.button.grid(padx=10)
 	nxt.button.config(width=10)
