@@ -5,19 +5,6 @@ from preBuilts2 import *
 
 def main(t, lang):
 
-#language changer
-	def clang():
-		if w.lang['self'] == 'english':
-			w.lang = languages['chinese']
-		else:
-			w.lang = languages['english']
-		for frame in w.frames.values():
-			for widget in frame.widgets.values():
-				widget.config(lang=w.lang)
-		for frame in w2.frames.values():
-			for widget in frame.widgets.values():
-				widget.config(lang=w.lang)
-
 	d.loadData()
 
 	w = AppWindow(t)
@@ -33,19 +20,11 @@ def main(t, lang):
 	w.attinfo.clast = '#FF99FF'
 
 #frame initialization
-	w.newFrame("L Frame", (0, 0))
 	w.newFrame("First Frame", (1, 0))
 	w.newFrame("Second Frame", (2, 0))
 	w.newFrame("Third Frame", (2, 1))
 	w.newFrame("Fourth Frame", (0, 2))
 	w.newFrame("Fifth Frame", (3, 0))
-
-
-#language changer button
-	w.frames["L Frame"].addWidget(bclang, (0, 0))
-	w.frames["L Frame"].grid(sticky=E)
-	bclang.config(cmd=clang)
-
 
 #add widget to search for students
 	w.frames["First Frame"].addWidget(sby, (0, 0))

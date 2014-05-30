@@ -6,16 +6,6 @@ import importwiz
 
 def main(t, lang):
 
-#language changer
-	def clang():
-		if w.lang['self'] == 'english':
-			w.lang = languages['chinese']
-		else:
-			w.lang = languages['english']
-		for frame in w.frames.values():
-			for widget in frame.widgets.values():
-				widget.config(lang=w.lang)
-
 	def cdb():
 		try:
 			p = filedialog.askopenfile().name.split('/')[-1]
@@ -64,17 +54,11 @@ def main(t, lang):
 	w.lang = lang
 
 #frame initialization
-	w.newFrame("L Frame", (0, 0))
 	w.newFrame("First Frame", (1, 0))
 	w.newFrame("Fifth Frame", (2, 0))
 	w.newFrame("Second Frame", (3, 0))
 	w.newFrame("Third Frame", (1, 1))
 	w.newFrame("Fourth Frame", (4, 1))
-
-#language changer button
-	w.frames["L Frame"].addWidget(bclang, (0, 0))
-	w.frames["L Frame"].grid(sticky=E)
-	bclang.config(cmd=clang)
 
 #import export widgets
 	w.frames["First Frame"].addWidget(imp, (0, 0))
