@@ -161,10 +161,12 @@ class StudentDB:
         
         try:
             self.file = kwargs['file']
+            self.loadData()
         except:
+            self.studentList = {}
+            self.saveData()
             print("file not found")
-
-        self.studentList = {}
+   
 
         #
         self.fcell = {1: lambda y: str(y), 2: lambda y: int(y), 3: lambda y: (datetime.strptime('1/1/1900', "%m/%d/%Y") + timedelta(days=y-2)).strftime("%m/%d/%y")}
@@ -209,7 +211,7 @@ class StudentDB:
         return h + ':' + m + ' ' + p
 
 
-    def scanStudent(self, barcode):
+    def scanStudent(self, barcode, xtra=False):
         #try:
         cdt = datetime.now()
 
@@ -217,8 +219,11 @@ class StudentDB:
         time = '{:%I:%M %p}'.format(cdt)
         date = '{:%m/%d/%Y}'.format(cdt)
 
+        data = [date, time, timeslot]
+        if xtra: data.append(xtra)
+
         s = self.studentList[barcode].datapoints
-        s['attinfo'][1].append([date, time, timeslot])
+        s['attinfo'][1].append(data)
         s['cRemaining'] -= 1
         if s['cRemaining'] < 0: s['cRemaining'] = 0
         #except:
@@ -273,6 +278,7 @@ class StudentDB:
             newS = StudentInfo()
             for dp in info:
                 newS.datapoints[repr[info.index(dp)]] = dp
+            newS.datapoints['attinfo'][0] = ['Date', 'Time', 'Check-In Time']
             if newS.datapoints['bCode'][:3] != 'FLU': continue
             self.addStudent(newS.datapoints['bCode'], newS)
 

@@ -1,6 +1,7 @@
 from uiHandler22 import *
 from dataHandler import *
 from preBuilts2 import *
+import sys
 
 
 def main(t, lang):
@@ -150,11 +151,12 @@ def main(t, lang):
 			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
 			nos(w.lang)
+			print(sys.exec_info)
 			pass
 
 
 	def ss():
-		d.scanStudent(w.s)
+		d.scanStudent(w.s, xtra=w.lang['Auto'] if sby.getData()[0] == 'bCode' else w.lang['Manual'])
 		d.saveData()
 		
 		#show alert if classes remaining is less than 2

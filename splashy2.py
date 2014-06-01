@@ -4,6 +4,7 @@ from dataHandler import *
 from languages import *
 from labelWidgets2 import *
 from photoWidget2 import *
+from preBuilts2 import ret
 import addS22
 import scanS22
 import sDb22
@@ -25,7 +26,10 @@ def main():
 
 	t = Window(top=False)
 
+	t.con = False
+
 	def showWindow(f):
+		if (f.__doc__) == 'addS22': t.con = True
 		w.frames["First Frame"].grid_forget()
 		w.t = f(w.frames["Second Frame"], w.lang)
 		w.frames["Second Frame"].grid()
@@ -33,6 +37,9 @@ def main():
 
 
 	def showMain():
+		if t.con:
+			if not ret('a', w.lang): return
+
 		w.frames['Second Frame'].grid_forget()
 		try:
 			w.t.destroy()

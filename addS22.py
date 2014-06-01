@@ -4,6 +4,7 @@ from preBuilts2 import *
 
 
 def main(t, lang):
+	'''addS22'''
 
 	d.loadData()
 
@@ -60,11 +61,11 @@ def main(t, lang):
 
 	w.frames["Fourth Frame"].addWidget(baclass, (0, 0))
 	w.frames["Fourth Frame"].addWidget(baoclass, (1, 0))
-	w.frames["Fourth Frame"].addWidget(baac, (2, 0))
+	#w.frames["Fourth Frame"].addWidget(baac, (2, 0))
 
-	baclass.config(cmd=cpicker)
+	baclass.config(cmd=lambda: cpicker(w.lang))
 	baoclass.config(cmd=caddone)
-	baac.config(cmd=cadd)
+	#baac.config(cmd=cadd)
 
 #address widgets
 	w.frames["First Frame"].addWidget(addr, (0, 2))

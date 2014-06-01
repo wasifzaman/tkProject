@@ -77,7 +77,12 @@ languages = \
 		"Cancel": "Cancel",
 		"Please choose a file": "Please choose a file\n",
 		"spec": "",
-		"Classes remaining for this student": "Classes remaining for this student"
+		"Classes remaining for this student": "Classes remaining for this student",
+		"gold60": "Gold (+60)",
+		"basic15": "Basic (+15)",
+		"Ret to Main": "Return to main window?",
+		"Auto": "Auto",
+		"Manual": "Manual"
 		},
 
 	"chinese": {
@@ -155,7 +160,12 @@ languages = \
 		"choosedb": "选择数据库",
 		"": "",
 		"Classes remaining for this student": "剩余的这名学生的班",
-		"spec": ""
+		"spec": "",
+		"gold60": "黄金 (+60)",
+		"basic15": "基本 (+15)",
+		"Ret to Main": "返回到主屏幕吗？",
+		"Auto": "Auto",
+		"Manual": "Manual"
 	}
 		
 }

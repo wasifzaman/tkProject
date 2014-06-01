@@ -85,7 +85,7 @@ def main(lang, top=False, i=0):
 	w.frames["Fourth Frame"].addWidget(baac, (2, 0))
 
 	baoclass.config(cmd=caddone)
-	baac.config(cmd=cadd)
+	baac.config(cmd=lambda: cadd(w.lang))
 
 	#
 	w.frames["First Frame"].addWidget(addr, (0, 2))

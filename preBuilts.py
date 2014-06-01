@@ -116,30 +116,37 @@ def cward():
 		#cAwarded.setData(b.get())
 		#return b.get()
 
-	t = Toplevel()
-	frame = Frame(t)
-	frame.pack()
+	t = Window(top=True)
+	#t = Toplevel()
+	
+	#frame = Frame(t)
+	#frame.pack()
 
-	rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
-	b, r = StringVar(), []
-	b.set(rads[0][1])
+	w = AppWindow(t.mainFrame)
 
-	info = Label(frame, text=rads[0][2])
-	info.pack()
+	bgold = Buttonbox(text='gold60', lang=language, repr='bgold')
+	bbasic = Buttonbox(text='basic15', lang=language, repr='bbasic')
 
+	#rads = [('Gold', 60, 'This awards the student 60 classes.'), ('Basic', 15, 'This awrards the student 15 classes.')]
+	#b, r = StringVar(), []
+	#b.set(rads[0][1])
 
-	for rad in rads:
-		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0)
-		rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
-		r.append(rb)
-
-	rads = r
+	#info = Label(frame, text=rads[0][2])
+	#info.pack()
 
 
-	for rad in rads:
-		rad.pack()
+	#for rad in rads:
+	#	rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0)
+	#	rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
+	#	r.append(rb)
 
-	Button(frame, text='sel', command=sel).pack()
+	#rads = r
+
+
+	#for rad in rads:
+	#	rad.pack()
+
+	#Button(frame, text='sel', command=sel).pack()
 
 	t.wait_window()
 

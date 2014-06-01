@@ -212,7 +212,7 @@ class Table(Widget):
 
 		self.previous = list(self.data)
 		self.previouscells = dict(self.cells)
-		self.previousheaders = self.headers
+		#self.previousheaders = self.headers
 
 		self.build(**kwargs)
 

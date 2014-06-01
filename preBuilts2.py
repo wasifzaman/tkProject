@@ -118,51 +118,77 @@ def spicker(d):
 
 
 #spicker
-def cward():
+def cward(lang):
 
-	def sel():
+	def sel(c):
+		t.c = c
 		t.destroy()
 		t.cancel = False
 
-	t = Toplevel()
+	
+	t = Window(top=True)
+	t.attributes('-fullscreen', False)
+	t.geometry('420x200')
+	t.resizable(0, 0)
 	t.grab_set()
 	t.focus_set()
 	t.cancel = True
+	t.c = 0
+
+
+	w = AppWindow(t.mainFrame)
+
+	bgold = Buttonbox(text='gold60', lang=lang, repr='bgold')
+	bbasic = Buttonbox(text='basic15', lang=lang, repr='bbasic')
+
+	w.newFrame("First Frame", (0, 0))
+
+	w.frames["First Frame"].addWidget(bgold, (0, 0))
+	w.frames["First Frame"].addWidget(bbasic, (1, 0))
+
+	bgold.config(cmd=lambda: sel(60))
+	bbasic.config(cmd=lambda: sel(15))
+
+
+	#t = Toplevel()
+	#t.grab_set()
+	#t.focus_set()
+	#t.cancel = True
 
 	t.protocol('WM_DELETE_WINDOW', t.destroy)
 
-	frame = Frame(t)
-	frame.grid()
+	#frame = Frame(t)
+	#frame.grid()
 
-	rads = [('Gold', 60, 'This awards the student 60 classes.'),\
-	('Basic', 15, 'This awrards the student 15 classes.')]
-	b, r = StringVar(), []
-	b.set(rads[0][1])
+	#rads = [('Gold', 60, 'This awards the student 60 classes.'),\
+	#('Basic', 15, 'This awrards the student 15 classes.')]
+	#b, r = StringVar(), []
+	#b.set(rads[0][1])
 
-	info = Label(frame, text=rads[0][2])
-	info.grid()
+	#info = Label(frame, text=rads[0][2])
+	#info.grid()
 
 
-	for rad in rads:
-		rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0, width=20)
-		rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
-		r.append(rb)
+	#for rad in rads:
+	#	rb = Radiobutton(frame, text=rad[0], variable=b, value=rad[1], indicatoron=0, width=20)
+	#	rb.bind('<Button-1>', lambda event, r=rad[2]: info.config(text=r))
+	#	r.append(rb)
 
-	rads = r
+	#rads = r
 
 	
 
 
-	for rad in rads:
-		rad.grid()
+	#for rad in rads:
+	#	rad.grid()
 
-	bac = Buttonbox(text='awardclass', lang=language, repr='bac')
-	bac.place(parent=frame, row=4, column=0)
-	bac.config(cmd=sel)
+	#bac = Buttonbox(text='awardclass', lang=language, repr='bac')
+	#bac.place(parent=frame, row=4, column=0)
+	#bac.config(cmd=sel)
 
 	t.wait_window()
 
-	return 0 if t.cancel else int(b.get())
+	return t.c
 
 def sstype():
 	if cAwarded.getData() >= 60:
@@ -170,13 +196,13 @@ def sstype():
 	else:
 		sType.setData('Basic')
 
-def cpicker():
-	cAwarded.setData(cward())
+def cpicker(lang):
+	cAwarded.setData(cward(lang))
 	cRemaining.setData(cAwarded.getData())
 	sstype()
 
-def cadd():
-	new = cward()
+def cadd(lang):
+	new = cward(lang)
 	cAwarded.setData(cAwarded.getData() + new)
 	cRemaining.setData(cRemaining.getData() + new)
 	sstype()
@@ -374,6 +400,39 @@ def cs(s, lang):
 	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
 
 	cstext.label.config(bg='grey', fg='white')
+	byes.button.config(bg='grey', fg='white')
+	bno.button.config(bg='grey', fg='white')
+	byes.button.grid(sticky=E+W, padx=5)
+	bno.button.grid(sticky=E+W, padx=5)
+	byes.config(cmd=lambda: d(True), lang=lang)
+	bno.config(cmd=lambda: d(False), lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
+
+	return t.z
+
+def ret(s, lang):
+
+	def d(z):
+		t.z = z
+		t.dw()
+
+	t = Mbox()
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	rettext = Labelbox(text='Ret to Main', lang=lang, repr='rettext')
+
+	t.frames["First Frame"].addWidget(hs, (1, 0))
+	t.frames["First Frame"].addWidget(rettext, (2, 0))
+	t.frames["Second Frame"].addWidget(byes, (0, 0))
+	t.frames["Second Frame"].addWidget(bno, (0, 1))
+
+	#Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
+
+	rettext.label.config(bg='grey', fg='white')
 	byes.button.config(bg='grey', fg='white')
 	bno.button.config(bg='grey', fg='white')
 	byes.button.grid(sticky=E+W, padx=5)
