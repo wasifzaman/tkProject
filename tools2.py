@@ -1,10 +1,11 @@
 from uiHandler22 import *
 from dataHandler import *
+from settingsHandler import *
 from preBuilts2 import *
 import importwiz
 
 
-def main(t, lang):
+def main(t, lang, d):
 
 	def cdb():
 		try:
@@ -14,6 +15,7 @@ def main(t, lang):
 				return
 			else:
 				curdb.config(text=p)
+				d.loadData()
 		except:
 			print("error opening file.")
 
@@ -34,9 +36,7 @@ def main(t, lang):
 
 
 	def ss():
-		def z():
-			s.config['dbFile'] = curdb.cget('text')
-		s.saveSettings(lambda: z())
+		d.file = curdb.cget('text')
 		dbs(w.lang)
 
 
@@ -83,7 +83,7 @@ def main(t, lang):
 	w.frames['Fourth Frame'].addWidget(bsav, (0, 0))
 
 	bsav.config(cmd=ss)
-	bimp.config(cmd=lambda: importwiz.main(w.lang))
+	bimp.config(cmd=lambda: importwiz.main(w.lang, d))
 	bcdb.config(cmd=cdb)
 	bimpt.config(cmd=ctdb)
 	#curdb.config(text=s.config['dbFile'])

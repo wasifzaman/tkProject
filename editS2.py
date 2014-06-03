@@ -3,17 +3,7 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(lang, top=False, i=0):
-
-#language changer
-	def clang():
-		if w.lang['self'] == 'english':
-			w.lang = languages['chinese']
-		else:
-			w.lang = languages['english']
-		for frame in w.frames.values():
-			for widget in frame.widgets.values():
-				widget.config(lang=w.lang)
+def main(lang, d, top=False, i=0):
 
 	d.loadData()
 
@@ -37,11 +27,6 @@ def main(lang, top=False, i=0):
 	w.newFrame("Fifth Frame", (0, 2))
 
 	w.frames["Fourth Frame"].grid(sticky=W)
-
-#language changer button
-	w.frames["L Frame"].addWidget(bclang, (0, 0))
-	w.frames["L Frame"].grid(sticky=E)
-	bclang.config(cmd=clang)
 
 #basic info widgets
 	w.frames["First Frame"].addWidget(firstName, (0, 0))
@@ -130,6 +115,11 @@ def main(lang, top=False, i=0):
 	w.frames["Second Frame"].addWidget(brwp, (1, 0))
 	brwp.config(cmd=ppicker)
 
+	#set starting lang
+	for frame in w.frames.values():
+		for widget in frame.widgets.values():
+			widget.config(lang=w.lang)
+
 	
 	t.mainloop()
 
@@ -140,6 +130,6 @@ def main(lang, top=False, i=0):
 
 
 if __name__ == '__main__':
-	main(language, i='')
+	main(languages['chinese'], i='FLU-000-001')
 	
 

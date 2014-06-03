@@ -1,5 +1,6 @@
 from datetime import datetime, time, timedelta
-from settingsHandler import *
+#from settingsHandler import *
+import keeper
 import pickle
 import xlrd
 
@@ -158,14 +159,15 @@ class StudentDB:
     '''
 
     def __init__(self, **kwargs):
+        self.file = kwargs['file']
+        #self.cfile = kwargs['cfile']
         
         try:
-            self.file = kwargs['file']
             self.loadData()
         except:
             self.studentList = {}
             self.saveData()
-            print("file not found")
+            print(self.file + " file not found, new file was created")
    
 
         #
@@ -252,6 +254,7 @@ class StudentDB:
         try:
             return self.fcell[ctype](value)
         except:
+            return
             if ctype == 0: print("cell is empty, not added to database")
             else: print("cell could not be formatted")
 
@@ -307,20 +310,26 @@ class StudentDB:
         for info in sinfo:
     
             bCode = info[0]
-            tdata = info[4:info.index(None)]
+            cAward = info[3]
+            tdata = info[4:]#info.index(None)]
 
             if bCode not in self.studentList: continue
 
             ftdata = []
             for td in tdata:
-                dt = td.split(' ')
-                date = dt[0]
-                time = dt[1]
+                try:
+                    dt = td.split(' ')
+                    date = dt[0]
+                    time = dt[1]
+                except:
+                    continue
 
                 ftdata.append([date, '', time])
 
-#            print(bCode, ftdata)
+            #print(bCode, ftdata)
             for data in ftdata:
+                self.studentList[bCode].datapoints['cAwarded'] = cAward
+                self.studentList[bCode].datapoints['attinfo'][0] = ['Date', 'Check-In Time', 'Class Time']
                 self.studentList[bCode].datapoints['attinfo'][1].append(data)
 
 
@@ -356,7 +365,10 @@ class StudentDB:
 
 #print(s.config['dbFile'])
 
-d = StudentDB(file=s.config['dbFile'])
+#k = keeper.Keeper('keeper.db')
+#k.files['cfilepath'] = 't2.db'
+
+#d = StudentDB(file=k.files['cfilepath'], cfile=k.fname)
 #d.loadData()
 #d.addStudent(s.datapoints['barcode'], s)
 #d.scanStudent('1234')
@@ -368,6 +380,8 @@ d = StudentDB(file=s.config['dbFile'])
 
 #d.importxlsx('sdt1.xls')
 #d.importtimexlsx('at.xls')
+
+#d.importxlsx('sdt.xls')
 
 #date = datetime.strptime('1/1/1900', "%m/%d/%Y")
 #edate = date + timedelta(days=38779-2)

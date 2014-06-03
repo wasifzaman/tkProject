@@ -22,7 +22,6 @@ def main():
 			for widget in frame.widgets.values():
 				widget.config(lang=w.lang)
 
-	d.loadData()
 
 	t = Window(top=False)
 
@@ -30,8 +29,9 @@ def main():
 
 	def showWindow(f):
 		if (f.__doc__) == 'addS22': t.con = True
+		else: t.con = False
 		w.frames["First Frame"].grid_forget()
-		w.t = f(w.frames["Second Frame"], w.lang)
+		w.t = f(w.frames["Second Frame"], w.lang, w.d)
 		w.frames["Second Frame"].grid()
 		w.frames["Third Frame"].grid()
 
@@ -54,11 +54,17 @@ def main():
 
 		w.frames["First Frame"].grid()
 		w.frames['Third Frame'].grid_forget()
+
+		w.k.files['cfilepath'] = w.d.file
 		
 
 
 	w = AppWindow(t.mainFrame)
 	w.lang = languages['english']
+
+	w.k = keeper.Keeper('keeper.db')
+	w.d = StudentDB(file=w.k.files['cfilepath'], cfile=w.k.fname)
+
 
 	w.newFrame("First Frame", (0, 0))
 	w.newFrame("Second Frame", (1, 0))

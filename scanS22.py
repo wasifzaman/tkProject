@@ -1,10 +1,9 @@
 from uiHandler22 import *
 from dataHandler import *
 from preBuilts2 import *
-import sys
 
 
-def main(t, lang):
+def main(t, lang, d):
 
 	d.loadData()
 
@@ -151,7 +150,6 @@ def main(t, lang):
 			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
 			nos(w.lang)
-			print(sys.exec_info)
 			pass
 
 

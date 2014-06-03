@@ -3,7 +3,7 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(t, lang):
+def main(t, lang, d):
 	'''addS22'''
 
 	d.loadData()

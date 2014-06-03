@@ -4,7 +4,7 @@ from dataHandler import *
 from preBuilts2 import *
 
 
-def main(t, lang):
+def main(t, lang, d):
 
 	d.loadData()
 
@@ -19,10 +19,12 @@ def main(t, lang):
 	w.newFrame("Fourth Frame", (2, 1))
 
 	#widget for scan
-	#w.frames["First Frame"].addWidget(sby, (0, 0))
+	w.frames["First Frame"].addWidget(sby, (0, 0))
+	w.frames["First Frame"].addWidget(bsearch, (1, 0))
+	
 
 
-	w.frames["Second Frame"].addWidget(stable, (0, 0))
+	w.frames["Second Frame"].addWidget(stable, (2, 0))
 
 	sby.rads=[('Barcode', 'bCode'), ('First Name', 'firstName'), ('Last Name', 'lastName'), ('Chinese Name', 'chineseName')]
 
@@ -35,13 +37,50 @@ def main(t, lang):
 	stable.setData((stableh, sL))
 	stable.canvas.config(width=700, height=700)
 
-	sbind(lambda i: editS2.main(w.lang, top=True, i=i))
+	sbind(lambda i: editS2.main(w.lang, top=True, i=i, d=d))
 
 
 
 	def s():
-		print(sby.getData())
-		editS2.main(top=True, i=sby.getData()[1])
+		try:
+			w.s = sby.getData()[1]
+
+			print(sby.getData())
+
+
+			if sby.getData()[0] != 'bCode':
+				sty = sby.getData()[0]
+				sdp = sby.getData()[1]
+
+				sl = []
+
+				for s in d.studentList:
+					if d.studentList[s].datapoints[sty] == sdp:
+						dp = d.studentList[s].datapoints
+						sl.append([dp['bCode'], dp['firstName'], dp['lastName'], dp['dob']])
+
+
+				if len(sl) == 0:
+					nos(w.lang)
+					return
+
+				w.s = sl[0][0]
+				if len(sl) > 1:
+					sl.sort()
+					w.s = spicker(sl)
+					if not w.s: return
+
+			print(w.s)
+			editS2.main(w.lang, top=True, i=w.s)
+		except:
+			nos(w.lang)
+			pass
+
+
+	w.frames["First Frame"].widgets['sby'].entry.bind("<Return>", lambda x: s())
+
+	bsearch.button.config(width=20)
+	bsearch.config(cmd=s)
 
 	#button for scan
 	#Button(w.frames["First Frame"], text="try", command=s).grid()
