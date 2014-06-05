@@ -19,4 +19,4 @@ class Keeper:
 	def save(self):
 		pickle.dump(self.files, open(self.fname, "wb"))
 
-Keeper('keeper.db')
+#Keeper('keeper.db')

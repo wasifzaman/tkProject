@@ -10,7 +10,7 @@ def main(lang, d, top=False, i=0):
 	t = Window(top=top)
 	t.attributes('-fullscreen', False)
 	t.geometry('1900x900')
-	t.resizable(0, 0)
+	#t.resizable(0, 0)
 	t.grab_set()
 	t.focus_set()
 
@@ -22,11 +22,12 @@ def main(lang, d, top=False, i=0):
 	w.newFrame("L Frame", (0, 0))
 	w.newFrame("First Frame", (1, 0))
 	w.newFrame("Second Frame", (1, 1))
-	w.newFrame("Third Frame", (3, 1))
+	w.newFrame("Third Frame", (3, 0))
 	w.newFrame("Fourth Frame", (2, 0))
 	w.newFrame("Fifth Frame", (0, 2))
 
 	w.frames["Fourth Frame"].grid(sticky=W)
+	w.frames["Third Frame"].grid(columnspan=3)
 
 #basic info widgets
 	w.frames["First Frame"].addWidget(firstName, (0, 0))
@@ -47,11 +48,9 @@ def main(lang, d, top=False, i=0):
 
 	w.frames["First Frame"].addWidget(sepr, (12, 0))
 
-	w.frames["First Frame"].addWidget(findSchool, (13, 0))
 	w.frames["First Frame"].addWidget(notes, (14, 0))
 
-	findSchool.config(height=3, width=10)
-	notes.config(height=3, width=10)
+	notes.config(height=5, width=10)
 
 	w.frames["First Frame"].addWidget(sepr, (15, 0))
 
@@ -61,6 +60,7 @@ def main(lang, d, top=False, i=0):
 	w.frames["First Frame"].addWidget(cRemaining, (18, 0))
 	w.frames["First Frame"].addWidget(tpd, (16, 2))
 	w.frames["First Frame"].addWidget(tpa, (17, 2))
+	w.frames["First Frame"].addWidget(tpo, (18, 2))
 
 
 	baoclass = Buttonbox(text='awardoneclass', lang=w.lang, repr='aoclass')
@@ -99,9 +99,15 @@ def main(lang, d, top=False, i=0):
 	portr.setData('monet_sm.jpg')
 
 	s = d.studentList[i]
+	#print(s.datapoints['attinfo'])
+	print(s.datapoints['notes'])
 	w.populate(s.datapoints)
 
+	#if amount owed is larger than amount paid, color amount owed in red
+	if s.datapoints['tpa'] < s.datapoints['tpo']: tpo.entry.config(bg='red')
+
 	def collect():
+		if not conS(s.datapoints['firstName'] + ' ' + s.datapoints['lastName'], w.lang): return
 		s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
 		d.saveData()
 
@@ -111,6 +117,10 @@ def main(lang, d, top=False, i=0):
 	sstudent = Buttonbox(text='savestudent', lang=w.lang, repr='sstudent')
 	w.frames["Third Frame"].addWidget(sstudent, (0, 0))
 	sstudent.config(cmd=collect)
+
+	bclose = Buttonbox(text='close', lang=w.lang, repr='bclose')
+	w.frames["Third Frame"].addWidget(bclose, (0, 1))
+	bclose.config(cmd=t.destroy)
 
 	w.frames["Second Frame"].addWidget(brwp, (1, 0))
 	brwp.config(cmd=ppicker)

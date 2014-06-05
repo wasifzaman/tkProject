@@ -36,6 +36,7 @@ languages = \
 		"Notes": "Notes",
 		"No student": "\nStudent was not found!\nType in the correct name or \n contact your system administrator.",
 		"Con student": "\nAre you sure you would like\nto add this to the Database?",
+		"Con S student": "\nAre you sure you would like\nto save this student's information to the Database?",
 		"Ase student": "\nStudent with this barcode exists in the database\nAdding this student will overwrite the existing student.\nOverwrite current student?\n",
 		"Sa student": "\nStudent has been added to the database.",
 		"Cs student": "\nCheck in the student?\n",
@@ -82,7 +83,11 @@ languages = \
 		"basic15": "Basic (+15)",
 		"Ret to Main": "Return to main window?",
 		"Auto": "Auto",
-		"Manual": "Manual"
+		"Manual": "Manual",
+		"close": "Close",
+		"Amount Owed": "Amount Owed",
+		">> Next 30 >>": ">> Next 30 >>",
+		"<< Previous 30 <<": "<< Previous 30 <<"
 		},
 
 	"chinese": {
@@ -165,7 +170,12 @@ languages = \
 		"basic15": "基本 (+15)",
 		"Ret to Main": "返回到主屏幕吗？",
 		"Auto": "Auto",
-		"Manual": "Manual"
+		"Manual": "Manual",
+		"Con S student": "确实要将此学生的信息保存到数据库吗？",
+		"close": "关闭",
+		"Amount Owed": "所欠的金额",
+		">> Next 30 >>": ">> Next 30 >>",
+		"<< Previous 30 <<": "<< Previous 30 <<"
 	}
 		
 }

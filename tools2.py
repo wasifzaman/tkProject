@@ -1,6 +1,5 @@
 from uiHandler22 import *
 from dataHandler import *
-from settingsHandler import *
 from preBuilts2 import *
 import importwiz
 
@@ -9,30 +8,32 @@ def main(t, lang, d):
 
 	def cdb():
 		try:
-			p = filedialog.askopenfile().name.split('/')[-1]
+			p = filedialog.askopenfile(mode='r').name.split('/')[-1]
 			if p[p.rfind('.'):]!= '.db':
 				print("invalid file")
 				return
 			else:
 				curdb.config(text=p)
-				d.loadData()
+				d.file = p
+				#d.loadData()
 		except:
 			print("error opening file.")
 
 
 	def ctdb():
-		try:
-			p = filedialog.askopenfile().name.split('/')[-1]
-			ext = p[p.rfind('.'):]
-			if ext != '.xls' and ext != '.xlsx':
-				print("invalid file")
-				return
-			else:
-				d.loadData()
-				d.importtimexlsx(p)
-				d.saveData()
-		except:
-			print("error opening file.")
+		#try:
+		p = filedialog.askopenfile(mode='r').name
+		l = p.split('/')[-1]
+		ext = l[l.rfind('.'):]
+		if ext != '.xls' and ext != '.xlsx':
+			print("invalid file")
+			return
+		else:
+			#d.loadData()
+			d.importtimexlsx(p)
+			#d.saveData()
+		#except:
+			#print("error opening file.")
 
 
 	def ss():
@@ -47,7 +48,7 @@ def main(t, lang, d):
 		return
 
 
-	d.loadData()
+	#d.loadData()
 
 	w = AppWindow(t)
 
@@ -73,7 +74,7 @@ def main(t, lang, d):
 	w.frames["Second Frame"].addWidget(sepr, (1, 0))
 	w.frames["Second Frame"].addWidget(bexp, (2, 0))
 
-	curdb = Label(w.frames['Third Frame'], text=s.config['dbFile'])
+	curdb = Label(w.frames['Third Frame'], text=d.file)
 	w.frames["Third Frame"].addWidget(curfile, (0, 0))
 	curdb.grid(row=1, column=0)
 

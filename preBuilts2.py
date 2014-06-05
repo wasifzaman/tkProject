@@ -45,6 +45,7 @@ tpd = Datebox(text="Tuition Paid Day", lang=language, repr='tpd')
 
 #money
 tpa = MoneyTextbox(text="Tuition Pay Amount", lang=language, repr='tpa')
+tpo = MoneyTextbox(text="Amount Owed", lang=language, repr='tpo')
 
 
 #attendance table
@@ -212,9 +213,14 @@ def caddone():
 	cRemaining.setData(cRemaining.getData() + 1)
 	sstype()
 
+def caddx(x):
+	cAwarded.setData(x)
+	cRemaining.setData(x)
+	sstype()
+
 
 #longtexts
-findSchool = LongTextbox(text="How did you hear about the school?", lang=language, repr='findSchool')
+#findSchool = LongTextbox(text="How did you hear about the school?", lang=language, repr='findSchool')
 notes = LongTextbox(text="Notes", lang=language, repr='notes')
 
 
@@ -310,6 +316,39 @@ def con(s, lang):
 	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
 
 	context.label.config(bg='grey', fg='white')
+	byes.button.config(bg='grey', fg='white')
+	bno.button.config(bg='grey', fg='white')
+	byes.button.grid(sticky=E+W, padx=5)
+	bno.button.grid(sticky=E+W, padx=5)
+	byes.config(cmd=lambda: d(True), lang=lang)
+	bno.config(cmd=lambda: d(False), lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
+
+	return t.z
+
+def conS(s, lang):
+
+	def d(z):
+		t.z = z
+		t.dw()
+
+	t = Mbox()
+
+	t.newFrame("First Frame", (0, 0))
+	t.newFrame("Second Frame", (1, 0))
+
+	constext = Labelbox(text='Con S student', lang=lang, repr='constext')
+
+	t.frames["First Frame"].addWidget(hs, (1, 0))
+	t.frames["First Frame"].addWidget(constext, (2, 0))
+	t.frames["Second Frame"].addWidget(byes, (0, 0))
+	t.frames["Second Frame"].addWidget(bno, (0, 1))
+
+	Label(t.frames["First Frame"], text=s, bg='grey', fg='white').grid()
+
+	constext.label.config(bg='grey', fg='white')
 	byes.button.config(bg='grey', fg='white')
 	bno.button.config(bg='grey', fg='white')
 	byes.button.grid(sticky=E+W, padx=5)

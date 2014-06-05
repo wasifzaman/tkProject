@@ -63,3 +63,7 @@ class Photo(Widget):
 	def setData(self, data):
 		if data == '': return
 		self.config(path=data)
+
+
+	def hide(self):
+		self.label.grid_forget()

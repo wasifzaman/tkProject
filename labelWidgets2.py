@@ -313,7 +313,8 @@ class LongTextbox(Textbox):
 			#print("the widget could not be configured")
 
 		try:
-			self.sentry.delete(1.0, END)
+			#self.text = kwargs['text']
+			#self.sentry.delete(1.0, END)
 			self.sentry.insert(END, kwargs['text'])
 		except:
 			pass
@@ -347,12 +348,16 @@ class LongTextbox(Textbox):
 
 
 	def getData(self):
-		return self.sentry.get(1.0, END)
+		return self.sentry.get('1.0', END + '-1c')
 
 
 	def setData(self, data):
-		self.sentry.delete(1.0, END)
-		self.sentry.insert(END, self.text)
+		self.sentry.delete('1.0', END)
+		self.config(text=data)
+
+	#def setData(self, data):
+		#self.sentry.delete('1.0', END)
+		#self.sentry.insert(END, self.text)
 		#self.config(text=data)
 
 
@@ -430,3 +435,71 @@ class Buttonbox(Textbox):
 		self.button = Button(self.parent, text=self.lang[self.text], width=self.width)
 		self.button.bind('<Enter>', self.config(bg='blue'))
 		self.button.grid(row=self.row, column=self.column)
+
+
+class Buttonbox2(Textbox):
+
+	def __init__(self, **kwargs):
+		try:
+			self.text = kwargs['text']
+			self.repr = kwargs['repr']
+			self.lang = kwargs['lang']
+		except:
+			print("widget could not be loaded")
+
+		self.width = 30
+
+
+	def config(self, **kwargs):
+		
+		try:
+			self.lang = kwargs['lang']
+			self.button.config(text=self.lang[self.text])
+		except:
+			pass
+
+		try:
+			self.cmd = kwargs['cmd']
+			self.button.bind('<ButtonRelease-1>', self.cmd)
+		except:
+			pass
+
+
+	def enter(self, event):
+
+		try:
+			self.button.config(bg='#5C85FF', fg='white')
+			self.selfframe.config(bg='#195CBF')
+		except:
+			pass
+
+
+	def leave(self, event):
+
+		try:
+			self.button.config(bg='white', fg='black')
+			self.selfframe.config(bg='#56A0EA')
+		except:
+			pass
+
+
+	def setData(self, data):
+		self.config(text=data)
+
+
+	def place(self, **kwargs):
+
+		try:
+			self.trytoplace(**kwargs)
+		except:
+			print("widget could not be placed")
+
+		self.selfframe = Frame(self.parent, bg='#CCE0FF', bd=2)
+		self.button = Label(self.selfframe, text=self.lang[self.text], width=self.width, bg='white', \
+			font=('Verdana', 11), pady=10)
+
+		self.button.bind('<Enter>', self.enter)
+		self.button.bind('<Leave>', self.leave)
+
+		self.selfframe.grid(row=self.row, column=self.column, pady=2)
+		self.button.pack()

@@ -296,6 +296,13 @@ class Table(Widget):
 			value.config(width=self.cwids[key[1]] + 2)
 
 
+	def makeScroll(self, event):
+		self.canvas.config(scrollregion=self.canvas.bbox("all"))
+		self.xscrollbar.pack(side=BOTTOM, fill=X)
+		self.canvas.pack(side=LEFT)			
+		self.yscrollbar.pack(side=RIGHT, fill=Y)
+
+
 	def place(self, **kwargs):
 
 		try:
@@ -303,11 +310,7 @@ class Table(Widget):
 		except:
 			print("error-267: widget could not be placed")
 
-		def makeScroll(event):
-			self.canvas.config(scrollregion=self.canvas.bbox("all"))
-			self.xscrollbar.pack(side=BOTTOM, fill=X)
-			self.canvas.pack(side=LEFT)			
-			self.yscrollbar.pack(side=RIGHT, fill=Y)
+		
 
 		try:
 			for cell in self.cells.values():
@@ -316,9 +319,9 @@ class Table(Widget):
 			print("error-279: cells could not be placed")
 
 		self.container.grid()
-		self.innerframe.grid(row=0, column=0)
+		self.innerframe.grid(row=0, column=0, pady=30)
 		self.canvas.create_window((0,0), window=self.outerframe, anchor=NW)
-		self.parent.bind("<Configure>", makeScroll)
+		self.parent.bind("<Configure>", self.makeScroll)
 		self.resize()
 
 		#try:

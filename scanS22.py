@@ -38,7 +38,7 @@ def main(t, lang, d):
 
 	w.frames["Second Frame"].addWidget(sepr, (5, 0))
 
-	w.frames["Second Frame"].addWidget(bCode, (6, 0))
+	#w.frames["Second Frame"].addWidget(bCode, (6, 0))
 	w.frames["Second Frame"].addWidget(sid, (7, 0))
 
 
@@ -65,15 +65,23 @@ def main(t, lang, d):
 	w.frames["Second Frame"].addWidget(sType, (16, 0))
 	w.frames["Second Frame"].addWidget(cAwarded, (17, 0))
 	w.frames["Second Frame"].addWidget(cRemaining, (16, 2))
+	w.frames["Second Frame"].addWidget(tpa, (17, 2))
+	w.frames["Second Frame"].addWidget(tpo, (18, 2))
 
-	w.frames["Second Frame"].addWidget(sepr, (18, 0))
+	w.frames["Second Frame"].addWidget(sepr, (19, 0))
 
 #special
 	spec = Labelbox(text='spec', lang=w.lang, repr='spec')
-	w.frames["Second Frame"].addWidget(spec, (19, 0))
+	w.frames["Second Frame"].addWidget(spec, (20, 0))
 
 	w.portr = portr = Photo(repr='portr', path='monet_sm.jpg')
 	w.frames["Third Frame"].addWidget(w.portr, (0, 0))
+	w.portr.hide()
+	w.frames["Third Frame"].addWidget(notes, (1, 0))
+
+	notes.config(height=20, width=30)
+	notes.label.grid(row=0, sticky=N)
+	notes.sentry.grid(row=1, column=0)
 
 	w.frames["Fourth Frame"].addWidget(w.attinfo, (0, 0))
 	w.frames["Fourth Frame"].grid(rowspan=100, sticky=W)
@@ -143,9 +151,13 @@ def main(t, lang, d):
 			w2.attinfo.editwidget=False
 			w2.attinfo.canvas.config(width=500, height=500)
 			#
+			dp = d.studentList[w.s].datapoints
 
-			w.populate(d.studentList[w.s].datapoints)
-			w2.populate(d.studentList[w.s].datapoints)
+			w.populate(dp)
+			w2.populate(dp)
+
+			#if amount owed is larger than amount paid, color amount owed in red
+			if dp['tpa'] < dp['tpo']: tpo.entry.config(bg='red')
 
 			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
@@ -169,6 +181,13 @@ def main(t, lang, d):
 		w.frames['Fourth Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
 		w2.frames['Third Frame'].widgets['attinfo'].setData(d.studentList[w.s].datapoints['attinfo'])
 
+		#auto scroll to last position
+		w.attinfo.canvas.yview_moveto(1.0)
+		w2.attinfo.canvas.yview_moveto(1.0)
+
+		#reset Scan By to Barcode
+		sby.b.set(sby.rads[0][1])
+
 
 	def z():
 		try:
@@ -187,8 +206,18 @@ def main(t, lang, d):
 	bsearch.button.config(width=20)
 	bsearch.config(cmd=s)
 
+#collect and check in button
+	def collect():
+		s = d.studentList[w.s]
+		s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
+		d.saveData()
+
+	sstudent = Buttonbox(text='savestudent', lang=w.lang, repr='sstudent')
+	w.frames["Fifth Frame"].addWidget(sstudent, (0, 0))
+	sstudent.config(cmd=collect)
+
 	bcheck = Buttonbox(text='cinstudent', lang=language, repr='bcheck')
-	w.frames["Fifth Frame"].addWidget(bcheck, (1, 0))
+	w.frames["Fifth Frame"].addWidget(bcheck, (0, 1))
 	bcheck.config(cmd=z)
 
 #t2 window

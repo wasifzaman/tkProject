@@ -27,7 +27,7 @@ def main(lang, d):
 	def pvdb():
 		#try:
 		w.randfile = 'temp' + str(randrange(0, 10000)) + '.db'
-		nd = StudentDB(file=w.randfile)
+		nd = StudentDB(file=w.randfile, cfile='')
 		nd.importxlsx(fpath.getData())
 
 		w.sL = []
@@ -60,7 +60,7 @@ def main(lang, d):
 
 	def sav():
 		f = fpath2.getData().split('/')[-1] + '.db'
-		nd = StudentDB(file=f)
+		nd = StudentDB(file=f, cfile='')
 		
 		if f == '.db':
 			pchoosefile(w.lang)

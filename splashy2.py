@@ -56,6 +56,7 @@ def main():
 		w.frames['Third Frame'].grid_forget()
 
 		w.k.files['cfilepath'] = w.d.file
+		w.k.save()
 		
 
 

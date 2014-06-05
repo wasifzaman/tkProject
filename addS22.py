@@ -38,11 +38,9 @@ def main(t, lang, d):
 
 	w.frames["First Frame"].addWidget(sepr, (12, 0))
 
-	w.frames["First Frame"].addWidget(findSchool, (13, 0))
 	w.frames["First Frame"].addWidget(notes, (14, 0))
 
-	findSchool.config(height=3, width=10)
-	notes.config(height=3, width=10)
+	notes.config(height=5, width=10)
 
 	w.frames["First Frame"].addWidget(sepr, (15, 0))
 
@@ -53,18 +51,25 @@ def main(t, lang, d):
 	w.frames["First Frame"].widgets['cRemaining'].hide()
 	w.frames["First Frame"].addWidget(tpd, (16, 2))
 	w.frames["First Frame"].addWidget(tpa, (17, 2))
+	w.frames["First Frame"].addWidget(tpo, (18, 2))
 
 
 	baclass = Buttonbox(text='awardclass', lang=w.lang, repr='aclass')
 	baoclass = Buttonbox(text='awardoneclass', lang=w.lang, repr='aoclass')
 	baac = Buttonbox(text='awardaddclass', lang=w.lang, repr='baaclasses')
+	bgold = Buttonbox(text='gold60', lang=lang, repr='bgold')
+	bbasic = Buttonbox(text='basic15', lang=lang, repr='bbasic')
 
-	w.frames["Fourth Frame"].addWidget(baclass, (0, 0))
-	w.frames["Fourth Frame"].addWidget(baoclass, (1, 0))
+	w.frames["Fourth Frame"].addWidget(bgold, (0, 0))
+	w.frames["Fourth Frame"].addWidget(bbasic, (1, 0))
+	#w.frames["Fourth Frame"].addWidget(baclass, (0, 0))
+	w.frames["Fourth Frame"].addWidget(baoclass, (2, 0))
 	#w.frames["Fourth Frame"].addWidget(baac, (2, 0))
 
 	baclass.config(cmd=lambda: cpicker(w.lang))
 	baoclass.config(cmd=caddone)
+	bgold.config(cmd=lambda: caddx(60))
+	bbasic.config(cmd=lambda: caddx(15))
 	#baac.config(cmd=cadd)
 
 #address widgets
@@ -99,6 +104,7 @@ def main(t, lang, d):
 			if not con(ns.datapoints['firstName'], w.lang):
 				return
 
+		ns.datapoints['attinfo'] = [['Date', 'Check-In Time', 'Class Time'], []]
 		d.addStudent(ns.datapoints['bCode'], ns)
 		d.saveData()
 

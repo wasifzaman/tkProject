@@ -99,6 +99,7 @@ class Window(Tk):
 
 		#self.title(title)
 		#self.geometry(geometry)
+		#self.attributes('-alpha', 0.9)
 		self.config(bg="#575765", bd=2)
 		self.attributes('-fullscreen', True)
 

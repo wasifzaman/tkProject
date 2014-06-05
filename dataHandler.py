@@ -1,5 +1,4 @@
 from datetime import datetime, time, timedelta
-#from settingsHandler import *
 import keeper
 import pickle
 import xlrd
@@ -79,6 +78,7 @@ class StudentInfo:
             "wkdwknd": '',
             "tpd": '1/1/1900',
             "tpa": 0,
+            "tpo": 0,
             "email": '',
             "sType": '',
             "cAwarded": 0,
@@ -112,6 +112,7 @@ class StudentInfo:
             "Payment Date": "tpd",
             "Payment Method": "Payment Method: ",
             "Payment Amount": "tpa",
+            "Payment Owed": "tpo",
             "Email": "email",
             "Service Type": "sType",
             "Classes Awarded": "cAwarded",
@@ -160,7 +161,7 @@ class StudentDB:
 
     def __init__(self, **kwargs):
         self.file = kwargs['file']
-        #self.cfile = kwargs['cfile']
+        self.cfile = kwargs['cfile']
         
         try:
             self.loadData()
@@ -327,10 +328,18 @@ class StudentDB:
                 ftdata.append([date, '', time])
 
             #print(bCode, ftdata)
-            for data in ftdata:
-                self.studentList[bCode].datapoints['cAwarded'] = cAward
-                self.studentList[bCode].datapoints['attinfo'][0] = ['Date', 'Check-In Time', 'Class Time']
-                self.studentList[bCode].datapoints['attinfo'][1].append(data)
+            dp = self.studentList[bCode].datapoints
+            
+            dp['cAwarded'] = cAward
+            dp['cRemaining'] = int(cAward) - len(ftdata) if int(cAward) > len(ftdata) else 0
+            dp['attinfo'] = []
+            dp['attinfo'].append(['Date', 'Check-In Time', 'Class Time'])
+            dp['attinfo'].append(ftdata)
+
+
+            print(self.studentList[bCode].datapoints['attinfo'])
+            #for data in ftdata:
+                
 
 
             #for dp in info:
