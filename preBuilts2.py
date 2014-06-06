@@ -322,6 +322,7 @@ def con(s, lang):
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True), lang=lang)
 	bno.config(cmd=lambda: d(False), lang=lang)
+	bno.button.focus_set()
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -388,6 +389,7 @@ def ase(s, lang):
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True), lang=lang)
 	bno.config(cmd=lambda: d(False), lang=lang)
+	bno.button.focus_set()
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -445,6 +447,7 @@ def cs(s, lang):
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True), lang=lang)
 	bno.config(cmd=lambda: d(False), lang=lang)
+	byes.button.focus_set()
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -478,6 +481,7 @@ def ret(s, lang):
 	bno.button.grid(sticky=E+W, padx=5)
 	byes.config(cmd=lambda: d(True), lang=lang)
 	bno.config(cmd=lambda: d(False), lang=lang)
+	bno.button.focus_set()
 	t.config(bg='grey')
 
 	t.root.wait_window()
@@ -536,6 +540,37 @@ def pchoosefile(lang):
 	
 	pchoosefiletext.label.config(bg='grey', fg='white')
 	bok.button.config(bg='grey', fg='white')
+	bok.config(cmd=t.dw, lang=lang)
+	t.config(bg='grey')
+
+	t.root.wait_window()
+
+def ctimp(lang, simp, timp):
+
+	t = Mbox()
+	
+	t.newFrame("First Frame", (0, 0))
+
+	fimport = Labelbox(text='Import succesful', lang=lang, repr='fimport')
+	simport = Labelbox(text='Students imported: ', lang=lang, repr='simport')
+	timport = Labelbox(text='Attendance data imported: ', lang=lang, repr='timport')
+
+	Label(t.frames["First Frame"], text=simp, bg='grey', fg='white').grid(row=2, column=1)
+	Label(t.frames["First Frame"], text=timp, bg='grey', fg='white').grid(row=3, column=1)
+
+	t.frames["First Frame"].addWidget(cm, (0, 0))
+	t.frames["First Frame"].addWidget(fimport, (1, 0))
+	t.frames["First Frame"].addWidget(simport, (2, 0))
+	t.frames["First Frame"].addWidget(timport, (3, 0))
+	t.frames["First Frame"].addWidget(bok, (4, 0))
+	
+	cm.label.grid(columnspan=2)
+	fimport.label.config(bg='grey', fg='white')
+	fimport.label.grid(columnspan=2)
+	simport.label.config(bg='grey', fg='white')
+	timport.label.config(bg='grey', fg='white')
+	bok.button.config(bg='grey', fg='white')
+	bok.button.grid(columnspan=2)
 	bok.config(cmd=t.dw, lang=lang)
 	t.config(bg='grey')
 

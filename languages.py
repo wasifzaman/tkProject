@@ -87,7 +87,10 @@ languages = \
 		"close": "Close",
 		"Amount Owed": "Amount Owed",
 		">> Next 30 >>": ">> Next 30 >>",
-		"<< Previous 30 <<": "<< Previous 30 <<"
+		"<< Previous 30 <<": "<< Previous 30 <<",
+		"Import succesful": "Import succesful",
+		"Students imported: ": "Students imported: ",
+		"Attendance data imported: ": "Attendance data imported: "
 		},
 
 	"chinese": {
@@ -175,7 +178,10 @@ languages = \
 		"close": "关闭",
 		"Amount Owed": "所欠的金额",
 		">> Next 30 >>": ">> Next 30 >>",
-		"<< Previous 30 <<": "<< Previous 30 <<"
+		"<< Previous 30 <<": "<< Previous 30 <<",
+		"Import succesful": "Import succesful",
+		"Students imported: ": "Students imported: ",
+		"Attendance data imported: ": "Attendance data imported: "
 	}
 		
 }

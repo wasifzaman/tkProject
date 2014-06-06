@@ -73,6 +73,8 @@ def main(t, lang, d):
 #special
 	spec = Labelbox(text='spec', lang=w.lang, repr='spec')
 	w.frames["Second Frame"].addWidget(spec, (20, 0))
+	spec.label.config(font=('Verdana', 15))
+	spec.label.grid(columnspan=2)
 
 	w.portr = portr = Photo(repr='portr', path='monet_sm.jpg')
 	w.frames["Third Frame"].addWidget(w.portr, (0, 0))
@@ -158,6 +160,7 @@ def main(t, lang, d):
 
 			#if amount owed is larger than amount paid, color amount owed in red
 			if dp['tpa'] < dp['tpo']: tpo.entry.config(bg='red')
+			else: tpo.entry.config(bg='white')
 
 			if cs(d.studentList[w.s].datapoints['firstName'], w.lang): ss()
 		except:
@@ -172,8 +175,12 @@ def main(t, lang, d):
 		#show alert if classes remaining is less than 2
 		cRem = d.studentList[w.s].datapoints['cRemaining']
 		if cRem <= 2:
+			spec.show()
 			spec.setData(w.lang['Classes remaining for this student'] + ': ' + str(cRem))
-			spec.label.config(bg='yellow')
+			spec.label.config(fg='red', font=('Verdana', 15))
+		else:
+			#hide, show will work better once window size is set
+			pass
 
 		#update cRemaining
 		cRemaining.setData(str(cRem))
@@ -208,9 +215,13 @@ def main(t, lang, d):
 
 #collect and check in button
 	def collect():
-		s = d.studentList[w.s]
-		s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
-		d.saveData()
+		try:
+			s = d.studentList[w.s]
+			if not conS(s.datapoints['firstName'] + ' ' + s.datapoints['lastName'], w.lang): return
+			s.datapoints = dict(list(s.datapoints.items()) + list(w.collect(s.datapoints).items()))
+			d.saveData()
+		except:
+			return
 
 	sstudent = Buttonbox(text='savestudent', lang=w.lang, repr='sstudent')
 	w.frames["Fifth Frame"].addWidget(sstudent, (0, 0))

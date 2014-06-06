@@ -393,6 +393,14 @@ class Labelbox(Textbox):
 		self.label.grid(row=self.row, column=self.column)
 
 
+	def hide(self):
+		self.label.grid_forget()
+
+
+	def show(self):
+		self.label.grid()
+
+
 class Buttonbox(Textbox):
 
 	def __init__(self, **kwargs):

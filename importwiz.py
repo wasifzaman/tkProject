@@ -25,32 +25,32 @@ def main(lang, d):
 		w.frames["Sixth Frame"].grid_forget()
 
 	def pvdb():
-		#try:
-		w.randfile = 'temp' + str(randrange(0, 10000)) + '.db'
-		nd = StudentDB(file=w.randfile, cfile='')
-		nd.importxlsx(fpath.getData())
+		try:
+			w.randfile = 'temp' + str(randrange(0, 10000)) + '.db'
+			nd = StudentDB(file=w.randfile, cfile='')
+			nd.importxlsx(fpath.getData())
 
-		w.sL = []
-		for s in nd.studentList.values():
-			dp = s.datapoints
-			w.sL.append([dp['bCode'], dp['firstName'], dp['lastName'], dp['chineseName'], dp['dob']])
+			w.sL = []
+			for s in nd.studentList.values():
+				dp = s.datapoints
+				w.sL.append([dp['bCode'], dp['firstName'], dp['lastName'], dp['chineseName'], dp['dob']])
 
-		w.sL.sort()
+			w.sL.sort()
 
 
-		w.frames["First Frame"].grid_forget()
-		w.frames["Second Frame"].grid_forget()
-		w.frames["Third Frame"].grid_forget()
+			w.frames["First Frame"].grid_forget()
+			w.frames["Second Frame"].grid_forget()
+			w.frames["Third Frame"].grid_forget()
 
-		w.frames["Fourth Frame"].grid()
-		w.frames["Fifth Frame"].grid()
-		w.frames["Sixth Frame"].grid()
+			w.frames["Fourth Frame"].grid()
+			w.frames["Fifth Frame"].grid()
+			w.frames["Sixth Frame"].grid()
 
-		
-		w.stable.setData((w.stableh, w.sL))
-		w.stable.canvas.config(width=700)
-		#except:
-			#noimp(w.lang)
+			
+			w.stable.setData((w.stableh, w.sL))
+			w.stable.canvas.config(width=700)
+		except:
+			noimp(w.lang)
 
 	def pdb():
 		try:

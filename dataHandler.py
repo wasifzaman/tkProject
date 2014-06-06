@@ -307,6 +307,7 @@ class StudentDB:
         sraw = [worksheet.row(rx) for rx in range(1, worksheet.nrows)]
         sinfo = [[self.format(cell.ctype, cell.value) for cell in row] for row in sraw]
 
+        ns, nt = 0, 0
 
         for info in sinfo:
     
@@ -336,8 +337,10 @@ class StudentDB:
             dp['attinfo'].append(['Date', 'Check-In Time', 'Class Time'])
             dp['attinfo'].append(ftdata)
 
+            ns += 1
+            nt += len(ftdata)
 
-            print(self.studentList[bCode].datapoints['attinfo'])
+            #print(self.studentList[bCode].datapoints['attinfo'])
             #for data in ftdata:
                 
 
@@ -350,6 +353,9 @@ class StudentDB:
         #print(repr, headers, sinfo)
 
         self.saveData()
+
+        return ns, nt
+
 
 
     #def modData(self):

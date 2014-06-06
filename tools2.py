@@ -30,7 +30,8 @@ def main(t, lang, d):
 			return
 		else:
 			#d.loadData()
-			d.importtimexlsx(p)
+			ns, nt = d.importtimexlsx(p)
+			ctimp(w.lang, ns, nt)
 			#d.saveData()
 		#except:
 			#print("error opening file.")
