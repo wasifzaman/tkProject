@@ -47,7 +47,10 @@ def main():
 
 	w.frames["First Frame"].addWidget(w.b, (0, 0))
 
-	w.b.config(cmd=lambda event: print('called'))
+	def c(event):
+		print('called')
+
+	w.b.config(cmd=c)
 	
 	
 

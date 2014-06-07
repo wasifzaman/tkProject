@@ -21,19 +21,20 @@ def main(t, lang, d):
 
 
 	def ctdb():
-		#try:
-		p = filedialog.askopenfile(mode='r').name
-		l = p.split('/')[-1]
-		ext = l[l.rfind('.'):]
-		if ext != '.xls' and ext != '.xlsx':
-			print("invalid file")
+		try:
+			p = filedialog.askopenfile(mode='r').name
+			l = p.split('/')[-1]
+			ext = l[l.rfind('.'):]
+			if ext != '.xls' and ext != '.xlsx':
+				print("invalid file")
+				return
+			else:
+				d.loadData()
+				ns, nt = d.importtimexlsx(p)
+				ctimp(w.lang, ns, nt)
+				#d.saveData()
+		except:
 			return
-		else:
-			#d.loadData()
-			ns, nt = d.importtimexlsx(p)
-			ctimp(w.lang, ns, nt)
-			#d.saveData()
-		#except:
 			#print("error opening file.")
 
 
@@ -82,9 +83,9 @@ def main(t, lang, d):
 	w.frames["Third Frame"].addWidget(bcdb, (2, 0))
 
 
-	w.frames['Fourth Frame'].addWidget(bsav, (0, 0))
+	#w.frames['Fourth Frame'].addWidget(bsav, (0, 0))
 
-	bsav.config(cmd=ss)
+	#bsav.config(cmd=ss)
 	bimp.config(cmd=lambda: importwiz.main(w.lang, d))
 	bcdb.config(cmd=cdb)
 	bimpt.config(cmd=ctdb)

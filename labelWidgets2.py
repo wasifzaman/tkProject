@@ -1,5 +1,6 @@
 from tkinter import *
 from widget import Widget
+import inspect
 from tkinter.scrolledtext import ScrolledText
 from datetime import time, date, datetime
 
@@ -468,7 +469,12 @@ class Buttonbox2(Textbox):
 
 		try:
 			self.cmd = kwargs['cmd']
-			self.button.bind('<ButtonRelease-1>', self.cmd)
+			self.args = inspect.getargspec(kwargs['cmd']).args
+			#print(inspect.getargspec(kwargs['cmd']).args)
+			if len(self.args) > 0 and self.args[0] != 'self':
+				self.button.bind('<ButtonRelease-1>', self.cmd)	
+			else:
+				self.button.bind('<ButtonRelease-1>', lambda e: self.cmd())
 		except:
 			pass
 
@@ -486,7 +492,7 @@ class Buttonbox2(Textbox):
 
 		try:
 			self.button.config(bg='white', fg='black')
-			self.selfframe.config(bg='#56A0EA')
+			self.selfframe.config(bg='#CCE0FF')
 		except:
 			pass
 
@@ -502,7 +508,7 @@ class Buttonbox2(Textbox):
 		except:
 			print("widget could not be placed")
 
-		self.selfframe = Frame(self.parent, bg='#CCE0FF', bd=2)
+		self.selfframe = Frame(self.parent, bg='#CCE0FF', bd=1)
 		self.button = Label(self.selfframe, text=self.lang[self.text], width=self.width, bg='white', \
 			font=('Verdana', 11), pady=10)
 

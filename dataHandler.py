@@ -312,8 +312,11 @@ class StudentDB:
         for info in sinfo:
     
             bCode = info[0]
-            cAward = info[3]
-            tdata = info[4:]#info.index(None)]
+            try:
+                cAward = info[3]
+            except:
+                cAward = 0
+            tdata = info[4:]
 
             if bCode not in self.studentList: continue
 
@@ -332,7 +335,10 @@ class StudentDB:
             dp = self.studentList[bCode].datapoints
             
             dp['cAwarded'] = cAward
-            dp['cRemaining'] = int(cAward) - len(ftdata) if int(cAward) > len(ftdata) else 0
+            try:
+                dp['cRemaining'] = int(cAward) - len(ftdata) if int(cAward) > len(ftdata) else 0
+            except:
+                dp['cRemaining'] = 0
             dp['attinfo'] = []
             dp['attinfo'].append(['Date', 'Check-In Time', 'Class Time'])
             dp['attinfo'].append(ftdata)

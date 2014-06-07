@@ -66,7 +66,7 @@ languages = \
 		"Add Students": "Add Students", #students* for buttons
 		"Scan Students": "Scan Students",
 		"Student Database": "Student Database",
-		"Tools": "Tools",
+		"Tools": "Database Management",
 		"Back to Main Menu": "Back to Main Menu",
 		"Exit": "Exit",
 		"Search": "Search",
